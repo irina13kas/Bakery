@@ -86,7 +86,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 3vw;
+    margin-bottom: 14%;
 }
 
 .my-priorities-image {
@@ -98,12 +98,6 @@
     background-repeat: no-repeat;
     padding-right: 2vw;
 }
-
-/*.my-priorities-image-text img {
-    width: 30%;
-    height: 20%;
-    margin-right: 2vw;
-}*/
 
 .my-priorities-text-content {
     flex: 1;
@@ -141,7 +135,7 @@
 
 .our-difference-first-paragraph{
     font-family: 'Courier New', Courier, monospace;
-    margin-right: 20%;
+    margin-right: 15%;
     font-size: 1.2em;
     line-height: 1.6em;
 }
@@ -152,15 +146,16 @@
     line-height: 1.6em;
 }
 
-.our-difference-left-content img{
-    width: 11em;
-    height: 11em;
+.our-difference-left-content-image {
+    width: 150%; /* Полная ширина контейнера */
+    height: 11em; /* Высота контейнера */
+    background-image: url('.vscode/images/cookies.jpg'); /* Путь к изображению */
+    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
+    background-position: left; /* Центрирование изображения */
+    background-repeat: no-repeat;
+    padding-right: 2vw;
 }
 
-.our-difference-right-image img{
-    width: 32em;
-    height: 25em;
-}
 .our-difference-left-content-second-part{  
     margin-top: 5%;
     display: flex;
@@ -168,16 +163,33 @@
     justify-content: space-between;
 }
 
+.our-difference-right-image{
+    width: 190%;
+    height: 60vh;
+    background-image: url('.vscode/images/about_bareky_shop.jpg'); /* Путь к изображению */
+    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
+    background-position: left; /* Центрирование изображения */
+    background-repeat: no-repeat;
+    padding-right: 2vw;
+}
+
+
+
 .dream-pastry-image-text{
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 3vw;
 }
-.dream-pastry-image-text img{
-    width: 40%;
-    height: 30%;
-    margin-right: 1vw;
+
+.dream-pastry-image {
+    width: 40%; /* Полная ширина контейнера */
+    height: 60vh; /* Высота контейнера */
+    background-image: url('.vscode/images/CakeDisplay.jpg'); /* Путь к изображению */
+    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
+    background-position: left; /* Центрирование изображения */
+    background-repeat: no-repeat;
+    padding-right: 2vw;
 }
 
 .dream-pastry-text-content{
@@ -190,7 +202,7 @@
     font-size: 1.2em;
     line-height: 1.6em;
     margin-left: 5%;
-    margin-right: 25%;
+    margin-right: 20%;
     margin-top: 5%;
 }
 
