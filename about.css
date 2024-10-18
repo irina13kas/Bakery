@@ -1,16 +1,23 @@
-﻿/* Основной блок с изображением и текстом */
+﻿/* Изначально скрываем элементы до появления на экране */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40%); /* Смещаем элементы вниз */
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Когда элемент виден, добавляем анимацию */
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0); /* Элемент поднимается на место */
+}
+
+/* Основной блок с изображением и текстом */
 .about-me-section {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
 }
-
-
-/*.image-container{
-    width: 80%;
-    height: 70%;
-}*/
 
 .about-me-image-container {
     width: 50%; /* Полная ширина контейнера */
@@ -44,12 +51,6 @@
     margin-bottom: 1.5em;
 }
 
-/* Анимация появления при прокрутке */
-.visible {
-    opacity: 1;
-    transform: translateY(0); /* Возвращаем на исходную позицию */
-}
-
 .scroll-image-1 {
     background-image: url('.vscode/images/about_bakery_shop_2.jpg'); /* Укажи путь к твоему изображению */
     background-size: cover; /* Масштабирование изображения, чтобы оно полностью покрывало блок */
@@ -81,19 +82,6 @@
     line-height: 1.6em; /* Межстрочный интервал для удобства чтения */
 }
 
-/* Изначально скрываем элементы до появления на экране */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(40%); /* Смещаем элементы вниз */
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-/* Когда элемент виден, добавляем анимацию */
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0); /* Элемент поднимается на место */
-}
-
 .my-priorities-image-text {
     display: flex;
     flex-direction: row;
@@ -101,15 +89,25 @@
     margin-bottom: 3vw;
 }
 
-.my-priorities-image-text img {
+.my-priorities-image {
+    width: 40%; /* Полная ширина контейнера */
+    height: 65vh; /* Высота контейнера */
+    background-image: url('.vscode/images/cakes.jpg'); /* Путь к изображению */
+    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
+    background-position: left; /* Центрирование изображения */
+    background-repeat: no-repeat;
+    padding-right: 2vw;
+}
+
+/*.my-priorities-image-text img {
     width: 30%;
     height: 20%;
     margin-right: 2vw;
-}
+}*/
 
 .my-priorities-text-content {
     flex: 1;
-    margin-left: 10%;
+    margin-left: 8%;
 }
 
 .my-priorities-main-paragraph {
@@ -131,7 +129,7 @@
     margin-bottom: 1.5em;
 }
 
-.split-layout {
+.our-difference {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -141,29 +139,29 @@
     margin-bottom: 10%;
 }
 
-.first-paragraph{
+.our-difference-first-paragraph{
     font-family: 'Courier New', Courier, monospace;
     margin-right: 20%;
     font-size: 1.2em;
     line-height: 1.6em;
 }
-.second-paragraph{
+.our-difference-second-paragraph{
     font-family: 'Courier New', Courier, monospace;
     margin-left:5%;
     font-size: 1.2em;
     line-height: 1.6em;
 }
 
-.left-content img{
+.our-difference-left-content img{
     width: 11em;
     height: 11em;
 }
 
-.right-image img{
+.our-difference-right-image img{
     width: 32em;
     height: 25em;
 }
-.left-content-second-part{  
+.our-difference-left-content-second-part{  
     margin-top: 5%;
     display: flex;
     flex-direction: row;
