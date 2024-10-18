@@ -1,5 +1,5 @@
 ﻿/* Основной блок с изображением и текстом */
-.about-section {
+.about-me-section {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -12,7 +12,7 @@
     height: 70%;
 }*/
 
-.image-container {
+.about-me-image-container {
     width: 50%; /* Полная ширина контейнера */
     height: 90vh; /* Высота контейнера */
     background-image: url('.vscode/images/about_child.jpg'); /* Путь к изображению */
@@ -22,11 +22,11 @@
     padding-right: 3vw;
 }
 
-.text-container {
+.about-me-text-container {
     flex: 1;
 }
 
-.about-heading {
+.about-me-heading {
     display: flex;
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
@@ -36,7 +36,7 @@
     margin-bottom: 1em;
 }
 
-.about-paragraph {
+.about-me-paragraph {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.2em;
     line-height: 1.6em;
@@ -62,7 +62,7 @@
     margin-bottom: 5%;
 }
 
-.three-columns {
+.experience-columns {
     display: flex;
     flex-direction:row;
     justify-content: space-between;
@@ -70,12 +70,12 @@
     padding: 2vw;
 }
 
-.column-heading {
+.experience-column-heading {
     font-family: 'Tempus Sans ITC', sans-serif;
     font-size: 2em; /* Крупный заголовок */
 }
 
-.column-text {
+.experience-column-text {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.2em; /* Размер текста */
     line-height: 1.6em; /* Межстрочный интервал для удобства чтения */
@@ -94,31 +94,31 @@
     transform: translateY(0); /* Элемент поднимается на место */
 }
 
-.top-section {
+.my-priorities-image-text {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 3vw;
 }
 
-.top-section img {
+.my-priorities-image-text img {
     width: 30%;
     height: 20%;
     margin-right: 2vw;
 }
 
-.text-content {
+.my-priorities-text-content {
     flex: 1;
     margin-left: 10%;
 }
 
-.main-paragraph {
+.my-priorities-main-paragraph {
     font-family: 'Tempus Sans ITC', sans-serif;
     font-size: 1.6em;
     line-height: 1.7em;
 }
 
-.extra-text {
+.my-priorities-extra-text {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.2em;
     line-height: 1.6em;
@@ -127,7 +127,7 @@
     margin-top: 5%;
 }
 
-.extra-text p {
+.my-priorities-extra-text p {
     margin-bottom: 1.5em;
 }
 
