@@ -1,0 +1,243 @@
+﻿.ad-container {
+    margin: 0;
+    padding: 0;
+    height: 60vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexbox {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 2%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.letters {
+    width:100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+    
+}
+
+.svg-letter {
+    width: 120%;
+    height: 120%;
+    position: relative;
+    transition: transform 0.5s ease;
+}
+
+    
+    .svg-letter:nth-child(1) {
+        z-index: 0;
+        transform: translate(20%, 15%);
+    }
+
+    .svg-letter:nth-child(2) {
+        z-index: 1;
+        transform: translate(-20%, -5%);
+    }
+
+.flexbox:hover .name {
+    animation: zigzag-name-letter 1.5s forwards;
+}
+
+.flexbox:hover .lastname {
+    animation: zigzag-lastname-letter 1.5s forwards;
+}
+
+@keyframes zigzag-name-letter {
+    0% {
+        transform: translate(20%, 15%);
+    }
+
+    25% {
+        transform: translate(15%, -15%);
+    }
+
+    50% {
+        transform: translate(-25%, -15%);
+    }
+    75% {
+        transform: translate(25%, -70%);
+    }
+    100% {
+        transform: translate(70%, -65%);
+    }
+}
+
+@keyframes zigzag-lastname-letter {
+    0% {
+        transform: translate(-20%, -5%);
+    }
+
+    25% {
+        transform: translate(-20%, -15%);
+    }
+
+    50% {
+        transform: translate(50%, -15%);
+    }
+    75% {
+        transform: translate(-40%, -25%);
+    }
+    100% {
+        transform: translate(-70%, -30%);
+    }
+}
+.flexbox:active .svg-letter {
+    fill: black;
+}
+
+.flexbox:active .name {
+    animation: jump-name-letter 7s forwards;
+}
+
+.flexbox:active .lastname {
+    animation: jump-lastname-letter 7s forwards;
+}
+
+@keyframes jump-name-letter {
+    0% {
+        transform: translate(70%, -65%);
+        opacity: 1;
+    }
+    17% {
+        transform: translate(110%, -85%);
+        opacity: 1;
+    }
+    34% {
+        transform: translate(150%, -65%);
+        opacity: 1;
+    }
+    51% {
+        transform: translate(150%, -65%);
+        opacity: 1;
+    }
+    68% {
+        transform: translate(150%, -65%);
+        opacity: 1;
+    }
+    85% {
+        transform: translate(110%, -85%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(70%, -65%);
+        opacity: 0;
+    }
+}
+
+@keyframes jump-lastname-letter {
+    0% {
+        transform: translate(-70%, -30%);
+        opacity: 1;
+    }
+    17% {
+        transform: translate(-70%, -30%);
+        opacity: 1;
+    }
+    34% {
+        transform: translate(-70%, -30%);
+        opacity: 1;
+    }
+    51% {
+        transform: translate(-110%, -50%);
+        opacity: 1;
+    }
+
+    68% {
+        transform: translate(-150%, -30%);
+        opacity: 1;
+    }
+
+    85% {
+        transform: translate(-110%, -50%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-70%, -30%);
+        opacity: 0;
+    }
+
+}
+
+@keyframes show-item {
+    0% {
+        opacity: 0;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.hidden-image {
+    width: 120%;
+    height: 100%;
+    margin-bottom: 5%;
+    filter: none; 
+    transition: filter 0.5s ease-out;
+}
+
+.hidden-text {
+    position: relative;
+    text-transform: uppercase;
+    color: darkred;
+    font-size: 200%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.content-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    opacity: 0;
+    transform: translate(0,70%);
+    transition: opacity 0.5s ease;
+}
+
+
+.flexbox:active .content-container img {
+    filter: none;
+}
+
+.flexbox:focus-within img{
+    filter: sepia(100%);
+}
+
+.flexbox:active .content-container {
+    animation: show-item 10s ease forwards;
+}
+
+.flexbox:focus-within .content-container{
+    opacity: 1;
+}
+
+.flexbox:focus .name {
+    opacity: 0;
+}
+
+.flexbox:focus .lastname {
+    opacity: 0;
+}

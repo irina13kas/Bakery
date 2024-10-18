@@ -1,0 +1,217 @@
+﻿/* Основной блок с изображением и текстом */
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+
+/*.image-container{
+    width: 80%;
+    height: 70%;
+}*/
+
+.image-container {
+    width: 50%; /* Полная ширина контейнера */
+    height: 90vh; /* Высота контейнера */
+    background-image: url('.vscode/images/about_child.jpg'); /* Путь к изображению */
+    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
+    background-position: left; /* Центрирование изображения */
+    background-repeat: no-repeat;
+    padding-right: 3vw;
+}
+
+.text-container {
+    flex: 1;
+}
+
+.about-heading {
+    display: flex;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-transform: uppercase;
+    font-size: 2.5em;
+    display: center;
+    margin-bottom: 1em;
+}
+
+.about-paragraph {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    color: #333;
+    margin-bottom: 1.5em;
+}
+
+/* Анимация появления при прокрутке */
+.visible {
+    opacity: 1;
+    transform: translateY(0); /* Возвращаем на исходную позицию */
+}
+
+.scroll-image-1 {
+    background-image: url('.vscode/images/about_bakery_shop_2.jpg'); /* Укажи путь к твоему изображению */
+    background-size: cover; /* Масштабирование изображения, чтобы оно полностью покрывало блок */
+    background-attachment: fixed; /* Фиксация изображения для эффекта прокрутки */
+    background-position: center top; /* Начальная позиция фона */
+    width: 100vw; /* Во всю ширину экрана */
+    height: 100vh; /* Высота экрана */
+    overflow: hidden; /* Скрываем лишние части изображения */
+    margin-top: 15%;
+    margin-bottom: 5%;
+}
+
+.three-columns {
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+    gap: 2vw; /* Расстояние между колонками */
+    padding: 2vw;
+}
+
+.column-heading {
+    font-family: 'Tempus Sans ITC', sans-serif;
+    font-size: 2em; /* Крупный заголовок */
+}
+
+.column-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em; /* Размер текста */
+    line-height: 1.6em; /* Межстрочный интервал для удобства чтения */
+}
+
+/* Изначально скрываем элементы до появления на экране */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40%); /* Смещаем элементы вниз */
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+/* Когда элемент виден, добавляем анимацию */
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0); /* Элемент поднимается на место */
+}
+
+.top-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 3vw;
+}
+
+.top-section img {
+    width: 30%;
+    height: 20%;
+    margin-right: 2vw;
+}
+
+.text-content {
+    flex: 1;
+    margin-left: 10%;
+}
+
+.main-paragraph {
+    font-family: 'Tempus Sans ITC', sans-serif;
+    font-size: 1.6em;
+    line-height: 1.7em;
+}
+
+.extra-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    margin-left: 17%;
+    margin-right: 15%;
+    margin-top: 5%;
+}
+
+.extra-text p {
+    margin-bottom: 1.5em;
+}
+
+.split-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10%;
+    gap: 3vw; /* Увеличен промежуток между блоками */
+    margin-bottom: 10%;
+}
+
+.first-paragraph{
+    font-family: 'Courier New', Courier, monospace;
+    margin-right: 20%;
+    font-size: 1.2em;
+    line-height: 1.6em;
+}
+.second-paragraph{
+    font-family: 'Courier New', Courier, monospace;
+    margin-left:5%;
+    font-size: 1.2em;
+    line-height: 1.6em;
+}
+
+.left-content img{
+    width: 11em;
+    height: 11em;
+}
+
+.right-image img{
+    width: 32em;
+    height: 25em;
+}
+.left-content-second-part{  
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dream-pastry-image-text{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 3vw;
+}
+.dream-pastry-image-text img{
+    width: 40%;
+    height: 30%;
+    margin-right: 1vw;
+}
+
+.dream-pastry-text-content{
+    flex: 1;
+    margin-left: 8%;
+}
+
+.dream-pastry-text{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    line-height: 1.6em;
+    margin-left: 5%;
+    margin-right: 25%;
+    margin-top: 5%;
+}
+
+.dream-pastry-text p{
+    margin-bottom: 1.5em;
+}
+
+.dream-pastry{
+    margin-bottom: 10%;
+}
+
+.scroll-image-2{
+    background-image: url('.vscode/images/street-2.jpg'); /* Укажи путь к твоему изображению */
+    background-size: cover; /* Масштабирование изображения, чтобы оно полностью покрывало блок */
+    background-attachment: fixed; /* Фиксация изображения для эффекта прокрутки */
+    background-position: center bottom; /* Начальная позиция фона */
+    width: 100vw; /* Во всю ширину экрана */
+    height: 100vh; /* Высота экрана */
+    overflow: hidden; /* Скрываем лишние части изображения */
+    margin-top: 15%;
+    margin-bottom: 15%;
+}

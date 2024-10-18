@@ -1,0 +1,224 @@
+﻿
+.container-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.fon {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #f5dbb8, #be7d25);
+}
+
+.border{
+    width:100%;
+    height:0.5%;
+    background-color:#442a08;
+    top: 70%;
+    position:absolute;
+}
+
+.vase {
+    position: relative;
+    width: 12%;
+    height: 35%;
+}
+
+.vase-part.top {
+    height: 35%;
+    width: 70%;
+    background: linear-gradient(135deg,#bbf7b9,#40ca3a);
+    clip-path: polygon(0 0, 100% 0, 68% 100%, 0 100%); /* Скрыть часть, которая выходит за границы */
+    position: relative;
+    top: 94%;
+    z-index: 2;
+}
+
+.vase-part.middle {
+    width: 95%;
+    height: 120%;
+    background: linear-gradient(-135deg,#bbf7b9,#40ca3a);
+    border-radius: 0 100% 100% 0/ 50%;
+    overflow: hidden;
+    position: relative;
+    top: 86%;
+    z-index: 1;
+}
+    .vase-part.bottom {
+        height: 12%;
+        width: 80%;
+        background: linear-gradient(45deg,#bbf7b9,#40ca3a);
+        clip-path: polygon(0 0, 69% 0, 100% 100%, 0 100%); /* Скрыть часть, которая выходит за границы */
+        position: relative;
+        top: 76%;
+        z-index: 2;
+    }
+
+.table{
+    position: absolute;
+}
+
+.table-leg {
+    position: absolute;
+    height: 3.8em;
+    width: 2.8em;
+    
+}
+    .right {
+        top: 65%;
+        border: 3.5px solid transparent; /* Прозрачная граница */
+        border-bottom: 3.5px solid #ff00dc; 
+        border-left: 3.5px solid #ff00dc; 
+        border-radius: 0 0 0 100%; /* Скругление для создания овала */
+        left: 290%;
+    }
+
+    .left {
+        top: 65%;
+        border: 3.5px solid transparent; /* Прозрачная граница */
+        border-bottom: 3.5px solid #ff00dc; 
+        border-right: 3.5px solid #ff00dc; 
+        border-radius: 0 0 100% 0; /* Скругление для создания овала */
+        left: 130%;
+    }
+
+    .table-leg-end-right {
+        width: 50%;
+        height: 15%;
+        position: absolute;
+        border-radius: 100% 100% 100% 100%/ 100%;
+        background: #ff00dc;
+        top: 154%;
+        left: 377%;
+    }
+
+    .table-leg-end-left {
+        width: 50%;
+        height: 15%;
+        position: absolute;
+        border-radius: 100% 100% 100% 100%/ 100%;
+        background: #ff00dc;
+        top: 155%;
+        left: 95%;
+    }
+
+.tabletop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 9.5em;
+    height: 0.6em;
+    background: #d375c6;
+    position: absolute;
+    top: 35px;
+    left: 42px;
+    padding: 0 0.2em;
+}
+
+    .circle-print{
+        width: 0.5em;
+        height: 0.5em;
+        border-radius: 50%;
+        background: white;
+        
+    }
+
+.drink{
+    position:absolute;
+    height: 75px;
+    width: 20px;
+    top: 34%;
+    left:38%;
+}
+
+    .cup {
+        position: relative;
+        height: 50%;
+        width: 100%;
+        background: linear-gradient(150deg,#39ff00,#ff0000);
+        clip-path: polygon(0 0, 100% 0, 82% 100%, 18% 100%); 
+        position: relative;
+        z-index: 2;
+    }
+
+    .pipe{
+        position:relative;
+        background:blue;
+        height: 50%;
+        width:7%;
+        transform: rotate(165deg);
+        bottom:80%;
+        left:20%;
+        z-index:1;
+    }
+
+.food {
+    position: absolute;
+    height: 70px;
+    width: 29px;
+    top: 35%;
+    left: 75%;
+}
+
+.ice-cream-1 {
+    position: relative;
+    bottom: 11%;
+    height: 18px;
+    width: 18px;
+    background: linear-gradient(135deg,white,#1cced4);
+    border: 0.5px solid #379b9f;
+    border-radius: 100%;
+    z-index: 2;
+}
+
+.ice-cream-2 {
+    position: relative;
+    bottom: 38%;
+    left:50%;
+    height: 18px;
+    width: 18px;
+    background: linear-gradient(135deg,white,#1cced4);
+    border: 0.5px solid #379b9f;
+    border-radius: 100%;
+    z-index:3;
+}
+
+
+
+.ice-cream-3 {
+    position: relative;
+    bottom: 77%;
+    left: 30%;
+    height: 18px;
+    width: 18px;
+    background: linear-gradient(135deg,white,#1cced4);
+    border: 0.5px solid #379b9f;
+    border-radius: 100%;
+    z-index: 1;
+}
+
+.bowl-top {
+    bottom: 77%;    
+    position: relative;
+    height: 16px;
+    width: 33px;
+    background: linear-gradient(150deg,#39ff00,#ff0000);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 4;
+}
+
+    .bowl-bottom {
+        position: relative;
+        height: 40%;
+        width: 80%;
+        bottom:89%;
+        left: 18%;
+        clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        background: linear-gradient(150deg,#39ff00,#ff0000);
+        z-index:1;
+    }
+
