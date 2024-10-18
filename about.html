@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href=".vscode/images/icon.ico" type="image/x-icon">
     <title>Кондитерская</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="about.css">
@@ -44,6 +45,7 @@
             </div>
         </div>
         </section>
+        <button id="scrollToTopBtn" class="scroll-to-top">Наверх</button>
         <section class="scroll-image-1"></section>
         <section class="experience-columns">
             <div class="experience-column">
@@ -146,4 +148,28 @@
         const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
         elementsToAnimate.forEach(el => observer.observe(el));
     });
+
+    // Получаем кнопку по ID
+const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+// Функция для прокрутки наверх
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // Плавная прокрутка
+    });
+}
+
+// Показываем кнопку при скролле
+window.addEventListener('scroll', () => {
+    // Если страница прокручена больше чем на 100px
+    if (window.scrollY > 100) {
+        scrollToTopBtn.classList.add('show', 'moving'); // Показываем кнопку и запускаем движение вниз
+    } else {
+        scrollToTopBtn.classList.remove('show', 'moving'); // Прячем кнопку
+    }
+});
+
+// Добавляем событие клика по кнопке
+scrollToTopBtn.addEventListener('click', scrollToTop);
 </script>

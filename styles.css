@@ -159,3 +159,30 @@ footer {
     margin: 0;
     font-size: 1em;
 }
+
+/* Стили кнопки */
+.scroll-to-top {
+    position: fixed; /* Фиксируем позицию кнопки */
+    bottom: 5%; /* Начальное расположение снизу */
+    right: 3%; /* Отступ справа */
+    padding: 1% 1.5%;
+    background-color: #d2691eb9; /* Цвет кнопки */
+    color: white;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-size: 1.2em;
+    opacity: 0; /* Изначально невидима */
+    transition: opacity 0.5s ease, bottom 0.5s ease; /* Плавное появление и перемещение */
+}
+
+/* Показываем кнопку при скролле */
+.scroll-to-top.show {
+    opacity: 1;
+}
+
+/* При скролле кнопка движется вниз */
+.scroll-to-top.moving {
+    bottom: 5%;
+    right:3%;
+}
