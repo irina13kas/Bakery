@@ -54,132 +54,183 @@
 </html>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const questions = [
-  {
-    question: "А голос у него был не такой, как у почтальона Печкина, дохленький. У Гаврюши голосище был, как у электрички. Он _____ _____ на ноги поднимал.",
-    answers: ["Пол деревни, за раз", "Полдеревни, зараз", "Пол-деревни, за раз"],
-    correct: 1,
-    explanation: "Правильно! Раздельно существительное будет писаться в случае наличия дополнительного слова между существительным и частицей. Правильный ответ: полдеревни пишется слитно. Зараз (ударение на второй слог) — это обстоятельственное наречие, пишется слитно. Означает быстро, одним махом."
-  },
-  {
-    question: "А эти слова как пишутся?",
-    answers: ["Капуччино и эспрессо", "Каппуччино и экспресо", "Капучино и эспрессо"],
-    correct: 2,
-    explanation: "Конечно! По орфографическим нормам русского языка единственно верным написанием будут «капучино» и «эспрессо»."
-  },
-  {
-    question: "Как нужно писать?",
-    answers: ["Черезчур", "Черес-чур", "Чересчур"],
-    correct: 2,
-    explanation: "Да! Это слово появилось от соединения предлога «через» и древнего слова «чур», которое означает «граница», «край». Но слово претерпело изменения, так что правильное написание учим наизусть — «чересчур»."
-  },
-  {
-    question: "Где допущена ошибка?",
-    answers: ["Аккордеон", "Белиберда", "Эпелепсия"],
-    correct: 2,
-    explanation: "Верно! Это слово пишется так: «эпИлепсия»"
+document.addEventListener("DOMContentLoaded", function () {
+  const questions = [
+    {
+      question: "А голос у него был не такой, как у почтальона Печкина, дохленький. У Гаврюши голосище был, как у электрички. Он _____ _____ на ноги поднимал.",
+      answers: ["Пол деревни, за раз", "Полдеревни, зараз", "Пол-деревни, за раз"],
+      correct: 1,
+      explanation: "Правильно! Раздельно существительное будет писаться в случае наличия дополнительного слова между существительным и частицей. Правильный ответ: полдеревни пишется слитно. Зараз (ударение на второй слог) — это обстоятельственное наречие, пишется слитно. Означает быстро, одним махом."
+    },
+    {
+      question: "А эти слова как пишутся?",
+      answers: ["Капуччино и эспрессо", "Каппуччино и экспресо", "Капучино и эспрессо"],
+      correct: 2,
+      explanation: "Конечно! По орфографическим нормам русского языка единственно верным написанием будут «капучино» и «эспрессо»."
+    },
+    {
+      question: "Как нужно писать?",
+      answers: ["Черезчур", "Черес-чур", "Чересчур"],
+      correct: 2,
+      explanation: "Да! Это слово появилось от соединения предлога «через» и древнего слова «чур», которое означает «граница», «край». Но слово претерпело изменения, так что правильное написание учим наизусть — «чересчур»."
+    },
+    {
+      question: "Где допущена ошибка?",
+      answers: ["Аккордеон", "Белиберда", "Эпелепсия"],
+      correct: 2,
+      explanation: "Верно! Это слово пишется так: «эпИлепсия»"
+    }
+  ];
+
+  let questionIndex = 0;
+  let correctAnswers = 0;
+  let answeredQuestions = [];
+
+  const startQuizBtn = document.getElementById("startQuizBtn");
+  const quizContainer = document.getElementById("quizContainer");
+  const resultContainer = document.getElementById("resultContainer");
+  const correctCount = document.getElementById("correctCount");
+  const totalQuestions = document.getElementById("totalQuestions");
+
+  // Начать тест
+  startQuizBtn.addEventListener("click", displayQuestion);
+
+  // Вывод вопроса
+  function displayQuestion() {
+    if (answeredQuestions.length < questions.length) {
+      startQuizBtn.disabled = true; // Блокируем кнопку после нажатия
+
+      // Выбор случайного вопроса
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * questions.length);
+      } while (answeredQuestions.includes(randomIndex));
+
+      answeredQuestions.push(randomIndex);
+      const currentQuestion = questions[randomIndex];
+      questionIndex++;
+
+      const questionBlock = document.createElement("div");
+      questionBlock.classList.add("question");
+
+      const questionText = document.createElement("h2");
+      questionText.innerText = `${questionIndex}. ${currentQuestion.question}`;
+      questionBlock.appendChild(questionText);
+
+      const answersBlock = document.createElement("div");
+      answersBlock.classList.add("answers");
+
+      const shuffledAnswers = currentQuestion.answers
+        .map((answer, index) => ({ answer, index }))
+        .sort(() => Math.random() - 0.5);
+
+      shuffledAnswers.forEach((item) => {
+        const answerBtn = document.createElement("div");
+        answerBtn.classList.add("answer");
+        answerBtn.innerText = item.answer;
+        answerBtn.addEventListener("click", () => handleAnswer(item.index, answerBtn, currentQuestion, questionBlock));
+        answersBlock.appendChild(answerBtn);
+      });
+
+      questionBlock.appendChild(answersBlock);
+      quizContainer.appendChild(questionBlock);
+    } else {
+      displayResult();
+    }
   }
-];
 
-let questionIndex = 0;
-let correctAnswers = 0;
-let answeredQuestions = [];
+  // Обработка ответа
+  function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
+    const answers = quizContainer.querySelectorAll(".answer");
 
-const startQuizBtn = document.getElementById("startQuizBtn");
-const quizContainer = document.getElementById("quizContainer");
-const resultContainer = document.getElementById("resultContainer");
-const correctCount = document.getElementById("correctCount");
-const totalQuestions = document.getElementById("totalQuestions");
+    answers.forEach((answer) => answer.removeEventListener("click", handleAnswer));
 
-// Начать тест
-startQuizBtn.addEventListener("click", displayQuestion);
+    if (selectedIndex === currentQuestion.correct) {
+      answerBtn.classList.add("correct");
+      correctAnswers++;
 
-// Вывод вопроса
-function displayQuestion() {
-  if (answeredQuestions.length < questions.length) {
-    startQuizBtn.disabled = true; // Блокируем кнопку после нажатия
+      // Убираем все объяснения перед показом
+      hideAllExplanations();
 
-    // Выбор случайного вопроса
-    let randomIndex;
-    do {
-      randomIndex = Math.floor(Math.random() * questions.length);
-    } while (answeredQuestions.includes(randomIndex));
+      const explanation = createExplanation(currentQuestion);
+      questionBlock.appendChild(explanation);
 
-    answeredQuestions.push(randomIndex);
-    const currentQuestion = questions[randomIndex];
-    questionIndex++;
+      setTimeout(() => {
+        answers.forEach((answer) => answer.classList.add("animate-out"));
+        questionBlock.classList.add("correct");
 
-    const questionBlock = document.createElement("div");
-    questionBlock.classList.add("question");
+        setTimeout(() => {
+          questionBlock.querySelector(".answers").classList.add("hidden");
+          startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+        }, 500);
+      }, 3000);
+    } else {
+      answerBtn.classList.add("wrong");
+      answers.forEach((answer) => answer.classList.add("animate-out"));
 
-    const questionText = document.createElement("h2");
-    questionText.innerText = `${questionIndex}. ${currentQuestion.question}`;
-    questionBlock.appendChild(questionText);
+      setTimeout(() => {
+        questionBlock.classList.add("wrong");
+        startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
 
-    const answersBlock = document.createElement("div");
-    answersBlock.classList.add("answers");
-
-    const shuffledAnswers = currentQuestion.answers
-      .map((answer, index) => ({ answer, index }))
-      .sort(() => Math.random() - 0.5);
-
-    shuffledAnswers.forEach((item) => {
-      const answerBtn = document.createElement("div");
-      answerBtn.classList.add("answer");
-      answerBtn.innerText = item.answer;
-      answerBtn.addEventListener("click", () => handleAnswer(item.index, answerBtn, currentQuestion, questionBlock));
-      answersBlock.appendChild(answerBtn);
-    });
-
-    questionBlock.appendChild(answersBlock);
-    quizContainer.appendChild(questionBlock);
-  } else {
-    displayResult();
+        setTimeout(() => {
+          questionBlock.querySelector(".answers").classList.add("hidden");
+          const explanation = createExplanation(currentQuestion);
+          questionBlock.appendChild(explanation);
+          startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+        }, 300);
+      }, 300);
+    }
   }
-}
 
-// Обработка ответа
-function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
-  const answers = quizContainer.querySelectorAll(".answer");
+  // Создание блока с объяснением и правильным ответом
+  function createExplanation(currentQuestion) {
+    const explanationBlock = document.createElement("div");
+    explanationBlock.classList.add("explanation");
 
-  answers.forEach((answer) => answer.removeEventListener("click", handleAnswer));
-
-  if (selectedIndex === currentQuestion.correct) {
-    answerBtn.classList.add("correct");
-    correctAnswers++;
+    const correctAnswer = document.createElement("p");
+    correctAnswer.innerText = `Правильный ответ: ${currentQuestion.answers[currentQuestion.correct]}`;
 
     const explanation = document.createElement("p");
     explanation.innerText = currentQuestion.explanation;
-    explanation.classList.add("explanation");
-    questionBlock.appendChild(explanation);
 
-    setTimeout(() => {
-      answers.forEach((answer) => answer.classList.add("animate-out"));
-      explanation.classList.add("animate-out");
-      questionBlock.classList.add("correct");
+    explanationBlock.appendChild(correctAnswer);
+    explanationBlock.appendChild(explanation);
+    explanationBlock.classList.add("hidden");
 
-      setTimeout(() => {
-        questionBlock.querySelector(".answers").classList.add("hidden");
-        explanation.classList.add("hidden");
-        startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-      }, 500);
-    }, 3000);
-  } else {
-    answerBtn.classList.add("wrong");
-    answers.forEach((answer) => answer.classList.add("animate-out"));
+    explanationBlock.addEventListener("click", () => {
+      explanationBlock.classList.toggle("hidden");
+      hideAllExplanations(explanationBlock); // Скрыть другие объяснения, если кликнули
+    });
 
-    setTimeout(() => {
-      questionBlock.classList.add("wrong");
-      startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+    return explanationBlock;
+  }
 
-      setTimeout(() => {
-        questionBlock.querySelector(".answers").classList.add("hidden");
-        explanation.classList.add("hidden");
-        startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-      }, 300);
-    }, 300);
-}
-}
+  // Скрыть все объяснения
+  function hideAllExplanations(except = null) {
+    const explanationBlocks = quizContainer.querySelectorAll(".explanation");
+    explanationBlocks.forEach((block) => {
+      if (block !== except) {
+        block.classList.add("hidden");
+      }
+    });
+  }
+
+  // Отображение результата
+  function displayResult() {
+    resultContainer.classList.remove("hidden");
+    correctCount.innerText = correctAnswers;
+    totalQuestions.innerText = questions.length;
+
+    const questionBlocks = quizContainer.querySelectorAll(".question");
+    questionBlocks.forEach((block) => {
+      block.addEventListener("click", () => {
+        const explanationBlock = block.querySelector(".explanation");
+        if (explanationBlock) {
+          explanationBlock.classList.toggle("hidden");
+          hideAllExplanations(explanationBlock); // Скрыть остальные объяснения
+        }
+      });
+    });
+  }
 });
 </script>
