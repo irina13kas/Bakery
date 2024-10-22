@@ -40,7 +40,7 @@
             <h1>DOM-Тест</h1>
         </div>
         <div id="app">
-            <button id="startQuizBtn">Начать тестирование</button>
+            <button id="startQuizBtn">Вопрос</button>
             <div id="quizContainer"></div>
             <div id="resultContainer" class="hidden">
               <h2>Вопросы закончились</h2>
@@ -54,6 +54,7 @@
 </html>
 
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
     const questions = [
   {
     question: "А голос у него был не такой, как у почтальона Печкина, дохленький. У Гаврюши голосище был, как у электрички. Он _____ _____ на ноги поднимал.",
@@ -97,7 +98,7 @@ startQuizBtn.addEventListener("click", displayQuestion);
 // Вывод вопроса
 function displayQuestion() {
   if (answeredQuestions.length < questions.length) {
-    startQuizBtn.classList.add("hidden");
+    startQuizBtn.disabled = true; // Блокируем кнопку после нажатия
 
     // Выбор случайного вопроса
     let randomIndex;
@@ -150,34 +151,35 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
 
     const explanation = document.createElement("p");
     explanation.innerText = currentQuestion.explanation;
+    explanation.classList.add("explanation");
     questionBlock.appendChild(explanation);
 
     setTimeout(() => {
       answers.forEach((answer) => answer.classList.add("animate-out"));
+      explanation.classList.add("animate-out");
       questionBlock.classList.add("correct");
 
       setTimeout(() => {
         questionBlock.querySelector(".answers").classList.add("hidden");
-        startQuizBtn.classList.remove("hidden");
-      }, 1000);
-    }, 1000);
+        explanation.classList.add("hidden");
+        startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+      }, 500);
+    }, 3000);
   } else {
     answerBtn.classList.add("wrong");
     answers.forEach((answer) => answer.classList.add("animate-out"));
 
     setTimeout(() => {
       questionBlock.classList.add("wrong");
-      startQuizBtn.classList.remove("hidden");
-    }, 1000);
-  }
-}
+      startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
 
-// Результаты
-function displayResult() {
-  quizContainer.innerHTML = "";
-  resultContainer.classList.remove("hidden");
-  correctCount.innerText = correctAnswers;
-  totalQuestions.innerText = questions.length;
+      setTimeout(() => {
+        questionBlock.querySelector(".answers").classList.add("hidden");
+        explanation.classList.add("hidden");
+        startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+      }, 300);
+    }, 300);
 }
-
+}
+});
 </script>

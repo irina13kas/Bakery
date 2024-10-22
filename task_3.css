@@ -1,5 +1,5 @@
 #app {
-    max-width: 800px;
+    max-width: 1200px;
     width: 100%;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -19,18 +19,25 @@
   #startQuizBtn:hover {
     background-color: #45a049;
   }
-  
-  #quizContainer {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
+
+  #startQuizBtn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
   }
+
+  #quizContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Добавлено для предотвращения равной высоты */
+  margin-top: 20px;
+}
   
-  .question {
+.question {
     margin: 10px;
     padding: 10px;
     border: 2px solid #ccc;
-    flex-basis: 45%;
+    width: calc(30% - 20px); /* Определяем ширину без жесткой высоты */
+    box-sizing: border-box;
     transition: all 0.3s ease;
   }
   
@@ -59,7 +66,7 @@
   }
   
   .answer:hover {
-    background-color: #f0f0f0;
+    background-color:rgb(248, 194, 59);
   }
   
   .answer.correct {
@@ -71,18 +78,98 @@
     border: 2px solid red;
   }
   
-  .answer.animate-out {
+  .animate-out {
     transform: translateY(100%) scale(0.8);
     opacity: 0;
-    transition: transform 0.5s, opacity 0.5s;
+    transition: transform 1s, opacity 1s;
   }
   
   .hidden {
     display: none;
   }
+
+  .explanation {
+    transition: transform 1s, opacity 1s;
+  }
   
-  @media (max-width: 600px) {
-    #quizContainer {
-      flex-direction: column;
+  .explanation.animate-out {
+    transform: translateY(100%) scale(0.8);
+    opacity: 0;
+  }
+  /* Адаптивные стили */
+  
+  /* Экраны больше 1200px */
+  @media (min-width: 1200px) {
+    .question {
+      width: 280px;
+    }
+  
+    .container {
+      width: 85%;
     }
   }
+  
+  /* Экраны от 768px до 1200px */
+  @media (max-width: 1200px) and (min-width: 768px) {
+    .question {
+        width: calc(45% - 20px);
+      margin-right: 20px;
+    }
+  
+    .answers {
+      display: block;
+    }
+  }
+  
+  /* Экраны от 576px до 768px */
+  @media (max-width: 768px) and (min-width: 576px) {
+    .question {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .nextQuestion {
+      width: 100%;
+    }
+  
+    .answers {
+      display: block;
+    }
+  }
+  
+  /* Экраны меньше 576px */
+  @media (max-width: 576px) {
+    body {
+      padding: 10px;
+    }
+  
+    .container {
+      padding: 10px;
+      width: 100%;
+    }
+  
+    .question {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+      padding: 10px;
+      flex-basis: 30%;
+    }
+  
+    .nextQuestion {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+    }
+  
+    .answer {
+      padding: 15px;
+    }
+  
+    .finished {
+      font-size: 18px;
+    }
+  }
+
+  
