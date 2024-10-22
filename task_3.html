@@ -43,10 +43,10 @@
             <button id="startQuizBtn">Вопрос</button>
             <div id="quizContainer"></div>
             <div id="resultContainer" class="hidden">
-              <h2>Вопросы закончились</h2>
-              <p>Правильных ответов: <span id="correctCount"></span> из <span id="totalQuestions"></span></p>
-              <button id="showAnswersBtn">Посмотреть ответы</button>
-              <div id="answersContainer"></div>
+                <h2>Вопросы закончились</h2>
+                    <p>Правильных ответов: <span id="correctCount"></span> из <span id="totalQuestions"></span></p>
+                    <button id="restartQuizBtn">Пройти тестирование заново</button>
+                    <div id="answersContainer"></div>
             </div>
           </div>
     </div>
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     {
       question: "А голос у него был не такой, как у почтальона Печкина, дохленький. У Гаврюши голосище был, как у электрички. Он _____ _____ на ноги поднимал.",
       answers: ["Пол деревни, за раз", "Полдеревни, зараз", "Пол-деревни, за раз"],
-      correct: 1,
+      correct: 0,
       explanation: "Правильно! Раздельно существительное будет писаться в случае наличия дополнительного слова между существительным и частицей. Правильный ответ: полдеревни пишется слитно. Зараз (ударение на второй слог) — это обстоятельственное наречие, пишется слитно. Означает быстро, одним махом."
     },
     {
@@ -139,61 +139,62 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Обработка ответа
-  function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
+// Обработка ответа
+function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
     const answers = quizContainer.querySelectorAll(".answer");
 
+    // Отключаем клики на все ответы
     answers.forEach((answer) => answer.removeEventListener("click", handleAnswer));
 
     if (selectedIndex === currentQuestion.correct) {
-      answerBtn.classList.add("correct");
-      correctAnswers++;
+        answerBtn.classList.add("correct");
+        correctAnswers++;
 
-      // Убираем все объяснения перед показом
-      hideAllExplanations();
+        // Убираем все объяснения перед показом
+        hideAllExplanations();
 
-      const explanation = createExplanation(currentQuestion);
-      questionBlock.appendChild(explanation);
+        // Создаём пояснение и показываем его
+        const explanation = createExplanation(currentQuestion);
+        questionBlock.appendChild(explanation);
+        explanation.classList.remove("hidden");
 
-      setTimeout(() => {
-        answers.forEach((answer) => answer.classList.add("animate-out"));
-        questionBlock.classList.add("correct");
-
+        // Ожидаем несколько секунд для отображения пояснения, затем скрываем все блоки
         setTimeout(() => {
-          questionBlock.querySelector(".answers").classList.add("hidden");
-          startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-        }, 500);
-      }, 3000);
+            answers.forEach((answer) => answer.classList.add("animate-out")); // Анимация скрытия ответов
+            questionBlock.classList.add("correct"); // Отметка правильного вопроса
+
+            // Скрываем пояснение и вопрос
+            setTimeout(() => {
+                questionBlock.querySelector(".answers").classList.add("hidden");
+                explanation.classList.add("hidden");
+                startQuizBtn.disabled = false; // Разблокируем кнопку для следующего вопроса
+            }, 2000); // Время до скрытия всех элементов (можно регулировать)
+        }, 2000); // Время показа пояснения (можно изменить)
     } else {
-      answerBtn.classList.add("wrong");
-      answers.forEach((answer) => answer.classList.add("animate-out"));
+    answerBtn.classList.add("wrong");
+    answers.forEach((answer) => answer.classList.add("animate-out"));
+
+    setTimeout(() => {
+      questionBlock.classList.add("wrong");
+      startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
 
       setTimeout(() => {
-        questionBlock.classList.add("wrong");
+        questionBlock.querySelector(".answers").classList.add("hidden");
+        explanation.classList.add("hidden");
         startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-
-        setTimeout(() => {
-          questionBlock.querySelector(".answers").classList.add("hidden");
-          const explanation = createExplanation(currentQuestion);
-          questionBlock.appendChild(explanation);
-          startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-        }, 300);
       }, 300);
+    }, 300);
     }
-  }
+}
 
   // Создание блока с объяснением и правильным ответом
   function createExplanation(currentQuestion) {
     const explanationBlock = document.createElement("div");
     explanationBlock.classList.add("explanation");
 
-    const correctAnswer = document.createElement("p");
-    correctAnswer.innerText = `Правильный ответ: ${currentQuestion.answers[currentQuestion.correct]}`;
-
     const explanation = document.createElement("p");
     explanation.innerText = currentQuestion.explanation;
 
-    explanationBlock.appendChild(correctAnswer);
     explanationBlock.appendChild(explanation);
     explanationBlock.classList.add("hidden");
 
@@ -215,22 +216,68 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Отображение результата
-  function displayResult() {
+// Отображение результата
+function displayResult() {
     resultContainer.classList.remove("hidden");
     correctCount.innerText = correctAnswers;
     totalQuestions.innerText = questions.length;
 
     const questionBlocks = quizContainer.querySelectorAll(".question");
-    questionBlocks.forEach((block) => {
-      block.addEventListener("click", () => {
-        const explanationBlock = block.querySelector(".explanation");
-        if (explanationBlock) {
-          explanationBlock.classList.toggle("hidden");
-          hideAllExplanations(explanationBlock); // Скрыть остальные объяснения
-        }
-      });
+
+    questionBlocks.forEach((block, index) => {
+        block.addEventListener("click", () => {
+            // Скрываем правильные ответы во всех других блоках
+            hideAllCorrectAnswersExcept(block);
+
+            const explanationBlock = block.querySelector(".correct-answer");
+            if (explanationBlock) {
+                explanationBlock.classList.toggle("hidden");
+            } else {
+                // Создаем блок с правильным ответом, если его ещё нет
+                const correctAnswerBlock = document.createElement("div");
+                correctAnswerBlock.classList.add("correct-answer");
+
+                const correctAnswer = document.createElement("p");
+                correctAnswer.innerText = `Правильный ответ: ${questions[index].answers[questions[index].correct]}`;
+
+                correctAnswerBlock.appendChild(correctAnswer);
+                block.appendChild(correctAnswerBlock);
+            }
+        });
     });
-  }
+}
+
+// Скрыть все правильные ответы, кроме текущего блока
+function hideAllCorrectAnswersExcept(currentBlock) {
+    const allCorrectAnswerBlocks = quizContainer.querySelectorAll(".correct-answer");
+    allCorrectAnswerBlocks.forEach((block) => {
+        if (block.parentElement !== currentBlock) {
+            block.classList.add("hidden");
+        }
+    });
+}
+
+// Обработчик для кнопки перезапуска теста
+const restartQuizBtn = document.getElementById("restartQuizBtn");
+    restartQuizBtn.addEventListener("click", restartQuiz);
+
+    // Функция для перезапуска теста
+    function restartQuiz() {
+        // Сброс всех переменных
+        questionIndex = 0;
+        correctAnswers = 0;
+        answeredQuestions = [];
+        
+        // Очистка контейнера с вопросами и результатами
+        quizContainer.innerHTML = "";
+        resultContainer.classList.add("hidden"); // Скрыть контейнер результатов
+
+        // Обновление текста количества правильных ответов
+        correctCount.innerText = 0;
+        totalQuestions.innerText = questions.length;
+
+        // Показать кнопку старта
+        startQuizBtn.disabled = false;
+    }
 });
 </script>
