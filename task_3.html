@@ -54,6 +54,7 @@
 </html>
 
 <script>
+    
 document.addEventListener("DOMContentLoaded", function () {
   const questions = [
     {
@@ -141,51 +142,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Обработка ответа
 function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
-    const answers = quizContainer.querySelectorAll(".answer");
+  const answers = quizContainer.querySelectorAll(".answer");
 
-    // Отключаем клики на все ответы
-    answers.forEach((answer) => answer.removeEventListener("click", handleAnswer));
+  // Убираем возможность повторного выбора ответа
+  answers.forEach((answer) => answer.removeEventListener("click", handleAnswer));
 
-    if (selectedIndex === currentQuestion.correct) {
-        answerBtn.classList.add("correct");
-        correctAnswers++;
+  if (selectedIndex === currentQuestion.correct) {
+    // Правильный ответ выбран
+    answerBtn.classList.add("correct");
+    correctAnswers++;
 
-        // Убираем все объяснения перед показом
-        hideAllExplanations();
+    // Показываем пояснение
+    const explanation = createExplanation(currentQuestion);
+    questionBlock.appendChild(explanation);
+    explanation.classList.remove("hidden");
 
-        // Создаём пояснение и показываем его
-        const explanation = createExplanation(currentQuestion);
-        questionBlock.appendChild(explanation);
-        explanation.classList.remove("hidden");
+    // Перемещаем неправильные ответы вниз
+    answers.forEach((answer) => {
+      if (!answer.classList.contains("correct")) {
+        questionBlock.classList.add("correct");
+        answer.classList.add("animate-out"); // Добавляем анимацию перемещения вниз
+      }
+    });
 
-        // Ожидаем несколько секунд для отображения пояснения, затем скрываем все блоки
-        setTimeout(() => {
-            answers.forEach((answer) => answer.classList.add("animate-out")); // Анимация скрытия ответов
-            questionBlock.classList.add("correct"); // Отметка правильного вопроса
-
-            // Скрываем пояснение и вопрос
-            setTimeout(() => {
-                questionBlock.querySelector(".answers").classList.add("hidden");
-                explanation.classList.add("hidden");
-                startQuizBtn.disabled = false; // Разблокируем кнопку для следующего вопроса
-            }, 2000); // Время до скрытия всех элементов (можно регулировать)
-        }, 2000); // Время показа пояснения (можно изменить)
-    } else {
-    answerBtn.classList.add("wrong");
-    answers.forEach((answer) => answer.classList.add("animate-out"));
-
+    // Ждем завершения анимации, потом скрываем правильный ответ и пояснение
     setTimeout(() => {
-      questionBlock.classList.add("wrong");
-      startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+      answerBtn.classList.add("animate-out"); // Перемещаем правильный блок вниз
+      explanation.classList.add("animate-out"); // Перемещаем пояснение вниз
 
       setTimeout(() => {
         questionBlock.querySelector(".answers").classList.add("hidden");
-        explanation.classList.add("hidden");
+        explanation.classList.add("hidden"); // Скрываем блок пояснения
         startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-      }, 300);
-    }, 300);
-    }
+      }, 500); // Ждем завершения анимации перемещения
+    }, 3000); // Ждем 3 секунды перед началом исчезновения
+  } else {
+    // Неправильный ответ выбран
+    answerBtn.classList.add("wrong");
+
+    // Перемещаем все ответы вниз
+    answers.forEach((answer) => {
+      answer.classList.add("animate-out"); // Перемещаем каждый блок вниз
+    });
+
+    setTimeout(() => {
+      questionBlock.querySelector(".answers").classList.add("hidden");
+      questionBlock.classList.add("wrong");
+      startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+    }, 500); // Ждем завершения анимации перемещения вниз
+  }
 }
+
 
   // Создание блока с объяснением и правильным ответом
   function createExplanation(currentQuestion) {
