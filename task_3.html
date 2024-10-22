@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href=".vscode/images/icon.ico" type="image/x-icon">
+    <title>Кондитерская</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="task_3.css">
+    <link rel="stylesheet" href="logo.css">
+</head>
+
+<body>
+    <header>
+        <nav class="header-nav">
+            <div class="logo">
+                <div class="cake">
+                    <div class="layer_1"></div>
+                    <div class="layer_2"></div>
+                    <div class="layer_3"></div>
+                    <div class="layer_4"></div>
+                    <div class="candles">
+                        <div class="candle"></div>
+                        <div class="candle"></div>
+                        <div class="candle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-links">
+                <a href="about.html">Главная</a>
+                <a href="#">Торты</a>
+                <a href="portfolio.html" class="active">Задания</a>
+                <a href="contacts.html">Контакты</a>
+            </div>
+            <a href="#" class="cart-button"><span>Корзина</span></a>
+        </nav>
+    </header>
+    <div class="main-body">
+        <div class="topic">
+            <h1>DOM-Тест</h1>
+        </div>
+        <div id="app">
+            <button id="startQuizBtn">Начать тестирование</button>
+            <div id="quizContainer"></div>
+            <div id="resultContainer" class="hidden">
+              <h2>Вопросы закончились</h2>
+              <p>Правильных ответов: <span id="correctCount"></span> из <span id="totalQuestions"></span></p>
+              <button id="showAnswersBtn">Посмотреть ответы</button>
+              <div id="answersContainer"></div>
+            </div>
+          </div>
+    </div>
+</body>
+</html>
+
+<script>
+    const questions = [
+  {
+    question: "А голос у него был не такой, как у почтальона Печкина, дохленький. У Гаврюши голосище был, как у электрички. Он _____ _____ на ноги поднимал.",
+    answers: ["Пол деревни, за раз", "Полдеревни, зараз", "Пол-деревни, за раз"],
+    correct: 1,
+    explanation: "Правильно! Раздельно существительное будет писаться в случае наличия дополнительного слова между существительным и частицей. Правильный ответ: полдеревни пишется слитно. Зараз (ударение на второй слог) — это обстоятельственное наречие, пишется слитно. Означает быстро, одним махом."
+  },
+  {
+    question: "А эти слова как пишутся?",
+    answers: ["Капуччино и эспрессо", "Каппуччино и экспресо", "Капучино и эспрессо"],
+    correct: 2,
+    explanation: "Конечно! По орфографическим нормам русского языка единственно верным написанием будут «капучино» и «эспрессо»."
+  },
+  {
+    question: "Как нужно писать?",
+    answers: ["Черезчур", "Черес-чур", "Чересчур"],
+    correct: 2,
+    explanation: "Да! Это слово появилось от соединения предлога «через» и древнего слова «чур», которое означает «граница», «край». Но слово претерпело изменения, так что правильное написание учим наизусть — «чересчур»."
+  },
+  {
+    question: "Где допущена ошибка?",
+    answers: ["Аккордеон", "Белиберда", "Эпелепсия"],
+    correct: 2,
+    explanation: "Верно! Это слово пишется так: «эпИлепсия»"
+  }
+];
+
+let questionIndex = 0;
+let correctAnswers = 0;
+let answeredQuestions = [];
+
+const startQuizBtn = document.getElementById("startQuizBtn");
+const quizContainer = document.getElementById("quizContainer");
+const resultContainer = document.getElementById("resultContainer");
+const correctCount = document.getElementById("correctCount");
+const totalQuestions = document.getElementById("totalQuestions");
+
+// Начать тест
+startQuizBtn.addEventListener("click", displayQuestion);
+
+// Вывод вопроса
+function displayQuestion() {
+  if (answeredQuestions.length < questions.length) {
+    startQuizBtn.classList.add("hidden");
+
+    // Выбор случайного вопроса
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * questions.length);
+    } while (answeredQuestions.includes(randomIndex));
+
+    answeredQuestions.push(randomIndex);
+    const currentQuestion = questions[randomIndex];
+    questionIndex++;
+
+    const questionBlock = document.createElement("div");
+    questionBlock.classList.add("question");
+
+    const questionText = document.createElement("h2");
+    questionText.innerText = `${questionIndex}. ${currentQuestion.question}`;
+    questionBlock.appendChild(questionText);
+
+    const answersBlock = document.createElement("div");
+    answersBlock.classList.add("answers");
+
+    const shuffledAnswers = currentQuestion.answers
+      .map((answer, index) => ({ answer, index }))
+      .sort(() => Math.random() - 0.5);
+
+    shuffledAnswers.forEach((item) => {
+      const answerBtn = document.createElement("div");
+      answerBtn.classList.add("answer");
+      answerBtn.innerText = item.answer;
+      answerBtn.addEventListener("click", () => handleAnswer(item.index, answerBtn, currentQuestion, questionBlock));
+      answersBlock.appendChild(answerBtn);
+    });
+
+    questionBlock.appendChild(answersBlock);
+    quizContainer.appendChild(questionBlock);
+  } else {
+    displayResult();
+  }
+}
+
+// Обработка ответа
+function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
+  const answers = quizContainer.querySelectorAll(".answer");
+
+  answers.forEach((answer) => answer.removeEventListener("click", handleAnswer));
+
+  if (selectedIndex === currentQuestion.correct) {
+    answerBtn.classList.add("correct");
+    correctAnswers++;
+
+    const explanation = document.createElement("p");
+    explanation.innerText = currentQuestion.explanation;
+    questionBlock.appendChild(explanation);
+
+    setTimeout(() => {
+      answers.forEach((answer) => answer.classList.add("animate-out"));
+      questionBlock.classList.add("correct");
+
+      setTimeout(() => {
+        questionBlock.querySelector(".answers").classList.add("hidden");
+        startQuizBtn.classList.remove("hidden");
+      }, 1000);
+    }, 1000);
+  } else {
+    answerBtn.classList.add("wrong");
+    answers.forEach((answer) => answer.classList.add("animate-out"));
+
+    setTimeout(() => {
+      questionBlock.classList.add("wrong");
+      startQuizBtn.classList.remove("hidden");
+    }, 1000);
+  }
+}
+
+// Результаты
+function displayResult() {
+  quizContainer.innerHTML = "";
+  resultContainer.classList.remove("hidden");
+  correctCount.innerText = correctAnswers;
+  totalQuestions.innerText = questions.length;
+}
+
+</script>

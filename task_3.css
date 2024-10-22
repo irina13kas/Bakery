@@ -1,0 +1,88 @@
+#app {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  #startQuizBtn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #startQuizBtn:hover {
+    background-color: #45a049;
+  }
+  
+  #quizContainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .question {
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    flex-basis: 45%;
+    transition: all 0.3s ease;
+  }
+  
+  .question.correct {
+    border-color: green;
+    background-color: #eaffea;
+  }
+  
+  .question.wrong {
+    border-color: red;
+    background-color: #ffeaea;
+  }
+  
+  .answers {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+  }
+  
+  .answer {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: lightgray;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+  }
+  
+  .answer:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .answer.correct {
+    border: 2px solid green;
+    transform: scale(1.1);
+  }
+  
+  .answer.wrong {
+    border: 2px solid red;
+  }
+  
+  .answer.animate-out {
+    transform: translateY(100%) scale(0.8);
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.5s;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  @media (max-width: 600px) {
+    #quizContainer {
+      flex-direction: column;
+    }
+  }
