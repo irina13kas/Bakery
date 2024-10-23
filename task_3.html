@@ -41,13 +41,13 @@
         </div>
         <div id="app">
             <button id="startQuizBtn">Вопрос</button>
-            <div id="quizContainer"></div>
             <div id="resultContainer" class="hidden">
-                <h2>Вопросы закончились</h2>
-                    <p>Правильных ответов: <span id="correctCount"></span> из <span id="totalQuestions"></span></p>
-                    <button id="restartQuizBtn">Пройти тестирование заново</button>
-                    <div id="answersContainer"></div>
+              <h2>Вопросы закончились</h2>
+                  <p>Правильных ответов: <span id="correctCount"></span> из <span id="totalQuestions"></span></p>
+                  <div id="answersContainer"></div>
+                  <button id="restartQuizBtn">Пройти тестирование заново</button>
             </div>
+            <div id="quizContainer"></div>
           </div>
     </div>
 </body>
@@ -92,6 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const resultContainer = document.getElementById("resultContainer");
   const correctCount = document.getElementById("correctCount");
   const totalQuestions = document.getElementById("totalQuestions");
+  const restartQuizBtn = document.getElementById("restartQuizBtn");
 
   // Начать тест
   startQuizBtn.addEventListener("click", displayQuestion);
@@ -144,8 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
   const answers = quizContainer.querySelectorAll(".answer");
 
-  // Убираем возможность повторного выбора ответа
-  answers.forEach((answer) => answer.removeEventListener("click", handleAnswer));
+  // Проверяем, был ли этот вопрос уже отвечен
+  // Добавляем класс answered, чтобы обозначить, что ответ был выбран
+  questionBlock.classList.add("answered");
 
   if (selectedIndex === currentQuestion.correct) {
     // Правильный ответ выбран
@@ -174,7 +176,9 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
         questionBlock.querySelector(".answers").classList.add("hidden");
         explanation.classList.add("hidden"); // Скрываем блок пояснения
         startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-      }, 500); // Ждем завершения анимации перемещения
+      }, 500
+      ,questionBlock.classList.remove("answered")
+    , questionBlock.classList.add("collapsed")); // Ждем завершения анимации перемещения
     }, 3000); // Ждем 3 секунды перед началом исчезновения
   } else {
     // Неправильный ответ выбран
@@ -189,7 +193,9 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
       questionBlock.querySelector(".answers").classList.add("hidden");
       questionBlock.classList.add("wrong");
       startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-    }, 500); // Ждем завершения анимации перемещения вниз
+    }, 500
+    ,questionBlock.classList.remove("answered")
+    ,questionBlock.classList.add("collapsed")); // Ждем завершения анимации перемещения вниз
   }
 }
 
@@ -225,6 +231,12 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
 
 // Отображение результата
 function displayResult() {
+  // Скрываем кнопку "Вопрос"
+  startQuizBtn.classList.add("hidden");
+
+  // Показываем кнопку "Пройти тестирование заново"
+  restartQuizBtn.classList.remove("hidden");
+
     resultContainer.classList.remove("hidden");
     correctCount.innerText = correctAnswers;
     totalQuestions.innerText = questions.length;
@@ -233,6 +245,7 @@ function displayResult() {
 
     questionBlocks.forEach((block, index) => {
         block.addEventListener("click", () => {
+          block.classList.remove("collapsed");
             // Скрываем правильные ответы во всех других блоках
             hideAllCorrectAnswersExcept(block);
 
@@ -257,15 +270,19 @@ function displayResult() {
 // Скрыть все правильные ответы, кроме текущего блока
 function hideAllCorrectAnswersExcept(currentBlock) {
     const allCorrectAnswerBlocks = quizContainer.querySelectorAll(".correct-answer");
+    const allQuestionBlocks = quizContainer.querySelectorAll(".question");
+
     allCorrectAnswerBlocks.forEach((block) => {
         if (block.parentElement !== currentBlock) {
             block.classList.add("hidden");
         }
     });
+    allQuestionBlocks.forEach((block) => {
+        if (block !== currentBlock) {
+            block.classList.add("collapsed"); // Сворачиваем блоки, которые не являются текущими
+        }
+    });
 }
-
-// Обработчик для кнопки перезапуска теста
-const restartQuizBtn = document.getElementById("restartQuizBtn");
     restartQuizBtn.addEventListener("click", restartQuiz);
 
     // Функция для перезапуска теста
@@ -275,6 +292,7 @@ const restartQuizBtn = document.getElementById("restartQuizBtn");
         correctAnswers = 0;
         answeredQuestions = [];
         
+        startQuizBtn.classList.remove("hidden");
         // Очистка контейнера с вопросами и результатами
         quizContainer.innerHTML = "";
         resultContainer.classList.add("hidden"); // Скрыть контейнер результатов
