@@ -97,16 +97,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Начать тест
   startQuizBtn.addEventListener("click", displayQuestion);
-
+  let totalLength = questions.length;
+  totalQuestions.innerText = totalLength;
   // Вывод вопроса
   function displayQuestion() {
-    if (answeredQuestions.length < questions.length) {
+    if (answeredQuestions.length < totalLength) {
       startQuizBtn.disabled = true; // Блокируем кнопку после нажатия
 
       // Выбор случайного вопроса
       let randomIndex;
       do {
-        randomIndex = Math.floor(Math.random() * questions.length);
+        randomIndex = Math.floor(Math.random() * totalLength);
       } while (answeredQuestions.includes(randomIndex));
 
       answeredQuestions.push(randomIndex);
@@ -151,7 +152,7 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
   // Добавляем класс answered, чтобы обозначить, что ответ был выбран
   questionBlock.classList.add("answered");
 
-  if (selectedIndex === currentQuestion.correct) {
+  if (selectedIndex == currentQuestion.correct) {
     // Правильный ответ выбран
     answerBtn.classList.add("correct");
     correctAnswers++;
@@ -241,7 +242,6 @@ function displayResult() {
 
     resultContainer.classList.remove("hidden");
     correctCount.innerText = correctAnswers;
-    totalQuestions.innerText = questions.length;
 
     const questionBlocks = quizContainer.querySelectorAll(".question");
 
@@ -302,7 +302,6 @@ function hideAllCorrectAnswersExcept(currentBlock) {
 
         // Обновление текста количества правильных ответов
         correctCount.innerText = 0;
-        totalQuestions.innerText = questions.length;
 
         // Показать кнопку старта
         startQuizBtn.disabled = false;
