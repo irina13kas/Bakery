@@ -152,7 +152,7 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
   // Добавляем класс answered, чтобы обозначить, что ответ был выбран
   questionBlock.classList.add("answered");
 
-  if (selectedIndex == currentQuestion.correct) {
+  if (selectedIndex === currentQuestion.correct) {
     // Правильный ответ выбран
     answerBtn.classList.add("correct");
     correctAnswers++;
@@ -160,7 +160,6 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
     // Показываем пояснение
     const explanation = createExplanation(currentQuestion);
     questionBlock.appendChild(explanation);
-    explanation.classList.remove("hidden");
 
     // Перемещаем неправильные ответы вниз
     answers.forEach((answer) => {
@@ -171,18 +170,19 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
     });
 
     // Ждем завершения анимации, потом скрываем правильный ответ и пояснение
+    setTimeout(() =>{
     setTimeout(() => {
-      answerBtn.classList.add("animate-out"); // Перемещаем правильный блок вниз
-      explanation.classList.add("animate-out"); // Перемещаем пояснение вниз
+      questionBlock.querySelector(".answers").classList.add("hidden");
+        explanation.classList.add("hidden");
+        startQuizBtn.disabled = false;
 
       setTimeout(() => {
-        questionBlock.querySelector(".answers").classList.add("hidden");
-        explanation.classList.add("hidden"); // Скрываем блок пояснения
-        startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
-      }, 500
-      ,questionBlock.classList.remove("answered")
-    , questionBlock.classList.add("collapsed")); // Ждем завершения анимации перемещения
-    }, 3000); // Ждем 3 секунды перед началом исчезновения
+        questionBlock.classList.remove("answered");
+        questionBlock.classList.add("collapsed");
+      }, 500)}, 1000
+       ,answerBtn.classList.add("animate-out"),
+       explanation.classList.add("animate-out"))
+    }, 2000);
   } else {
     // Неправильный ответ выбран
     answerBtn.classList.add("wrong");
@@ -191,14 +191,16 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
     answers.forEach((answer) => {
       answer.classList.add("animate-out"); // Перемещаем каждый блок вниз
     });
-
     setTimeout(() => {
-      questionBlock.querySelector(".answers").classList.add("hidden");
-      questionBlock.classList.add("wrong");
-      startQuizBtn.disabled = false; // Разблокируем кнопку после ответа
+    setTimeout(() => {
+    questionBlock.classList.remove("answered");
+    questionBlock.classList.add("collapsed"); // Разблокируем кнопку после ответа
     }, 500
-    ,questionBlock.classList.remove("answered")
-    ,questionBlock.classList.add("collapsed")); // Ждем завершения анимации перемещения вниз
+    ,questionBlock.querySelector(".answers").classList.add("hidden")
+      ,questionBlock.classList.add("wrong")
+    ,startQuizBtn.disabled = false);
+  }, 500);
+     // Ждем завершения анимации перемещения вниз
   }
 }
 
@@ -212,7 +214,6 @@ function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) 
     explanation.innerText = currentQuestion.explanation;
 
     explanationBlock.appendChild(explanation);
-    explanationBlock.classList.add("hidden");
 
     explanationBlock.addEventListener("click", () => {
       explanationBlock.classList.toggle("hidden");
