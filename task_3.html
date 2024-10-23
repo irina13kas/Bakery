@@ -86,6 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let questionIndex = 0;
   let correctAnswers = 0;
   let answeredQuestions = [];
+  let questionOrder = [];
 
   const startQuizBtn = document.getElementById("startQuizBtn");
   const quizContainer = document.getElementById("quizContainer");
@@ -111,11 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
       answeredQuestions.push(randomIndex);
       const currentQuestion = questions[randomIndex];
       questionIndex++;
+      questionOrder.push(questions[randomIndex]);
 
       const questionBlock = document.createElement("div");
       questionBlock.classList.add("question");
 
-      const questionText = document.createElement("h2");
+      const questionText = document.createElement("h3");
       questionText.innerText = `${questionIndex}. ${currentQuestion.question}`;
       questionBlock.appendChild(questionText);
 
@@ -258,7 +260,7 @@ function displayResult() {
                 correctAnswerBlock.classList.add("correct-answer");
 
                 const correctAnswer = document.createElement("p");
-                correctAnswer.innerText = `Правильный ответ: ${questions[index].answers[questions[index].correct]}`;
+                correctAnswer.innerText = `Правильный ответ: ${questionOrder[index].answers[questionOrder[index].correct]}`;
 
                 correctAnswerBlock.appendChild(correctAnswer);
                 block.appendChild(correctAnswerBlock);
@@ -291,6 +293,7 @@ function hideAllCorrectAnswersExcept(currentBlock) {
         questionIndex = 0;
         correctAnswers = 0;
         answeredQuestions = [];
+        questionOrder = [];
         
         startQuizBtn.classList.remove("hidden");
         // Очистка контейнера с вопросами и результатами
