@@ -122,6 +122,7 @@ footer {
     background-color: #333;
     color: #fff;
     padding: 6vw 10vw;
+    margin-top: 10em;
 }
 
 .footer-container {
@@ -185,4 +186,68 @@ footer {
 .scroll-to-top.moving {
     bottom: 5%;
     right:3%;
+}
+
+/* Общие стили для всех экранов остаются */
+@media (max-width: 1200px) {
+    .header-nav {
+        max-width: 85%;
+    }
+    .nav-links {
+        gap: 3vw;
+    }
+    .scroll-to-top {
+        right: 2%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .header-nav {
+        max-width: 800px;
+        padding: 0 1vw;
+    }
+    .nav-links {
+        gap: 2.5vw;
+    }
+    .right-links, .left-links {
+        flex: 0 1 auto; /* Гибкое распределение места */
+    }
+    footer {
+        padding: 4vw 6vw;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 2vh;
+        margin-left: 0;
+        text-align: center;
+    }
+    .main-body {
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+    footer {
+        flex-direction: column;
+        padding: 4vw 5vw;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 2vh 2vw;
+    }
+    .nav-links {
+        gap: 1.5vw;
+    }
+    .cake {
+        width: 80%; /* Изменение размеров торта для небольших экранов */
+        margin: 0 auto;
+    }
 }
