@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let answeredQuestions = [];
     let questionOrder = [];
   
-    const startQuizBtn = document.getElementById("startQuizBtn");
+    const questionBtn = document.getElementById("questionBtn");
     const quizContainer = document.getElementById("quizContainer");
     const resultContainer = document.getElementById("resultContainer");
     const correctCount = document.getElementById("correctCount");
@@ -39,13 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const restartQuizBtn = document.getElementById("restartQuizBtn");
   
     // Начать тест
-    startQuizBtn.addEventListener("click", displayQuestion);
+    questionBtn.addEventListener("click", displayQuestion);
     let totalLength = questions.length;
     totalQuestions.innerText = totalLength;
     // Вывод вопроса
     function displayQuestion() {
       if (answeredQuestions.length < totalLength) {
-        startQuizBtn.disabled = true; // Блокируем кнопку после нажатия
+        questionBtn.disabled = true; // Блокируем кнопку после нажатия
   
         // Выбор случайного вопроса
         let randomIndex;
@@ -89,12 +89,12 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Обработка ответа
   function handleAnswer(selectedIndex, answerBtn, currentQuestion, questionBlock) {
-    const answers = quizContainer.querySelectorAll(".answer");
+    const answers = questionBlock.querySelectorAll(".answer");
   
     // Проверяем, был ли этот вопрос уже отвечен
     // Добавляем класс answered, чтобы обозначить, что ответ был выбран
     questionBlock.classList.add("answered");
-  
+    
     if (selectedIndex === currentQuestion.correct) {
       // Правильный ответ выбран
       answerBtn.classList.add("correct");
@@ -102,47 +102,54 @@ document.addEventListener("DOMContentLoaded", function () {
   
       // Показываем пояснение
       const explanation = createExplanation(currentQuestion);
-      questionBlock.appendChild(explanation);
-  
+      answerBtn.appendChild(explanation); // Помещаем пояснение в правильный ответ
       // Перемещаем неправильные ответы вниз
-      answers.forEach((answer) => {
+      setTimeout(()=>{
+      answers.forEach((answer, ind) => {
         if (!answer.classList.contains("correct")) {
-          questionBlock.classList.add("correct");
-          answer.classList.add("animate-out"); // Добавляем анимацию перемещения вниз
+          setTimeout(() => {
+            answer.classList.add("animate-out");
+          }, ind * 500);
         }
       });
+    },500);
   
       // Ждем завершения анимации, потом скрываем правильный ответ и пояснение
       setTimeout(() =>{
       setTimeout(() => {
         questionBlock.querySelector(".answers").classList.add("hidden");
+        questionBlock.classList.add("correct")
           explanation.classList.add("hidden");
-          startQuizBtn.disabled = false;
+          questionBtn.disabled = false;
   
         setTimeout(() => {
           questionBlock.classList.remove("answered");
           questionBlock.classList.add("collapsed");
-        }, 500)}, 1000
+        }, 500)}, 500
          ,answerBtn.classList.add("animate-out"),
          explanation.classList.add("animate-out"))
       }, 2000);
     } else {
       // Неправильный ответ выбран
       answerBtn.classList.add("wrong");
-  
-      // Перемещаем все ответы вниз
-      answers.forEach((answer) => {
-        answer.classList.add("animate-out"); // Перемещаем каждый блок вниз
-      });
+
+         setTimeout(()=>{
+         answers.forEach((answer,ind) => {
+            setTimeout(() => {
+                answer.classList.add("animate-out"); // Применяем анимацию через промежуток времени
+              }, ind * 500);});
+            },500);
+
+
       setTimeout(() => {
       setTimeout(() => {
       questionBlock.classList.remove("answered");
       questionBlock.classList.add("collapsed"); // Разблокируем кнопку после ответа
-      }, 500
+      }, 1000
       ,questionBlock.querySelector(".answers").classList.add("hidden")
         ,questionBlock.classList.add("wrong")
-      ,startQuizBtn.disabled = false);
-    }, 500);
+      ,questionBtn.disabled = false);
+    }, 2000);
        // Ждем завершения анимации перемещения вниз
     }
   }
@@ -179,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Отображение результата
   function displayResult() {
     // Скрываем кнопку "Вопрос"
-    startQuizBtn.classList.add("hidden");
+    questionBtn.classList.add("hidden");
   
     // Показываем кнопку "Пройти тестирование заново"
     restartQuizBtn.classList.remove("hidden");
@@ -239,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
           answeredQuestions = [];
           questionOrder = [];
           
-          startQuizBtn.classList.remove("hidden");
+          questionBtn.classList.remove("hidden");
           // Очистка контейнера с вопросами и результатами
           quizContainer.innerHTML = "";
           resultContainer.classList.add("hidden"); // Скрыть контейнер результатов
@@ -248,6 +255,6 @@ document.addEventListener("DOMContentLoaded", function () {
           correctCount.innerText = 0;
   
           // Показать кнопку старта
-          startQuizBtn.disabled = false;
+          questionBtn.disabled = false;
       }
   });
