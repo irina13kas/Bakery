@@ -21,16 +21,15 @@
 }
 
 .catalog-container {
-    margin-top: 10px;
-    padding: 20px;
+    margin-top: 5%;
+    padding: 5%;
     border: 2px solid transparent; /* Рамка по умолчанию прозрачная */
     transition: border-color 0.3s;
     opacity: 0;
-    transform: translateY(50px);
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    gap: 2%;
+    margin-top: 5%;
 }
 
 .catalog-container.visible {
@@ -40,7 +39,7 @@
 
 .catalog-item {
     text-align: center;
-    padding: 15px;
+    padding: 7%;
     transition: transform 0.3s;
 }
 
@@ -51,46 +50,48 @@
 }
 
 .title {
-    margin: 10px 0;
+    margin-bottom: 2%;
     font-size: 1.2em;
 }
 
 .price {
-    margin: 5px 0;
+    margin: 0.5em 0;
     font-size: 1em;
 }
 .quantity-block{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .quantity-controls {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px 0;
+    margin: 0.4em 0;
 }
 
 .quantity-controls button {
     background-color: #ddd;
     border: none;
-    padding: 5px 10px;
+    padding: 0.2em 0.5em;
     cursor: pointer;
     font-size: 1em;
 }
 
 .quantity {
-    margin: 0 10px;
+    margin: 0 0.5em;
 }
 
 .add-to-cart {
     background-color: #9c8bff;
     color: black;
     border: none;
-    padding: 10px 15px;
+    padding: 0.6em 0.8em;
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s;
+    margin-right: 2%;
 }
 
 .add-to-cart:hover {
@@ -98,7 +99,7 @@
 }
 
 .catalog-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3%);
 }
 
 .product-modal {
@@ -115,30 +116,51 @@
 }
 
 .modal-content {
+    position: relative;
     background: #fff;
-    padding: 20px;
+    padding: 2%;
     display: flex;
-    max-width: 600px;
-    width: 90%;
+    max-width: 60em;
     border-radius: 8px;
+    align-items: center;
 }
 
-.modal-left img {
-    width: 100%;
-    height: auto;
-    max-width: 200px;
-    border-radius: 5px;
+.modal-content h2{
+    margin-bottom: 3.5%;
 }
+
+.modal-content p{
+    margin-bottom: 3%;
+}
+
+.modal-left{
+    width: 50%;
+    margin-right: 2em;
+}
+
 
 .modal-right {
-    padding-left: 20px;
+    padding-left: 0.5%;
     flex: 1;
+}
+
+.nutrition-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 2%;
+    font-size: 1em;
+    color: #555;
+}
+
+.nutrition-list li {
+    margin-bottom: 2%;
 }
 
 .close-button {
     position: absolute;
-    top:1%;
-    font-size: 24px;
+    top: 2%;
+    right: 2%;
+    font-size: 2em;
     cursor: pointer;
 }
 

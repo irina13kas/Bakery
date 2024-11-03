@@ -26,7 +26,16 @@ function hideCatalog() {
 }
 // Данные о продуктах
 const products = [
-    { name: 'Black&White', price: 1500, image: '.vscode/images/images_1.jpg', description: 'Описание Black&White', composition: 'Состав Black&White', nutrition: 'Калорийность Black&White' },
+    {   name: 'Black&White', 
+        price: 1500, image: '.vscode/images/images_1.jpg', 
+        description: 'Набор из 12 ванильных капкейков в лаконичном черно-белом оформлении. Ничего лишнего - просто и вкусно', 
+        composition: 'Мука, белый сахарный песок, разрыхлитель, молоко нормализованное, масло сливочное, масло растительное, яйца, сыр творожный, сахарная пудра, краситель пищевой "черный", кондитерская посыпка', 
+        nutrition: {
+            calories: '375.5',
+            protein: '3.9',
+            fat:'25',
+            carbs:'34.7'
+        } },
     { name: 'Countryside', price: 1600, image: '.vscode/images/images_2.jpg', description: 'Описание Countryside', composition: 'Состав Countryside', nutrition: 'Калорийность Countryside' },
     { name: 'Sea pearl', price: 1600, image: '.vscode/images/images_3.jpg', description: 'Описание Sea pearl', composition: 'Состав Sea pearl', nutrition: 'Калорийность Sea pearl' },
     { name: 'Red rhapsody', price: 1000, image: '.vscode/images/images_4.jpg', description: 'Описание Red rhapsody', composition: 'Состав Red rhapsody', nutrition: 'Калорийность Red rhapsody' },
@@ -70,22 +79,26 @@ function showProductModal(index) {
     modal.innerHTML = `
         <div class="modal-content">
             <span class="close-button" onclick="closeModal()">&times;</span>
-            <div class="modal-left">
-                <img src="${product.image}" alt="${product.name}">
-            </div>
+                <img class="modal-left" src="${product.image}" alt="${product.name}">
             <div class="modal-right">
                 <h2>${product.name}</h2>
-                <p class="price">₽${product.price}</p>
-                <p class="description">${product.description}</p>
+                <p class="description"><strong>Описание:</strong>${product.description}</p>
                 <p class="composition"><strong>Состав:</strong> ${product.composition}</p>
-                <p class="nutrition"><strong>Пищевая ценность:</strong> ${product.nutrition}</p>
-                <div class="quantity-block>
-                <div class="quantity-controls">
-                    <button onclick="changeQuantity(this, -1)">-</button>
-                    <span class="quantity">1</span>
-                    <button onclick="changeQuantity(this, 1)">+</button>
-                </div>
-                <button class="add-to-cart" onclick="addToCart(this)">В корзину</button>
+                <p class="price"><strong>Цена:</strong>₽${product.price}</p>
+                <p class="nutrition"><strong>Пищевая ценность(на 100 грамм):</strong></p>
+                <ul class="nutrition-list">
+                <li>Калории: ${product.nutrition.calories} ккал</li>
+                <li>Белки: ${product.nutrition.protein} г</li>
+                <li>Жиры: ${product.nutrition.fat} г</li>
+                <li>Углеводы: ${product.nutrition.carbs} г</li>
+                </ul>
+                <div class="quantity-block">
+                    <div class="quantity-controls">
+                        <button onclick="changeQuantity(this, -1)">-</button>
+                        <span class="quantity">1</span>
+                        <button onclick="changeQuantity(this, 1)">+</button>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart(this)">В корзину</button>
                 </div>
             </div>
         </div>
