@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кондитерская</title>
     <link rel="icon" href=".vscode/images/icon.ico" type="image/x-icon">
+    <title>Кондитерская</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="portfolio.css">
+    <link rel="stylesheet" href="cakes.css">
     <link rel="stylesheet" href="logo.css">
 </head>
 <body>
@@ -27,36 +27,28 @@
             </div>
             <div class="nav-links">
                 <a href="about.html">Главная</a>
-                <a href="cakes.html">Торты</a>
-                <a href="portfolio.html" class="active">Задания</a>
+                <a href="cakes.html" class="active">Торты</a>
+                <a href="portfolio.html">Задания</a>
                 <a href="contacts.html">Контакты</a>
             </div>
             <a href="#" class="cart-button"><span>Корзина</span></a>
         </nav>
     </header>
     <div class="main-body">
-        <div class="topic">
-            <h1>Задания</h1>
+        <div class="catalog-header">
+            <div class="catalog-option" id="option1" onclick="selectOption('option1')">Наша выпечка</div>
+            <div class="catalog-option" id="option2" onclick="selectOption('option2')">Сам себе кондитер</div>
         </div>
-        <table>
-            <tr>
-                <td><a href="task_1.html">Рисунок CSS</a></td>
-                <td><a href="task_2.html">Анимированные буквы</a></td>
-                <td><a href="task_3.html">DOM-Тест</a></td>
-            </tr>
-            <tr>
-                <td><a href="page4.html">Ячейка 4</a></td>
-                <td><a href="page5.html">Ячейка 5</a></td>
-                <td><a href="page6.html">Ячейка 6</a></td>
-            </tr>
-        </table>
+        <div class="catalog-container" id="catalogContainer">
+            <!-- Здесь будет содержимое каталога -->
+        </div>
     </div>
     <footer>
         <nav class="footer-container">
             <div class="footer-links">
                 <ul>
-                    <li><a href="about.html" class="active">Главная</a></li>
-                    <li><a href="cakes.html">Торты</a></li>
+                    <li><a href="about.html">Главная</a></li>
+                    <li><a href="cakes.html" class="active">Торты</a></li>
                     <li><a href="portfolio.html">Задания</a></li>
                     <li><a href="contacts.html">Контакты</a></li>
                 </ul>
@@ -65,6 +57,7 @@
                 <p>&copy; 2024 Ваша Кондитерская. Все права защищены.</p>
             </div>
         </nav>
-    </footer>  
+    </footer> 
+    <script src= "cakes.js"></script>         
 </body>
 </html>
