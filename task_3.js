@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
     let questionIndex = 0;
     let correctAnswers = 0;
-    let answeredQuestions = [];
     let questionOrder = [];
   
     const questionBtn = document.getElementById("questionBtn");
@@ -44,16 +43,15 @@ document.addEventListener("DOMContentLoaded", function () {
     totalQuestions.innerText = totalLength;
     // Вывод вопроса
     function displayQuestion() {
-      if (answeredQuestions.length < totalLength) {
+      if (questionOrder.length < totalLength) {
         questionBtn.disabled = true; // Блокируем кнопку после нажатия
   
         // Выбор случайного вопроса
         let randomIndex;
         do {
           randomIndex = Math.floor(Math.random() * totalLength);
-        } while (answeredQuestions.includes(randomIndex));
+        } while (questionOrder.includes(questions[randomIndex]));
   
-        answeredQuestions.push(randomIndex);
         const currentQuestion = questions[randomIndex];
         questionIndex++;
         questionOrder.push(questions[randomIndex]);
@@ -92,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const answers = questionBlock.querySelectorAll(".answer");
   
     // Проверяем, был ли этот вопрос уже отвечен
-    // Добавляем класс answered, чтобы обозначить, что ответ был выбран
     questionBlock.classList.add("answered");
     
     if (selectedIndex === currentQuestion.correct) {
@@ -102,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
       // Показываем пояснение
       const explanation = createExplanation(currentQuestion);
-      answerBtn.appendChild(explanation); // Помещаем пояснение в правильный ответ
+      answerBtn.appendChild(explanation);
       // Перемещаем неправильные ответы вниз
       setTimeout(()=>{
       answers.forEach((answer, ind) => {
@@ -114,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     },500);
   
-      // Ждем завершения анимации, потом скрываем правильный ответ и пояснение
       setTimeout(() =>{
       setTimeout(() => {
         questionBlock.querySelector(".answers").classList.add("hidden");
@@ -128,15 +124,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 500)}, 500
          ,answerBtn.classList.add("animate-out"),
          explanation.classList.add("animate-out"))
-      }, 2000);
+      }, 3000);
     } else {
       // Неправильный ответ выбран
       answerBtn.classList.add("wrong");
-
          setTimeout(()=>{
          answers.forEach((answer,ind) => {
             setTimeout(() => {
-                answer.classList.add("animate-out"); // Применяем анимацию через промежуток времени
+                answer.classList.add("animate-out");
               }, ind * 500);});
             },500);
 
@@ -144,17 +139,15 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
       setTimeout(() => {
       questionBlock.classList.remove("answered");
-      questionBlock.classList.add("collapsed"); // Разблокируем кнопку после ответа
+      questionBlock.classList.add("collapsed");
       }, 1000
       ,questionBlock.querySelector(".answers").classList.add("hidden")
         ,questionBlock.classList.add("wrong")
       ,questionBtn.disabled = false);
     }, 2000);
-       // Ждем завершения анимации перемещения вниз
     }
   }
-  
-  
+   
     // Создание блока с объяснением и правильным ответом
     function createExplanation(currentQuestion) {
       const explanationBlock = document.createElement("div");
@@ -165,24 +158,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
       explanationBlock.appendChild(explanation);
   
-      explanationBlock.addEventListener("click", () => {
-        explanationBlock.classList.toggle("hidden");
-        hideAllExplanations(explanationBlock); // Скрыть другие объяснения, если кликнули
-      });
-  
       return explanationBlock;
     }
-  
-    // Скрыть все объяснения
-    function hideAllExplanations(except = null) {
-      const explanationBlocks = quizContainer.querySelectorAll(".explanation");
-      explanationBlocks.forEach((block) => {
-        if (block !== except) {
-          block.classList.add("hidden");
-        }
-      });
-    }
-  
+
   // Отображение результата
   function displayResult() {
     // Скрываем кнопку "Вопрос"
@@ -243,7 +221,6 @@ document.addEventListener("DOMContentLoaded", function () {
           // Сброс всех переменных
           questionIndex = 0;
           correctAnswers = 0;
-          answeredQuestions = [];
           questionOrder = [];
           
           questionBtn.classList.remove("hidden");
