@@ -29,7 +29,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     gap: 2%;
-    margin-top: 5%;
 }
 
 .catalog-container.visible {
@@ -171,3 +170,92 @@
 .popup-overlay.active {
     display: flex;
 }
+
+.custom-message {
+    font-size: 1.2em;
+    color: #555;
+    text-align: center;
+    margin-top: 2%;
+}
+
+/* Базовые стили для больших экранов (больше 1200px) */
+@media (min-width: 1200px) {
+    .catalog-container {
+        grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+        padding: 5%;
+    }
+    .modal-content {
+        max-width: 60em;
+    }
+}
+
+/* Экраны от 768px до 1200px */
+@media (max-width: 1200px) and (min-width: 768px) {
+    .catalog-option {
+        font-size: 1.4em;
+        padding: 1%;
+    }
+    .catalog-container {
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        padding: 4%;
+    }
+    .modal-content {
+        max-width: 60em;
+        width: 40em;
+        height: 25em;
+    }
+    .modal-content p{
+        font-size: 0.8em;
+    }
+    .nutrition-list li{
+        font-size: 0.8em;
+    }
+    .modal-left {
+        width: 45%;
+    }
+    .title{
+        font-size: 1em;
+    }
+}
+
+/* Экраны от 576px до 768px */
+@media (max-width: 768px) {
+    .catalog-header {
+        flex-direction: row;
+        align-items: center;
+    }
+    .title{
+        font-size: 1.1em;
+    }
+    .catalog-option {
+        font-size: 1.1em;
+        padding: 1.5%;
+    }
+    .catalog-container {
+        grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+        padding: 3%;
+        height: 115em;
+    }
+    .modal-content {
+        max-width: 36em;
+        height: 25em;
+        width: 60em;
+        
+    }
+    .modal-content p{
+        font-size: 0.7em;
+    }
+    .nutrition-list li{
+        font-size: 0.7em;
+    }
+    .modal-left{
+        width: 45%;
+        margin-right: 2%;
+    }
+    .add-to-cart{
+        font-size:0.8em;
+    }
+}
+
+
+

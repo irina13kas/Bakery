@@ -2,6 +2,7 @@ function selectOption(optionId) {
     const container = document.querySelector(".catalog-container");
     const option1 = document.getElementById("option1");
     const option2 = document.getElementById("option2");
+    const customMessage = document.querySelector(".custom-message");
 
     // Добавляем нужные классы
     if (optionId === 'option1') {
@@ -10,12 +11,14 @@ function selectOption(optionId) {
         option2.style.backgroundColor = 'transparent';
         container.style.borderColor = '#9c8bff';
         showCatalog();
+        customMessage.style.display = 'none';
     } else {
         option2.style.backgroundColor = '#7B68EE';
         option1.style.border = '2px solid #9c8bff';
         option1.style.background = 'transparent';
         container.style.borderColor = '#7B68EE';
         hideCatalog();
+        customMessage.style.display = 'block';
     }
 }
 
@@ -28,21 +31,91 @@ function hideCatalog() {
 const products = [
     {   name: 'Black&White', 
         price: 1500, image: '.vscode/images/images_1.jpg', 
-        description: 'Набор из 12 ванильных капкейков в лаконичном черно-белом оформлении. Ничего лишнего - просто и вкусно', 
-        composition: 'Мука, белый сахарный песок, разрыхлитель, молоко нормализованное, масло сливочное, масло растительное, яйца, сыр творожный, сахарная пудра, краситель пищевой "черный", кондитерская посыпка', 
+        description: 'Набор из 12 ванильных капкейков в монохромном оформлении. Ничего лишнего - просто и вкусно', 
+        composition: 'пшеничная мука, белый сахарный песок, разрыхлитель, молоко коровье нормализованное, масло сливочное, масло растительное, яйца, сыр творожный, сахарная пудра, краситель пищевой "черный", кондитерская посыпка', 
         nutrition: {
             calories: '375.5',
             protein: '3.9',
             fat:'25',
             carbs:'34.7'
         } },
-    { name: 'Countryside', price: 1600, image: '.vscode/images/images_2.jpg', description: 'Описание Countryside', composition: 'Состав Countryside', nutrition: 'Калорийность Countryside' },
-    { name: 'Sea pearl', price: 1600, image: '.vscode/images/images_3.jpg', description: 'Описание Sea pearl', composition: 'Состав Sea pearl', nutrition: 'Калорийность Sea pearl' },
-    { name: 'Red rhapsody', price: 1000, image: '.vscode/images/images_4.jpg', description: 'Описание Red rhapsody', composition: 'Состав Red rhapsody', nutrition: 'Калорийность Red rhapsody' },
-    { name: 'Lemon tart', price: 850, image: '.vscode/images/images_5.jpg', description: 'Описание Lemon tart', composition: 'Состав Lemon tart', nutrition: 'Калорийность Lemon tart' },
-    { name: 'Blue cheesecake', price: 1000, image: '.vscode/images/images_6.jpg', description: 'Описание Blue cheesecake', composition: 'Состав Blue cheesecake', nutrition: 'Калорийность Blue cheesecake' },
-    { name: 'Pavlova set', price: 500, image: '.vscode/images/images_7.jpg', description: 'Описание Pavlova set', composition: 'Состав Pavlova set', nutrition: 'Калорийность Pavlova set' },
-    { name: 'Vanilla eclairs', price: 600, image: '.vscode/images/images_8.jpg', description: 'Описание Vanilla eclairs', composition: 'Состав Vanilla eclairs', nutrition: 'Калорийность Vanilla eclairs' },
+    {   name: 'Countryside',
+        price: 1600, 
+        image: '.vscode/images/images_2.jpg', 
+        description: 'Набор из 12 ванильных капкейков с малиновой начинкой. Нежный десерт с легкой кислинкой украсит любой стол.', 
+        composition: 'Основа(пшеничная мука, белый сахарный песок, разрыхлитель, сливочное масло, куриное яйцо, соль, ванильный экстракт, молоко коровье нормализованное), Начинка(малина, сливки 33%, сахарная пудра, краситель пищевой "зеленый", сливочный сыр)', 
+        nutrition: {
+            calories: '310',
+            protein: '4',
+            fat:'15',
+            carbs:'40'
+        }  },
+    {   name: 'Sea pearl', 
+        price: 1600, 
+        image: '.vscode/images/images_3.jpg', 
+        description: 'Набор из 12 лимонных капкейков с грушевым канфи. Сочитание терпкой груши и кисловатого лимона создают взрывное сочетание и просто тают во рту.', 
+        composition: 'Основа(пшеничная мука, белый сахарный песок, разрыхлитель, сливочное масло, ванильный экстракт, куриное яйцо, лимон, сметана 22%), Начинка(груша, тростниковый сахар, корица, карамель)', 
+        nutrition: {
+            calories: '310',
+            protein: '4',
+            fat:'15',
+            carbs:'40'
+        }  },
+    {   name: 'Red rhapsody', 
+        price: 1000, 
+        image: '.vscode/images/images_4.jpg', 
+        description: 'Набор из 8 капкейков с вишневой начинкой. Пикантная вишня придает десерту дерзкую и даже роковую нотку.', 
+        composition: 'Основа(пшеничная мука, белый сахарный песок, разрыхлитель, сливочное масло, молоко коровье нормализованное, куриное яйцо), начинка(вишня, сыр маскарпоне, сахарная пудра, сливки 33%, ванильный экстракт, краситель пищевой "красный"', 
+        nutrition: {
+            calories: '256.2',
+            protein: '4.15',
+            fat:'11.67',
+            carbs:'34.81'
+        }  },
+    {   name: 'Lemon tart', 
+        price: 850, 
+        image: '.vscode/images/images_5.jpg', 
+        description: 'Десерт для уютных вечеров. Легкая текстура с насыщенным лимонным вкусом.', 
+        composition: 'Основа(пшеничная мука, белый сахарный песок, сливочное масло), Начинка(яйцо куриное, лимон, молоко коровье нормализованное, крахмал кукурузный, белый сахарный песок)', 
+        nutrition: {
+            calories: '298',
+            protein: '5',
+            fat:'13',
+            carbs:'40'
+        }  },
+    {   name: 'Blue cheesecake', 
+        price: 1000, 
+        image: '.vscode/images/images_6.jpg', 
+        description: 'Нежный - прекрасно подходит для описания этого десерта. Кремовая текстура и сливочный вкус лимона и ягод настолько идеальное сочетание, что больше и добавить нечего.', 
+        composition: 'Основа(печенье песочное, масло сливочное), Начинка(сметана 23%, сыр рикотта, цедра лимона, белый сахарный песок, куриное яйцо), Украшение(сезонная ягода)', 
+        nutrition: {
+            calories: '304',
+            protein: '8',
+            fat:'17',
+            carbs:'21'
+        }  },
+    {   name: 'Pavlova set', 
+        price: 1500, 
+        image: '.vscode/images/images_7.jpg', 
+        description: 'История гласит, что впервые этот десерт был приготовлен для балерины Анны Павловой. Кондитер передал пироженому всю воздушность танцовщицы. Набор состоит из 6 штучек.', 
+        composition: 'Основа(куриное яйцо белки, белый сахарный песок, сахарная пудра, сок лимона, соль), Крем(сливки 33%, творожный сыр, сахарная пудра), Украшение(малина, нейтральный гель, мята)', 
+        nutrition: {
+            calories: '342',
+            protein: '13',
+            fat:'10',
+            carbs:'35'
+        }  },
+    {   name: 'Vanilla eclairs', 
+        price: 600, 
+        image: '.vscode/images/images_8.jpg', 
+        description: 'Набор из 4 эклеров с заварным кремом. Не пироженые, а просто праздник какой-то! Тонкий слой теста и море начинки.', 
+        composition: 'Тесто(пшеничная мука, вода, соль, сливочное масло, куриное яйцо), Заварной крем(сливки 20%, куриное яйцо, пшеничная мука, белый сахарный песок, ванильный экстракт, сливочное масло)', 
+        nutrition: {
+            calories: '313.72',
+            protein: '5.07',
+            fat:'20.56',
+            carbs:'27.09'
+        }  },
 ];
 
 // Функция для отображения каталога
@@ -82,7 +155,7 @@ function showProductModal(index) {
                 <img class="modal-left" src="${product.image}" alt="${product.name}">
             <div class="modal-right">
                 <h2>${product.name}</h2>
-                <p class="description"><strong>Описание:</strong>${product.description}</p>
+                <p class="description"><strong>Описание: </strong>${product.description}</p>
                 <p class="composition"><strong>Состав:</strong> ${product.composition}</p>
                 <p class="price"><strong>Цена:</strong>₽${product.price}</p>
                 <p class="nutrition"><strong>Пищевая ценность(на 100 грамм):</strong></p>
