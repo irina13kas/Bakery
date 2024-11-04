@@ -25,15 +25,14 @@
     padding: 5%;
     border: 2px solid transparent; /* Рамка по умолчанию прозрачная */
     transition: border-color 0.3s;
-    opacity: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-    gap: 2%;
+    display: none;
 }
 
 .catalog-container.visible {
-    opacity: 1;
     transform: translateY(0);
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    gap: 2%;
 }
 
 .catalog-item {
@@ -171,6 +170,7 @@
     display: flex;
 }
 
+
 .custom-message {
     font-size: 1.2em;
     color: #555;
@@ -178,9 +178,85 @@
     margin-top: 2%;
 }
 
+#designerContainer {
+    margin-top: 5%;
+    padding: 5%;
+    border: 2px solid transparent; /* Рамка по умолчанию прозрачная */
+    transition: border-color 0.3s;
+    display: none;
+}
+
+#designerContainer.visible{
+    display: grid;
+    grid-template-columns: 1fr 3fr; /* Левая колонка - 1 часть, правая - 3 части */
+    max-width: 1200px;
+}
+
+.designer-left {
+    display: grid;
+    grid-template-rows: auto auto; /* Две строки: первая для шагов, вторая для стоимости */
+    gap: 20px;
+    border-right: 2px solid #ccc;
+    padding-right: 20px;
+}
+
+.steps {
+    display: grid;
+    gap: 15px; /* Расстояние между шагами */
+}
+
+.step {
+    font-size: 18px;
+    color: #333;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.step:hover {
+    color: #7B68EE; /* Цвет при наведении */
+    background-color: #f0f0f0; /* Легкий фон при наведении */
+    cursor: pointer;
+}
+
+.step.active {
+    font-weight: bold;
+    color: #7B68EE;
+    background-color: #e0e0e0;
+}
+
+.cost {
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+}
+
+.cost h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#totalCost {
+    font-size: 24px;
+    color: #fa1a1a; /* Красный цвет для стоимости */
+}
+
+.designer-right {
+    padding-left: 20px;
+}
+
+.designer-right h2 {
+    font-size: 24px;
+    font-weight:lighter;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+
+
 /* Базовые стили для больших экранов (больше 1200px) */
 @media (min-width: 1200px) {
-    .catalog-container {
+    .catalog-container.visible {
+        display:grid;
         grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
         padding: 5%;
     }
@@ -195,7 +271,8 @@
         font-size: 1.4em;
         padding: 1%;
     }
-    .catalog-container {
+    .catalog-container.visible {
+        display:grid;
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
         padding: 4%;
     }
@@ -231,7 +308,8 @@
         font-size: 1.1em;
         padding: 1.5%;
     }
-    .catalog-container {
+    .catalog-container.visible {
+        display:grid;
         grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
         padding: 3%;
         height: 115em;

@@ -1,32 +1,67 @@
 function selectOption(optionId) {
-    const container = document.querySelector(".catalog-container");
+    const catalog = document.querySelector(".catalog-container");
+    const designer = document.querySelector(".designer-container");
     const option1 = document.getElementById("option1");
     const option2 = document.getElementById("option2");
-    const customMessage = document.querySelector(".custom-message");
 
     // Добавляем нужные классы
     if (optionId === 'option1') {
         option1.style.backgroundColor = '#9c8bff';
         option2.style.border = '2px solid #7B68EE';
         option2.style.backgroundColor = 'transparent';
-        container.style.borderColor = '#9c8bff';
+        catalog.style.borderColor = '#9c8bff';
         showCatalog();
-        customMessage.style.display = 'none';
     } else {
         option2.style.backgroundColor = '#7B68EE';
         option1.style.border = '2px solid #9c8bff';
         option1.style.background = 'transparent';
-        container.style.borderColor = '#7B68EE';
-        hideCatalog();
-        customMessage.style.display = 'block';
+        designer.style.borderColor = '#7B68EE';
+        showDesigner();
     }
 }
 
-function hideCatalog() {
+function showDesigner(){
     const catalogContainer = document.getElementById('catalogContainer');
+    const designerContainer = document.getElementById('designerContainer');
     catalogContainer.classList.remove('visible');
-    catalogContainer.innerHTML = ''; // Убираем товары, если скрываем каталог
+    designerContainer.classList.add('visible');
+    catalogContainer.innerHTML = '';
+    designerContainer.innerHTML = `
+        <div class="designer-left">
+            <div class="steps">
+                <p class="step" onclick="showStep('biscuit')">Бисквит</p>
+                <p class="step" onclick="showStep('filling')">Начинка</p>
+                <p class="step" onclick="showStep('decor')">Декор</p>
+                <p class="step" onclick="showStep('wish')">Пожелание</p>
+            </div>
+            <div class="cost">
+                <h3>Стоимость:</h3>
+                <p id="totalCost">0 ₽</p>
+            </div>
+        </div>
+        <div class="designer-right" id="designerRight">
+            <h2 id="stepTitle">Давайте создадим торт вашей мечты!</h2>
+        </div>
+    `;
 }
+   
+// Функция для отображения активного шага
+function showStep(step) {
+    const designerRight = document.getElementById('designerRight');
+    const stepTitle = document.getElementById('stepTitle');
+    
+    // Назначаем название в правом блоке по выбранному шагу
+    const titles = {
+        biscuit: 'Бисквит',
+        filling: 'Начинка',
+        decor: 'Декор',
+        wish: 'Пожелание'
+    };
+    
+    // Очищаем контент и добавляем только соответствующий блоку текст
+    designerRight.innerHTML = `<h2>${titles[step]}</h2><p>Содержимое для ${titles[step]}</p>`;
+}
+
 // Данные о продуктах
 const products = [
     {   name: 'Black&White', 
@@ -121,8 +156,10 @@ const products = [
 // Функция для отображения каталога
 function showCatalog() {
     const catalogContainer = document.getElementById('catalogContainer');
+    const designerContainer = document.getElementById('designerContainer');
     catalogContainer.classList.add('visible');
-    catalogContainer.innerHTML = '';
+    designerContainer.classList.remove('visible');
+    designerContainer.innerHTML = '';
 
     products.forEach((product, index) => {
         const productElement = document.createElement('div');
