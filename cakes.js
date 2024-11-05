@@ -26,42 +26,8 @@ function showDesigner(){
     catalogContainer.classList.remove('visible');
     designerContainer.classList.add('visible');
     catalogContainer.innerHTML = '';
-    designerContainer.innerHTML = `
-        <div class="designer-left">
-            <div class="steps">
-                <p class="step" onclick="showStep('biscuit')">Бисквит</p>
-                <p class="step" onclick="showStep('filling')">Начинка</p>
-                <p class="step" onclick="showStep('decor')">Декор</p>
-                <p class="step" onclick="showStep('wish')">Пожелание</p>
-            </div>
-            <div class="cost">
-                <h3>Стоимость:</h3>
-                <p id="totalCost">0 ₽</p>
-            </div>
-        </div>
-        <div class="designer-right" id="designerRight">
-            <h2 id="stepTitle">Давайте создадим торт вашей мечты!</h2>
-        </div>
-    `;
-}
-   
-// Функция для отображения активного шага
-function showStep(step) {
-    const designerRight = document.getElementById('designerRight');
-    const stepTitle = document.getElementById('stepTitle');
-    
-    // Назначаем название в правом блоке по выбранному шагу
-    const titles = {
-        biscuit: 'Бисквит',
-        filling: 'Начинка',
-        decor: 'Декор',
-        wish: 'Пожелание'
-    };
-    
-    // Очищаем контент и добавляем только соответствующий блоку текст
-    designerRight.innerHTML = `<h2>${titles[step]}</h2><p>Содержимое для ${titles[step]}</p>`;
-}
 
+}
 // Данные о продуктах
 const products = [
     {   name: 'Black&White', 
@@ -159,13 +125,12 @@ function showCatalog() {
     const designerContainer = document.getElementById('designerContainer');
     catalogContainer.classList.add('visible');
     designerContainer.classList.remove('visible');
-    designerContainer.innerHTML = '';
 
     products.forEach((product, index) => {
         const productElement = document.createElement('div');
         productElement.classList.add('catalog-item');
-        productElement.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" onclick="showProductModal(${index})">
+        productElement.innerHTML = 
+            `<img src="${product.image}" alt="${product.name}" onclick="showProductModal(${index})">
             <p class="title">${product.name}</p>
             <p class="price">₽${product.price}</p>
             <div class="quantity-controls">
@@ -186,8 +151,8 @@ function showProductModal(index) {
     // Создаем модальное окно
     const modal = document.createElement('div');
     modal.classList.add('product-modal');
-    modal.innerHTML = `
-        <div class="modal-content">
+    modal.innerHTML = 
+        `<div class="modal-content">
             <span class="close-button" onclick="closeModal()">&times;</span>
                 <img class="modal-left" src="${product.image}" alt="${product.name}">
             <div class="modal-right">
@@ -237,4 +202,145 @@ function addToCart(button) {
     item.querySelector('.quantity').textContent = 1;
 }
 
+let currentStep = 1;
+const totalSteps = 4;
+let selectedImage = null;
+
+let selections = [null,null,null];
+
+function startDesign() {
+    const container = document.getElementById("designerContainer");
+    container.innerHTML = ''; // Очистка окна
+    renderStep();
+}
+
+const steps = [{
+    name:'Бисквит',
+    items:[ 
+        { src: '.vscode/images/images_1.jpg', title: 'Начинка 1', description: 'Описание начинки 1' },
+        { src: '.vscode/images/images_2.jpg', title: 'Начинка 2', description: 'Описание начинки 2' },
+        { src: '.vscode/images/images_3.jpg', title: 'Начинка 3', description: 'Описание начинки 3' }]},
+    {name:'Начинка',
+     items:[ 
+        { src: '.vscode/images/images_1.jpg', title: 'Начинка 1', description: 'Описание начинки 1' },
+        { src: '.vscode/images/images_2.jpg', title: 'Начинка 2', description: 'Описание начинки 2' },
+        { src: '.vscode/images/images_3.jpg', title: 'Начинка 3', description: 'Описание начинки 3' }]},
+    {name:'Декор',
+     items:[ 
+        { src: '.vscode/images/images_1.jpg', title: 'Начинка 1', description: 'Описание начинки 1' },
+        { src: '.vscode/images/images_2.jpg', title: 'Начинка 2', description: 'Описание начинки 2' },
+        { src: '.vscode/images/images_3.jpg', title: 'Начинка 3', description: 'Описание начинки 3' }]}
+    ];
+
+function renderStep() {
+    const container = document.getElementById("designerContainer");
+    container.innerHTML = `
+        <p class="step-indicator">ШАГ: ${currentStep}/${totalSteps}</p>
+        <h2 class="step-title">${steps[currentStep-1].name}</h2>
+        <div class="image-container" id="imagesContainer""></div>
+        <div class="button-container">
+        <button class="prev-btn" id="prevButton" onclick="goToPrevStep()">&#8592;</button>
+        <button class="next-btn" id="nextButton" onclick="goToNextStep()" disabled>Далее</button>
+        </div>
+    `;
+    displayImages();
+}
+
+function displayImages() {
+    const imagesContainer = document.getElementById('imagesContainer');
+    //imagesContainer.innerHTML = ''; // Очищаем контейнер для нового шага
+    let images = steps[currentStep-1].items;
+    images.forEach((img, index) => {
+        const imageDiv = document.createElement('div');
+        imageDiv.classList.add('image-item');
+        imageDiv.innerHTML = `
+            <img src="${img.src}" alt="${img.title}">
+            <div class="description">${img.description}</div>
+        `;
+
+        imageDiv.addEventListener('click', () => {
+            // Снимаем отметку со всех изображений и затемняем выбранное
+            document.querySelectorAll('.image-item').forEach(item => item.classList.remove('selected'));
+            imageDiv.classList.add('selected');
+            selectedImage = index; // Запоминаем выбранное изображение
+            selections[currentStep-1] = imageDiv;
+            document.getElementById('nextButton').disabled = false; // Разблокируем кнопку "Далее"
+        });
+
+        imagesContainer.appendChild(imageDiv);
+    });
+}
+
+function selectImage(element) {
+    // Выбор картинки
+    const imageContainer = document.querySelector(".image-container");
+    selectedImage = true; // Помечаем картинку как выбранную
+    element.classList.add("selected");
+
+    // Активируем кнопку "Далее"
+    document.querySelector(".next-btn").disabled = false;
+}
+
+function goToNextStep() {
+    if (selectedImage==null) {
+        shakeButton();
+        return;
+    }
+    currentStep++;
+    if (currentStep < totalSteps) {
+        selectedImage = null; // Сбрасываем выбор картинки
+        renderStep();
+    }
+    else if (currentStep===totalSteps){
+        customerWishes();
+    }
+}
+
+function goToPrevStep() {
+    if (currentStep > 1) {
+        currentStep--;
+        renderStep();
+        selections[currentStep-1].classList.add('selected');
+    }
+}
+
+function shakeButton() {
+    const nextButton = document.querySelector(".next-btn");
+    nextButton.classList.add("shake");
+    setTimeout(() => nextButton.classList.remove("shake"), 500);
+}
+
+function customerWishes(){
+
+    const container = document.getElementById("designerContainer");
+    container.innerHTML = `
+        <p class="step-indicator">ШАГ: ${currentStep}/${totalSteps}</p>
+        <h2 class="step-title">Ваши пожелания</h2>
+        <div class="form-container">
+        <form id="wishForm"></form>
+        </div>
+        <div class="button-container">
+        <button class="prev-btn" id="prevButton" onclick="goToPrevStep()">&#8592;</button>
+        </div>
+    `;
+    formStructure();
+}
+
+function formStructure(){
+    const wishWindow = document.getElementById('wishForm');
+    wishWindow.innerHTML=`
+            <label for="cakeText">Надпись на торт:</label>
+            <input type="text" id="cakeText" required>
+        </div>
+        <div>
+            <label for="compositionWish">Пожелания к составу:</label>
+            <textarea id="compositionWish" rows="4" required></textarea>
+        </div>
+        <div class="counter">
+            <label for="sweetCount">Количество сладкоежек:</label>
+            <button type="button" id="decreaseBtn">-</button>
+            <input type="number" id="sweetCount" value="1" min="1" readonly>
+            <button type="button" id="increaseBtn">+</button>
+        <button type="submit" class="submit-btn">Завершить</button>`;
+}
 
