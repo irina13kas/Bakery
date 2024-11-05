@@ -316,9 +316,8 @@ function customerWishes(){
     container.innerHTML = `
         <p class="step-indicator">ШАГ: ${currentStep}/${totalSteps}</p>
         <h2 class="step-title">Ваши пожелания</h2>
-        <div class="form-container">
-        <form id="wishForm"></form>
-        </div>
+        <form class="form" id="wishForm"></form>
+        <div class="message" id="successMessage">Ваш торт уже в корзине!</div>
         <div class="button-container">
         <button class="prev-btn" id="prevButton" onclick="goToPrevStep()">&#8592;</button>
         </div>
@@ -328,19 +327,48 @@ function customerWishes(){
 
 function formStructure(){
     const wishWindow = document.getElementById('wishForm');
-    wishWindow.innerHTML=`
+    wishWindow.innerHTML=`<div class="form-group">
             <label for="cakeText">Надпись на торт:</label>
             <input type="text" id="cakeText" required>
         </div>
-        <div>
+        <div class="form-group">
             <label for="compositionWish">Пожелания к составу:</label>
-            <textarea id="compositionWish" rows="4" required></textarea>
+            <textarea id="compositionWish" rows="1" required></textarea>
         </div>
-        <div class="counter">
+        <div class="form-group counter-group">
             <label for="sweetCount">Количество сладкоежек:</label>
             <button type="button" id="decreaseBtn">-</button>
             <input type="number" id="sweetCount" value="1" min="1" readonly>
             <button type="button" id="increaseBtn">+</button>
+        </div>
         <button type="submit" class="submit-btn">Завершить</button>`;
+    fillForm();
+}
+
+function fillForm(){
+    const wishForm = document.getElementById('wishForm');
+        const sweetCountInput = document.getElementById('sweetCount');
+        const successMessage = document.getElementById('successMessage');
+
+        document.getElementById('decreaseBtn').addEventListener('click', function() {
+            let count = parseInt(sweetCountInput.value);
+            if (count > 1) {
+                sweetCountInput.value = count - 1;
+            }
+        });
+
+        document.getElementById('increaseBtn').addEventListener('click', function() {
+            let count = parseInt(sweetCountInput.value);
+            sweetCountInput.value = count + 1;
+        });
+
+        wishForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            wishForm.reset();
+            sweetCountInput.value = 1;
+            successMessage.style.display = 'block';
+            wishForm.classList.add('hidden');
+            document.querySelector(".button-container").classList.add('hidden');
+        });
 }
 
