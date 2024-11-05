@@ -173,7 +173,7 @@ function showProductModal(index) {
                         <span class="quantity">1</span>
                         <button onclick="changeQuantity(this, 1)">+</button>
                     </div>
-                    <button class="add-to-cart" onclick="addToCart(this)">В корзину</button>
+                    <button class="add-to-cart" onclick="addToCartModalProduct(this)">В корзину</button>
                 </div>
             </div>
         </div>
@@ -202,9 +202,13 @@ function addToCart(button) {
     item.querySelector('.quantity').textContent = 1;
 }
 
+function addToCartModalProduct(button) {
+    const item = button.closest('.product-modal');
+    item.querySelector('.quantity').textContent = 1;
+}
+
 let currentStep = 1;
 const totalSteps = 4;
-let selectedImage = null;
 
 let selections = [null,null,null];
 
@@ -240,7 +244,7 @@ function renderStep() {
         <div class="image-container" id="imagesContainer""></div>
         <div class="button-container">
         <button class="prev-btn" id="prevButton" onclick="goToPrevStep()">&#8592;</button>
-        <button class="next-btn" id="nextButton" onclick="goToNextStep()" disabled>Далее</button>
+        <button class="next-btn" id="nextButton" onclick="goToNextStep()">Далее</button>
         </div>
     `;
     displayImages();
@@ -257,38 +261,27 @@ function displayImages() {
             <img src="${img.src}" alt="${img.title}">
             <div class="description">${img.description}</div>
         `;
+        if(index==selections[currentStep-1])
+            imageDiv.classList.add('selected');
 
         imageDiv.addEventListener('click', () => {
             // Снимаем отметку со всех изображений и затемняем выбранное
             document.querySelectorAll('.image-item').forEach(item => item.classList.remove('selected'));
             imageDiv.classList.add('selected');
-            selectedImage = index; // Запоминаем выбранное изображение
-            selections[currentStep-1] = imageDiv;
-            document.getElementById('nextButton').disabled = false; // Разблокируем кнопку "Далее"
+            selections[currentStep-1] = index;
         });
 
         imagesContainer.appendChild(imageDiv);
     });
 }
 
-function selectImage(element) {
-    // Выбор картинки
-    const imageContainer = document.querySelector(".image-container");
-    selectedImage = true; // Помечаем картинку как выбранную
-    element.classList.add("selected");
-
-    // Активируем кнопку "Далее"
-    document.querySelector(".next-btn").disabled = false;
-}
-
 function goToNextStep() {
-    if (selectedImage==null) {
+    if (selections[currentStep-1]==null) {
         shakeButton();
         return;
     }
     currentStep++;
     if (currentStep < totalSteps) {
-        selectedImage = null; // Сбрасываем выбор картинки
         renderStep();
     }
     else if (currentStep===totalSteps){
@@ -300,7 +293,6 @@ function goToPrevStep() {
     if (currentStep > 1) {
         currentStep--;
         renderStep();
-        selections[currentStep-1].classList.add('selected');
     }
 }
 
@@ -318,6 +310,7 @@ function customerWishes(){
         <h2 class="step-title">Ваши пожелания</h2>
         <form class="form" id="wishForm"></form>
         <div class="message" id="successMessage">Ваш торт уже в корзине!</div>
+        <button type="button" id="resetButton" class="reset-button" onclick="resetForm()">Начать сначала</button>
         <div class="button-container">
         <button class="prev-btn" id="prevButton" onclick="goToPrevStep()">&#8592;</button>
         </div>
@@ -329,11 +322,11 @@ function formStructure(){
     const wishWindow = document.getElementById('wishForm');
     wishWindow.innerHTML=`<div class="form-group">
             <label for="cakeText">Надпись на торт:</label>
-            <input type="text" id="cakeText" required>
+            <input type="text" id="cakeText" required autocomplete="off">
         </div>
         <div class="form-group">
             <label for="compositionWish">Пожелания к составу:</label>
-            <textarea id="compositionWish" rows="1" required></textarea>
+            <input type="text" id="compositionWish" rows="1">
         </div>
         <div class="form-group counter-group">
             <label for="sweetCount">Количество сладкоежек:</label>
@@ -347,8 +340,9 @@ function formStructure(){
 
 function fillForm(){
     const wishForm = document.getElementById('wishForm');
-        const sweetCountInput = document.getElementById('sweetCount');
-        const successMessage = document.getElementById('successMessage');
+    const resetButton = document.getElementById("resetButton");
+    const sweetCountInput = document.getElementById('sweetCount');
+    const successMessage = document.getElementById('successMessage');
 
         document.getElementById('decreaseBtn').addEventListener('click', function() {
             let count = parseInt(sweetCountInput.value);
@@ -369,6 +363,11 @@ function fillForm(){
             successMessage.style.display = 'block';
             wishForm.classList.add('hidden');
             document.querySelector(".button-container").classList.add('hidden');
+            resetButton.classList.add("visible");
         });
 }
+
+function resetForm() {
+    location.reload(); // Перезапуск страницы
+  }
 

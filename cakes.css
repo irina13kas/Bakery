@@ -344,11 +344,6 @@
     cursor: pointer;
 }
 
-.next-btn:disabled {
-    background-color: #8a7e7e;
-    cursor: not-allowed;
-}
-
 .button-container {
     display: flex;
     gap: 3%; /* Отступ между кнопками */
@@ -384,6 +379,27 @@
 .next-btn.shake {
     animation: shake 0.3s;
 }
+
+.reset-button {
+    display: none; /* Изначально скрыта */
+    margin: 5% auto;
+    padding: 0.6em;
+    font-size: 1.2em;
+    background-color: #7B68EE;
+    color: black;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .reset-button:hover {
+    background-color: #4326e2;
+  }
+
+  .reset-button.visible {
+    display: block; /* Показываем кнопку */
+  }
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
