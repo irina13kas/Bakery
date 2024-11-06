@@ -26,7 +26,6 @@ function showDesigner(){
     catalogContainer.classList.remove('visible');
     designerContainer.classList.add('visible');
     catalogContainer.innerHTML = '';
-
 }
 // Данные о продуктах
 const products = [
@@ -221,19 +220,28 @@ function startDesign() {
 const steps = [{
     name:'Бисквит',
     items:[ 
-        { src: '.vscode/images/images_1.jpg', title: 'Начинка 1', description: 'Описание начинки 1' },
-        { src: '.vscode/images/images_2.jpg', title: 'Начинка 2', description: 'Описание начинки 2' },
-        { src: '.vscode/images/images_3.jpg', title: 'Начинка 3', description: 'Описание начинки 3' }]},
+        { src: '.vscode/images/biscuit_1.jpg', title: 'Ванильный', description: '' },
+        { src: '.vscode/images/biscuit_2.jpg', title: 'Шоколадный', description: '' },
+        { src: '.vscode/images/biscuit_3.jpg', title: 'Фисташковый', description: '' },
+        { src: '.vscode/images/biscuit_4.jpg', title: 'Красный бархат', description: '' }]},
     {name:'Начинка',
      items:[ 
-        { src: '.vscode/images/images_1.jpg', title: 'Начинка 1', description: 'Описание начинки 1' },
-        { src: '.vscode/images/images_2.jpg', title: 'Начинка 2', description: 'Описание начинки 2' },
-        { src: '.vscode/images/images_3.jpg', title: 'Начинка 3', description: 'Описание начинки 3' }]},
+        { src: '.vscode/images/topping_1.jpg', title: 'Сникерс', description: 'варёная сгущенка с солёной карамелью и жареным арахисом' },
+        { src: '.vscode/images/topping_2.jpg', title: 'Шоколадно-банановая', description: 'мусс из темного и молочного шоколада с добавлением кусочков бананов и сливочного сыра' },
+        { src: '.vscode/images/topping_3.jpg', title: 'Тропическая', description: 'творожный сыр с конфи из маракуи и ананаса' },
+        { src: '.vscode/images/topping_5.jpg', title: 'Шоколадная вишня', description: 'крем на основе горького шоколада. Конфи из вишни' },
+        { src: '.vscode/images/topping_6.jpg', title: 'Кофейная', description: 'кофейный крем на основе белого бельгийского шоколада' },
+        { src: '.vscode/images/topping_7.jpg', title: 'Кокосовая', description: 'творожный сыр с кокосом' }]},
     {name:'Декор',
      items:[ 
-        { src: '.vscode/images/images_1.jpg', title: 'Начинка 1', description: 'Описание начинки 1' },
-        { src: '.vscode/images/images_2.jpg', title: 'Начинка 2', description: 'Описание начинки 2' },
-        { src: '.vscode/images/images_3.jpg', title: 'Начинка 3', description: 'Описание начинки 3' }]}
+        { src: '.vscode/images/design_1.jpg', title: 'Голубая лагуна', description: '' },
+        { src: '.vscode/images/design_2.jpg', title: 'Клубника в шоколаде', description: '' },
+        { src: '.vscode/images/design_3.jpg', title: 'Осенний вайб', description: '' },
+        { src: '.vscode/images/design_4.jpg', title: 'Глазурь экскимо', description: '' },
+        { src: '.vscode/images/design_6.jpg', title: 'Цветочная поляна', description: '' },
+        { src: '.vscode/images/design_7.jpg', title: 'Улыбка ромашки', description: '' },
+        { src: '.vscode/images/design_8.jpg', title: 'Happy Birthday', description: '' },
+        { src: '.vscode/images/design_9.jpg', title: 'Мы вместе', description: '' }]}
     ];
 
 function renderStep() {
@@ -259,7 +267,7 @@ function displayImages() {
         imageDiv.classList.add('image-item');
         imageDiv.innerHTML = `
             <img src="${img.src}" alt="${img.title}">
-            <div class="description">${img.description}</div>
+            <div class="description">${img.title}. ${img.description}</div>
         `;
         if(index==selections[currentStep-1])
             imageDiv.classList.add('selected');
@@ -326,7 +334,7 @@ function formStructure(){
         </div>
         <div class="form-group">
             <label for="compositionWish">Пожелания к составу:</label>
-            <input type="text" id="compositionWish" rows="1">
+            <input type="text" id="compositionWish" autocomplete="off">
         </div>
         <div class="form-group counter-group">
             <label for="sweetCount">Количество сладкоежек:</label>
@@ -359,8 +367,10 @@ function fillForm(){
         wishForm.addEventListener('submit', function(event) {
             event.preventDefault();
             wishForm.reset();
-            sweetCountInput.value = 1;
+            //sweetCountInput.value = 1;
             successMessage.style.display = 'block';
+            document.querySelector(".step-indicator").style.display = 'none';
+            document.querySelector(".step-title").style.display = 'none';
             wishForm.classList.add('hidden');
             document.querySelector(".button-container").classList.add('hidden');
             resetButton.classList.add("visible");
@@ -368,6 +378,9 @@ function fillForm(){
 }
 
 function resetForm() {
-    location.reload(); // Перезапуск страницы
+    selections = [null,null,null];
+    currentStep = 1;
+    startDesign();
+     // Перезапуск страницы
   }
 
