@@ -3,11 +3,12 @@
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    margin-bottom: 20%;
+    margin-bottom: 10%;
 }
 
 td {
-    padding: 5vw;
+    width: 33%;
+    height: 5.5em;
     font-size: 1.6em;
 }
 

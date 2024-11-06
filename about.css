@@ -38,14 +38,13 @@
     justify-content: center;
     font-family: 'Courier New', Courier, monospace;
     text-transform: uppercase;
-    font-size: 2.5em;
+    font-size: 2em;
     display: center;
     margin-bottom: 1em;
 }
 
 .about-me-paragraph {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2em;
     line-height: 1.6em;
     color: #333;
     margin-bottom: 1.5em;
@@ -78,7 +77,6 @@
 
 .experience-column-text {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2em; /* Размер текста */
     line-height: 1.6em; /* Межстрочный интервал для удобства чтения */
 }
 
@@ -112,11 +110,7 @@
 
 .my-priorities-extra-text {
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2em;
     line-height: 1.6em;
-    margin-left: 17%;
-    margin-right: 15%;
-    margin-top: 5%;
 }
 
 .my-priorities-extra-text p {
@@ -136,19 +130,16 @@
 .our-difference-first-paragraph{
     font-family: 'Courier New', Courier, monospace;
     margin-right: 15%;
-    font-size: 1.2em;
     line-height: 1.6em;
 }
 .our-difference-second-paragraph{
     font-family: 'Courier New', Courier, monospace;
     margin-left:5%;
-    font-size: 1.2em;
     line-height: 1.6em;
 }
 
 .our-difference-left-content-image {
     width: 150%; /* Полная ширина контейнера */
-    height: 11em; /* Высота контейнера */
     background-image: url('.vscode/images/cookies.jpg'); /* Путь к изображению */
     background-size: contain; /* Масштабирование изображения с сохранением пропорций */
     background-position: left; /* Центрирование изображения */
@@ -173,8 +164,6 @@
     padding-right: 2vw;
 }
 
-
-
 .dream-pastry-image-text{
     display: flex;
     flex-direction: row;
@@ -183,7 +172,7 @@
 }
 
 .dream-pastry-image {
-    width: 40%; /* Полная ширина контейнера */
+    width: 49%; /* Полная ширина контейнера */
     height: 60vh; /* Высота контейнера */
     background-image: url('.vscode/images/CakeDisplay.jpg'); /* Путь к изображению */
     background-size: contain; /* Масштабирование изображения с сохранением пропорций */
@@ -199,10 +188,7 @@
 
 .dream-pastry-text{
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.2em;
     line-height: 1.6em;
-    margin-left: 5%;
-    margin-right: 20%;
     margin-top: 5%;
 }
 
@@ -220,8 +206,93 @@
     background-attachment: fixed; /* Фиксация изображения для эффекта прокрутки */
     background-position: center bottom; /* Начальная позиция фона */
     width: 100vw; /* Во всю ширину экрана */
-    height: 100vh; /* Высота экрана */
+    height: 95vh; /* Высота экрана */
     overflow: hidden; /* Скрываем лишние части изображения */
-    margin-top: 15%;
-    margin-bottom: 15%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 5%;
+    right: 3%;
+    padding: 1% 1.5%;
+    background-color: #d2691eb9;
+    color: white;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    font-size: 1.2em;
+    opacity: 0;
+    transition: opacity 0.5s ease, bottom 0.5s ease;
+}
+
+.scroll-to-top.show {
+    opacity: 1;
+}
+
+.scroll-to-top.moving {
+    bottom: 5%;
+    right:3%;
+}
+
+.p{
+    font-size: 1.2em;
+}
+
+/* Для экрана шириной от 1200px до 1440px */
+@media (min-width: 1200px) and (max-width: 1440px) {
+    .p{
+        font-size: 1.5em;
+    }
+    .my-priorities-main-paragraph {
+        font-size: 1.7em;
+    }
+    .experience-column-heading {
+        font-size: 2.2em;
+    }
+}
+
+/* Для экрана шириной от 1440px до 1920px */
+@media (min-width: 1440px) and (max-width: 1920px) {
+    .scroll-to-top {
+        font-size: 1.7em;
+    }
+    .p{
+        font-size: 1.7em;
+    }
+    .about-me-heading {
+        font-size: 2.7em;
+    }
+    .my-priorities-main-paragraph {
+        font-size: 1.9em;
+    }
+    .experience-column-heading {
+        font-size: 2.5em;
+    }
+}
+
+/* Для экранов шириной более 1920px */
+@media (min-width: 1920px) {
+    .scroll-to-top {
+        font-size: 2.2em;
+    }
+    .p{
+        font-size: 2.2em;
+    }
+    .about-me-heading {
+        font-size: 3em;
+    }
+    .our-difference-right-image {
+        width:240%
+    }
+    .experience-column-heading {
+        font-size: 2.9em;
+    }
+    .my-priorities-main-paragraph {
+        font-size: 2.3em;
+    }
+    .our-difference-left-content-image {
+        width: 184%;
+    }
 }
