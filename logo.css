@@ -98,14 +98,6 @@
         opacity: 0.7;
     }
 }
-
-@media (min-width: 1200px) and (max-width: 1440px) {
-    .logo{
-        width: 70px;
-        height: 70px;
-    }
-}
-
 @media (min-width: 1440px) and (max-width: 1920px) {
     .logo{
         width: 80px;
