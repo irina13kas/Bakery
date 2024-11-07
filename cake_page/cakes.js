@@ -245,6 +245,7 @@ const steps = [{
         { src: 'images_cake/self_conditer/designs/design_8.jpg', title: 'Мы вместе', description: '' }]}
     ];
 
+    //можно вынести
 function renderStep() {
     const container = document.getElementById("designerContainer");
     container.innerHTML = `
