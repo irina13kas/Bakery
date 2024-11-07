@@ -238,7 +238,7 @@
     left: 50%;
     width: 3em; /* Размер значка */
     height: 3em;
-    background-image: url('.vscode/images/yes_2.svg'); /* Путь к загруженному значку */
+    background-image: url('images_cake/selected_img.svg'); /* Путь к загруженному значку */
     background-size: cover;
     background-position: center;
     transform: translate(-50%, -50%);

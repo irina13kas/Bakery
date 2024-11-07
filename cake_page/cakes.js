@@ -220,28 +220,28 @@ function startDesign() {
 const steps = [{
     name:'Бисквит',
     items:[ 
-        { src: '.vscode/images/biscuit_1.jpg', title: 'Ванильный', description: '' },
-        { src: '.vscode/images/biscuit_2.jpg', title: 'Шоколадный', description: '' },
-        { src: '.vscode/images/biscuit_3.jpg', title: 'Фисташковый', description: '' },
-        { src: '.vscode/images/biscuit_4.jpg', title: 'Красный бархат', description: '' }]},
+        { src: 'images_cake/self_conditer/biscuits/biscuit_1.jpg', title: 'Ванильный', description: '' },
+        { src: 'images_cake/self_conditer/biscuits/biscuit_2.jpg', title: 'Шоколадный', description: '' },
+        { src: 'images_cake/self_conditer/biscuits/biscuit_3.jpg', title: 'Фисташковый', description: '' },
+        { src: 'images_cake/self_conditer/biscuits/biscuit_4.jpg', title: 'Красный бархат', description: '' }]},
     {name:'Начинка',
      items:[ 
-        { src: '.vscode/images/topping_1.jpg', title: 'Сникерс', description: 'варёная сгущенка с солёной карамелью и жареным арахисом' },
-        { src: '.vscode/images/topping_2.jpg', title: 'Шоколадно-банановая', description: 'мусс из темного и молочного шоколада с добавлением кусочков бананов и сливочного сыра' },
-        { src: '.vscode/images/topping_3.jpg', title: 'Тропическая', description: 'творожный сыр с конфи из маракуи и ананаса' },
-        { src: '.vscode/images/topping_5.jpg', title: 'Шоколадная вишня', description: 'крем на основе горького шоколада. Конфи из вишни' },
-        { src: '.vscode/images/topping_6.jpg', title: 'Кофейная', description: 'кофейный крем на основе белого бельгийского шоколада' },
-        { src: '.vscode/images/topping_7.jpg', title: 'Кокосовая', description: 'творожный сыр с кокосом' }]},
+        { src: 'images_cake/self_conditer/toppings/topping_1.jpg', title: 'Сникерс', description: 'варёная сгущенка с солёной карамелью и жареным арахисом' },
+        { src: 'images_cake/self_conditer/toppings/topping_2.jpg', title: 'Шоколадно-банановая', description: 'мусс из темного и молочного шоколада с добавлением кусочков бананов и сливочного сыра' },
+        { src: 'images_cake/self_conditer/toppings/topping_3.jpg', title: 'Тропическая', description: 'творожный сыр с конфи из маракуи и ананаса' },
+        { src: 'images_cake/self_conditer/toppings/topping_4.jpg', title: 'Шоколадная вишня', description: 'крем на основе горького шоколада. Конфи из вишни' },
+        { src: 'images_cake/self_conditer/toppings/topping_5.jpg', title: 'Кофейная', description: 'кофейный крем на основе белого бельгийского шоколада' },
+        { src: 'images_cake/self_conditer/toppings/topping_6.jpg', title: 'Кокосовая', description: 'творожный сыр с кокосом' }]},
     {name:'Декор',
      items:[ 
-        { src: '.vscode/images/design_1.jpg', title: 'Голубая лагуна', description: '' },
-        { src: '.vscode/images/design_2.jpg', title: 'Клубника в шоколаде', description: '' },
-        { src: '.vscode/images/design_3.jpg', title: 'Осенний вайб', description: '' },
-        { src: '.vscode/images/design_4.jpg', title: 'Глазурь экскимо', description: '' },
-        { src: '.vscode/images/design_6.jpg', title: 'Цветочная поляна', description: '' },
-        { src: '.vscode/images/design_7.jpg', title: 'Улыбка ромашки', description: '' },
-        { src: '.vscode/images/design_8.jpg', title: 'Happy Birthday', description: '' },
-        { src: '.vscode/images/design_9.jpg', title: 'Мы вместе', description: '' }]}
+        { src: 'images_cake/self_conditer/designs/design_1.jpg', title: 'Голубая лагуна', description: '' },
+        { src: 'images_cake/self_conditer/designs/design_2.jpg', title: 'Клубника в шоколаде', description: '' },
+        { src: 'images_cake/self_conditer/designs/design_3.jpg', title: 'Осенний вайб', description: '' },
+        { src: 'images_cake/self_conditer/designs/design_4.jpg', title: 'Глазурь экскимо', description: '' },
+        { src: 'images_cake/self_conditer/designs/design_5.jpg', title: 'Цветочная поляна', description: '' },
+        { src: 'images_cake/self_conditer/designs/design_6.jpg', title: 'Улыбка ромашки', description: '' },
+        { src: 'images_cake/self_conditer/designs/design_7.jpg', title: 'Happy Birthday', description: '' },
+        { src: 'images_cake/self_conditer/designs/design_8.jpg', title: 'Мы вместе', description: '' }]}
     ];
 
 function renderStep() {
