@@ -397,6 +397,10 @@
     font-size: 1.2em;
   }
 
+  .txt{
+    font-size: 1.2em;
+}
+
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-3%); }
@@ -417,35 +421,6 @@
     }
 }
 
-/* Экраны от 768px до 1200px */
-@media (max-width: 1200px) and (min-width: 768px) {
-    .catalog-option {
-        font-size: 1.4em;
-        padding: 1%;
-    }
-    .catalog-container.visible {
-        display:grid;
-        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-        padding: 4%;
-    }
-    .modal-content {
-        max-width: 60em;
-        width: 40em;
-        height: 25em;
-    }
-    .modal-content p{
-        font-size: 0.8em;
-    }
-    .nutrition-list li{
-        font-size: 0.8em;
-    }
-    .modal-left {
-        width: 45%;
-    }
-    .title{
-        font-size: 1em;
-    }
-}
 
 /* Экраны от 576px до 768px */
 @media (max-width: 768px) {
@@ -490,15 +465,112 @@
     }
 }
 
-@media (max-width: 1270px){
+/* Экраны от 576px до 768px */
+@media (max-width: 768px) {
+    .image-container {
+        width: 100%; /* Адаптивная ширина для меньших экранов */
+    }
+    .catalog-header {
+        flex-direction: row;
+        align-items: center;
+    }
+    .title{
+        font-size: 1.1em;
+    }
+    .catalog-option {
+        font-size: 1.1em;
+        padding: 1.5%;
+    }
+    .catalog-container.visible {
+        display:grid;
+        grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
+        padding: 3%;
+        height: 115em;
+    }
+    .modal-content {
+        max-width: 36em;
+        height: 25em;
+        width: 60em;
+        
+    }
+    .modal-content p{
+        font-size: 0.7em;
+    }
+    .nutrition-list li{
+        font-size: 0.7em;
+    }
+    .modal-left{
+        width: 45%;
+        margin-right: 2%;
+    }
+    .add-to-cart{
+        font-size:0.8em;
+    }
     .form-group input[type="text"],
     .form-group textarea {
         padding: 0.3em;
         font-size: 0.8em;
     }
 }
+@media (max-width: 1270px){
+    .catalog-option {
+        font-size: 1.4em;
+        padding: 1%;
+    }
+    .catalog-container.visible {
+        display:grid;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        padding: 4%;
+    }
+    .modal-content h2 {
+        font-size: 1.6em;
+    }
+    .modal-content {
+        max-width: 70em;
+        width: 55em;
+        height: 35em;
+    }
+    .modal-content p{
+        font-size: 1.1em;
+    }
+    .nutrition-list li{
+        font-size: 1.1em;
+    }
+    .modal-left {
+        width: 45%;
+    }
+}
 
 @media (min-width: 1440px) and (max-width: 1920px) {
+    .catalog-option {
+        font-size: 1.4em;
+        padding: 1%;
+    }
+    .catalog-container.visible {
+        display:grid;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        padding: 4%;
+    }
+    .modal-content h2 {
+        font-size: 1.7em;
+    }
+    .modal-content {
+        max-width: 80em;
+        width: 70em;
+        height: 35em;
+    }
+    .modal-content p{
+        font-size: 1.2em;
+    }
+    .nutrition-list li{
+        font-size: 1.2em;
+    }
+    .modal-left {
+        width: 45%;
+    }
+    .quantity-controls button {
+        font-size: 1.5em;
+    }
     .p{
         font-size: 1.9em;
       }
@@ -535,6 +607,35 @@
 }
 
 @media (min-width: 1920px){
+    .catalog-option {
+        font-size: 1.4em;
+        padding: 1%;
+    }
+    .catalog-container.visible {
+        display:grid;
+        grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+        padding: 4%;
+    }
+    .modal-content h2 {
+        font-size: 1.9em;
+    }
+    .modal-content {
+        max-width: 90em;
+        width: 85em;
+        height: 45em;
+    }
+    .modal-content p{
+        font-size: 1.5em;
+    }
+    .nutrition-list li{
+        font-size: 1.5em;
+    }
+    .modal-left {
+        width: 45%;
+    }
+    .quantity-controls button {
+        font-size: 1.8em;
+    }
     .p{
         font-size: 2.2em;
       }

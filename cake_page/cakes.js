@@ -131,14 +131,14 @@ function showCatalog() {
         productElement.classList.add('catalog-item');
         productElement.innerHTML = 
             `<img src="${product.image}" alt="${product.name}" onclick="showProductModal(${index})">
-            <p class="title">${product.name}</p>
-            <p class="price">₽${product.price}</p>
+            <div class="title p">${product.name}</div>
+            <div class="price p">₽${product.price}</div>
             <div class="quantity-controls">
                 <button onclick="changeQuantity(this, -1)">-</button>
-                <span class="quantity">1</span>
+                <span class="quantity p">1</span>
                 <button onclick="changeQuantity(this, 1)">+</button>
             </div>
-            <button class="add-to-cart" onclick="addToCart(this)">В корзину</button>
+            <button class="add-to-cart p" onclick="addToCart(this)">В корзину</button>
         `;
         catalogContainer.appendChild(productElement);
     });
@@ -168,12 +168,12 @@ function showProductModal(index) {
                 <li>Углеводы: ${product.nutrition.carbs} г</li>
                 </ul>
                 <div class="quantity-block">
-                    <div class="quantity-controls">
+                    <div class="quantity-controls txt">
                         <button onclick="changeQuantity(this, -1)">-</button>
-                        <span class="quantity">1</span>
+                        <span class="quantity txt">1</span>
                         <button onclick="changeQuantity(this, 1)">+</button>
                     </div>
-                    <button class="add-to-cart" onclick="addToCartModalProduct(this)">В корзину</button>
+                    <button class="add-to-cart txt" onclick="addToCartModalProduct(this)">В корзину</button>
                 </div>
             </div>
         </div>
