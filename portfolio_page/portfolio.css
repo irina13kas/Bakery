@@ -33,3 +33,30 @@ a {
     a:hover {
         text-decoration: underline;
     }
+
+    @media (max-width: 1024px){
+        td {
+            height: 5.5em;
+            font-size: 1.2em;
+        }
+    }
+
+    @media (min-width: 1440px) and (max-width: 1920px) {
+        td {
+            height: 6.5em;
+            font-size: 1.7em;
+        }
+        table {
+            width: 85%;
+        }
+    }
+
+    @media (min-width: 1920px){
+        td {
+            height: 7em;
+            font-size: 2.2em;
+        }
+        table {
+            width: 90%;
+        }
+    }

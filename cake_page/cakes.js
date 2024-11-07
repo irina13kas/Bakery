@@ -30,7 +30,8 @@ function showDesigner(){
 // Данные о продуктах
 const products = [
     {   name: 'Black&White', 
-        price: 1500, image: '.vscode/images/images_1.jpg', 
+        price: 1500, 
+        image: 'images_cake/catalog/catalog_img_1.jpg', 
         description: 'Набор из 12 ванильных капкейков в монохромном оформлении. Ничего лишнего - просто и вкусно', 
         composition: 'пшеничная мука, белый сахарный песок, разрыхлитель, молоко коровье нормализованное, масло сливочное, масло растительное, яйца, сыр творожный, сахарная пудра, краситель пищевой "черный", кондитерская посыпка', 
         nutrition: {
@@ -41,7 +42,7 @@ const products = [
         } },
     {   name: 'Countryside',
         price: 1600, 
-        image: '.vscode/images/images_2.jpg', 
+        image: 'images_cake/catalog/catalog_img_2.jpg', 
         description: 'Набор из 12 ванильных капкейков с малиновой начинкой. Нежный десерт с легкой кислинкой украсит любой стол.', 
         composition: 'Основа(пшеничная мука, белый сахарный песок, разрыхлитель, сливочное масло, куриное яйцо, соль, ванильный экстракт, молоко коровье нормализованное), Начинка(малина, сливки 33%, сахарная пудра, краситель пищевой "зеленый", сливочный сыр)', 
         nutrition: {
@@ -52,7 +53,7 @@ const products = [
         }  },
     {   name: 'Sea pearl', 
         price: 1600, 
-        image: '.vscode/images/images_3.jpg', 
+        image: 'images_cake/catalog/catalog_img_3.jpg', 
         description: 'Набор из 12 лимонных капкейков с грушевым канфи. Сочитание терпкой груши и кисловатого лимона создают взрывное сочетание и просто тают во рту.', 
         composition: 'Основа(пшеничная мука, белый сахарный песок, разрыхлитель, сливочное масло, ванильный экстракт, куриное яйцо, лимон, сметана 22%), Начинка(груша, тростниковый сахар, корица, карамель)', 
         nutrition: {
@@ -63,7 +64,7 @@ const products = [
         }  },
     {   name: 'Red rhapsody', 
         price: 1000, 
-        image: '.vscode/images/images_4.jpg', 
+        image: 'images_cake/catalog/catalog_img_4.jpg', 
         description: 'Набор из 8 капкейков с вишневой начинкой. Пикантная вишня придает десерту дерзкую и даже роковую нотку.', 
         composition: 'Основа(пшеничная мука, белый сахарный песок, разрыхлитель, сливочное масло, молоко коровье нормализованное, куриное яйцо), начинка(вишня, сыр маскарпоне, сахарная пудра, сливки 33%, ванильный экстракт, краситель пищевой "красный"', 
         nutrition: {
@@ -74,7 +75,7 @@ const products = [
         }  },
     {   name: 'Lemon tart', 
         price: 850, 
-        image: '.vscode/images/images_5.jpg', 
+        image: 'images_cake/catalog/catalog_img_5.jpg', 
         description: 'Десерт для уютных вечеров. Легкая текстура с насыщенным лимонным вкусом.', 
         composition: 'Основа(пшеничная мука, белый сахарный песок, сливочное масло), Начинка(яйцо куриное, лимон, молоко коровье нормализованное, крахмал кукурузный, белый сахарный песок)', 
         nutrition: {
@@ -85,7 +86,7 @@ const products = [
         }  },
     {   name: 'Blue cheesecake', 
         price: 1000, 
-        image: '.vscode/images/images_6.jpg', 
+        image: 'images_cake/catalog/catalog_img_6.jpg', 
         description: 'Нежный - прекрасно подходит для описания этого десерта. Кремовая текстура и сливочный вкус лимона и ягод настолько идеальное сочетание, что больше и добавить нечего.', 
         composition: 'Основа(печенье песочное, масло сливочное), Начинка(сметана 23%, сыр рикотта, цедра лимона, белый сахарный песок, куриное яйцо), Украшение(сезонная ягода)', 
         nutrition: {
@@ -96,7 +97,7 @@ const products = [
         }  },
     {   name: 'Pavlova set', 
         price: 1500, 
-        image: '.vscode/images/images_7.jpg', 
+        image: 'images_cake/catalog/catalog_img_7.jpg', 
         description: 'История гласит, что впервые этот десерт был приготовлен для балерины Анны Павловой. Кондитер передал пироженому всю воздушность танцовщицы. Набор состоит из 6 штучек.', 
         composition: 'Основа(куриное яйцо белки, белый сахарный песок, сахарная пудра, сок лимона, соль), Крем(сливки 33%, творожный сыр, сахарная пудра), Украшение(малина, нейтральный гель, мята)', 
         nutrition: {
@@ -107,7 +108,7 @@ const products = [
         }  },
     {   name: 'Vanilla eclairs', 
         price: 600, 
-        image: '.vscode/images/images_8.jpg', 
+        image: 'images_cake/catalog/catalog_img_8.jpg', 
         description: 'Набор из 4 эклеров с заварным кремом. Не пироженые, а просто праздник какой-то! Тонкий слой теста и море начинки.', 
         composition: 'Тесто(пшеничная мука, вода, соль, сливочное масло, куриное яйцо), Заварной крем(сливки 20%, куриное яйцо, пшеничная мука, белый сахарный песок, ванильный экстракт, сливочное масло)', 
         nutrition: {
@@ -247,8 +248,8 @@ const steps = [{
 function renderStep() {
     const container = document.getElementById("designerContainer");
     container.innerHTML = `
-        <p class="step-indicator">ШАГ: ${currentStep}/${totalSteps}</p>
-        <h2 class="step-title">${steps[currentStep-1].name}</h2>
+        <p class="step-indicator p">ШАГ: ${currentStep}/${totalSteps}</p>
+        <h2 class="step-title p">${steps[currentStep-1].name}</h2>
         <div class="image-container" id="imagesContainer""></div>
         <div class="button-container">
         <button class="prev-btn" id="prevButton" onclick="goToPrevStep()">&#8592;</button>
@@ -267,7 +268,7 @@ function displayImages() {
         imageDiv.classList.add('image-item');
         imageDiv.innerHTML = `
             <img src="${img.src}" alt="${img.title}">
-            <div class="description">${img.title}. ${img.description}</div>
+            <div class="description p">${img.title}. ${img.description}</div>
         `;
         if(index==selections[currentStep-1])
             imageDiv.classList.add('selected');
@@ -314,11 +315,11 @@ function customerWishes(){
 
     const container = document.getElementById("designerContainer");
     container.innerHTML = `
-        <p class="step-indicator">ШАГ: ${currentStep}/${totalSteps}</p>
-        <h2 class="step-title">Ваши пожелания</h2>
+        <p class="step-indicator p">ШАГ: ${currentStep}/${totalSteps}</p>
+        <h2 class="step-title p">Ваши пожелания</h2>
         <form class="form" id="wishForm"></form>
         <div class="message" id="successMessage">Ваш торт уже в корзине!</div>
-        <button type="button" id="resetButton" class="reset-button" onclick="resetForm()">Начать сначала</button>
+        <button type="button" id="resetButton" class="reset-button p" onclick="resetForm()">Начать сначала</button>
         <div class="button-container">
         <button class="prev-btn" id="prevButton" onclick="goToPrevStep()">&#8592;</button>
         </div>
@@ -328,21 +329,21 @@ function customerWishes(){
 
 function formStructure(){
     const wishWindow = document.getElementById('wishForm');
-    wishWindow.innerHTML=`<div class="form-group">
+    wishWindow.innerHTML=`<div class="form-group p">
             <label for="cakeText">Надпись на торт:</label>
             <input type="text" id="cakeText" required autocomplete="off">
         </div>
-        <div class="form-group">
+        <div class="form-group p">
             <label for="compositionWish">Пожелания к составу:</label>
             <input type="text" id="compositionWish" autocomplete="off">
         </div>
-        <div class="form-group counter-group">
+        <div class="form-group counter-group p">
             <label for="sweetCount">Количество сладкоежек:</label>
             <button type="button" id="decreaseBtn">-</button>
             <input type="number" id="sweetCount" value="1" min="1" readonly>
             <button type="button" id="increaseBtn">+</button>
         </div>
-        <button type="submit" class="submit-btn">Завершить</button>`;
+        <button type="submit" class="submit-btn p">Завершить</button>`;
     fillForm();
 }
 

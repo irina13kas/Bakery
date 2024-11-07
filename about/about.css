@@ -240,6 +240,20 @@
 .p{
     font-size: 1.2em;
 }
+
+@media (max-width: 1270px){
+    .about-me-text-container {
+        margin-left:5%;
+    }
+    .scroll-image-1{
+        height: 80vh; /* Высота экрана */
+    }
+
+    .scroll-image-2{
+        height: 70vh; /* Высота экрана */
+    }
+}
+
 /* Для экрана шириной от 1440px до 1920px */
 @media (min-width: 1440px) and (max-width: 1920px) {
     .scroll-to-top {
@@ -261,6 +275,9 @@
 
 /* Для экранов шириной более 1920px */
 @media (min-width: 1920px) {
+    .topic h1{
+        font-size: 3em;
+    }
     .scroll-to-top {
         font-size: 2.2em;
     }

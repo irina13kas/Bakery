@@ -127,6 +127,7 @@ footer {
 
 .footer-container {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
@@ -162,7 +163,23 @@ footer {
     font-size: 1em;
 }
 
+@media (max-width: 1024px){
+    .topic h1{
+        font-size: 2.2em;
+    }
+    footer{
+        padding: 6vw 3vh;
+    }
+    .main-body{
+        min-height: 50vh;
+    }
+}
+
 @media (min-width: 1440px) and (max-width: 1920px) {
+    .topic h1{
+        font-size: 2.5em;
+    }
+
     .footer-links ul li a {
         font-size: 1.5em;
     }
