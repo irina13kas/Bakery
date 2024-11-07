@@ -225,7 +225,7 @@
     cursor: pointer;
     font-size: 1.2em;
     opacity: 0;
-    transition: opacity 0.5s ease, bottom 0.5s ease;
+    transition: opacity 0.5s ease;
 }
 
 .scroll-to-top.show {
@@ -241,7 +241,57 @@
     font-size: 1.2em;
 }
 
-@media (max-width: 1270px){
+@media (max-width: 768px){
+    .about-me-section{
+        flex-direction: column;
+    }
+    .about-me-image-container{
+        width: 100%;
+        height:80vh;
+        background-position: center;
+        margin-bottom: 15%;
+    }
+    .experience-columns {
+        flex-direction: column;
+    }
+    .my-priorities-image-text {
+        flex-direction: column;
+    }
+    .my-priorities-image {
+        width: 93%;
+        background-position: center;
+        margin-bottom: 10%;
+    }
+    .our-difference {
+        flex-direction: column-reverse;
+    }
+    .our-difference-right-image {
+        width: 100%;
+        height: 50vh;
+        background-position: center;
+    }
+    .our-difference-left-content-image{
+        display: none;
+    }
+    .our-difference-first-paragraph {
+        margin:5%;
+    }
+    .our-difference-second-paragraph {
+        margin:5%;
+    }
+    .dream-pastry-image-text {
+        flex-direction: column;
+    }
+    .dream-pastry-image {
+        width:100%;
+        height: 50vh;
+    }
+    .dream-pastry-text{
+        margin-top: 15%;
+    }
+}
+
+@media (max-width: 769px) and (max-width: 1270px){
     .about-me-text-container {
         margin-left:5%;
     }

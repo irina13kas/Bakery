@@ -1,3 +1,7 @@
+.main-body{
+    min-height: 100vh;
+}
+
 .catalog-header {
     display: flex;
     width: 100%;
@@ -422,11 +426,11 @@
 }
 
 
-/* Экраны от 576px до 768px */
+/* Экраны от 576px до 768px
 @media (max-width: 768px) {
     .image-container {
         width: 100%; /* Адаптивная ширина для меньших экранов */
-    }
+    /*}
     .catalog-header {
         flex-direction: row;
         align-items: center;
@@ -463,7 +467,7 @@
     .add-to-cart{
         font-size:0.8em;
     }
-}
+} */
 
 /* Экраны от 576px до 768px */
 @media (max-width: 768px) {

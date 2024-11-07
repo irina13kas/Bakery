@@ -34,7 +34,34 @@ a {
         text-decoration: underline;
     }
 
-    @media (max-width: 1024px){
+    /* Для маленьких экранов меньше 768px */
+    @media (max-width: 768px) {
+        table {
+            display: flex; /* Устанавливаем таблицу как блочный элемент */
+            justify-content: center;
+        }
+    
+        tr {
+            display: flex; /* Делаем строки флекс-элементами */
+            flex-direction: column; /* Выводим каждую ячейку в новой строке */
+        }
+    
+        td {
+            width: 100%; /* Ширина каждой ячейки на 100% */
+            height: auto;
+            font-size: 1.2em;
+            padding: 1em;
+        }
+    
+        td:before {
+            content: attr(data-label); /* Добавляем заголовок для ячейки */
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 0.5em;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px){
         td {
             height: 5.5em;
             font-size: 1.2em;
