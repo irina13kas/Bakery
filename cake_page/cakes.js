@@ -125,6 +125,7 @@ function showCatalog() {
     const designerContainer = document.getElementById('designerContainer');
     catalogContainer.classList.add('visible');
     designerContainer.classList.remove('visible');
+    catalogContainer.innerHTML='';
 
     products.forEach((product, index) => {
         const productElement = document.createElement('div');

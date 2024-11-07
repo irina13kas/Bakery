@@ -1,5 +1,4 @@
 .contacts-text {
-    padding: 0;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -50,7 +49,24 @@ a {
     font-size: 1.2em;
 }
 
-@media (max-width: 1270px){
+@media (max-width:768px){
+    .contacts-heading{
+        margin-bottom: 7%;
+    }
+    .contacts-iframe {
+        display: none;
+    }
+    .contacts-container {
+        flex-direction: column;
+    }
+    .contacts-text-block{
+        margin-left: 0;
+        align-items: center;
+    }
+    
+}
+
+@media (min-width:769px)and(max-width: 1270px){
     .contacts-iframe {
         height: 49vh;
     }

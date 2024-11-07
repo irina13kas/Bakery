@@ -79,6 +79,7 @@ nav a.active {
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-height: 100vh;
 }
 
 .topic {
@@ -174,12 +175,12 @@ footer {
     font-size: 1em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1270px) {
     .main-body{
         align-items: center;
+        min-height: 0;
     }
     .topic{
-        font-size: 1.4em;
         margin-bottom: 2%;
     }
     footer {
@@ -237,7 +238,7 @@ footer {
     }
 }
 
-@media (min-width: 769px) and (max-width: 1024px){
+/* @media (min-width: 769px) and (max-width: 1024px){
     .topic h1{
         font-size: 2.2em;
     }
@@ -247,7 +248,7 @@ footer {
     .main-body{
         min-height: 50vh;
     }
-}
+} */
 
 @media (min-width: 1440px) and (max-width: 1920px) {
     .topic h1{
