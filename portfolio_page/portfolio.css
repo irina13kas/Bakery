@@ -40,13 +40,19 @@ a {
             height: 100vh;
         }
         table {
-            display: flex; /* Устанавливаем таблицу как блочный элемент */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
         }
     
         tr {
-            display: flex; /* Делаем строки флекс-элементами */
-            flex-direction: column; /* Выводим каждую ячейку в новой строке */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            flex-direction: column;
         }
     
         td {
@@ -57,7 +63,7 @@ a {
         }
     
         td:before {
-            content: attr(data-label); /* Добавляем заголовок для ячейки */
+            content: attr(data-label);
             font-weight: bold;
             display: inline-block;
             margin-bottom: 0.5em;
