@@ -1,4 +1,7 @@
-﻿.ad-container {
+﻿.main-body{
+    min-height: 100vh;
+}
+.ad-container {
     margin: 0;
     padding: 0;
     height: 60vh;

@@ -1,4 +1,7 @@
 ﻿
+.main-body{
+    min-height: 100vh;
+}
 .container-body{
     display: flex;
     justify-content: center;
