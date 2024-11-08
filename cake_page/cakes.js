@@ -4,7 +4,6 @@ function selectOption(optionId) {
     const option1 = document.getElementById("option1");
     const option2 = document.getElementById("option2");
 
-    // Добавляем нужные классы
     if (optionId === 'option1') {
         option1.style.backgroundColor = '#9c8bff';
         option2.style.border = '2px solid #7B68EE';
@@ -27,7 +26,7 @@ function showDesigner(){
     designerContainer.classList.add('visible');
     catalogContainer.innerHTML = '';
 }
-// Данные о продуктах
+
 const products = [
     {   name: 'Black&White', 
         price: 1500, 
@@ -119,7 +118,6 @@ const products = [
         }  },
 ];
 
-// Функция для отображения каталога
 function showCatalog() {
     const catalogContainer = document.getElementById('catalogContainer');
     const designerContainer = document.getElementById('designerContainer');
@@ -145,11 +143,9 @@ function showCatalog() {
     });
 }
 
-// Функция для отображения модального окна с информацией о продукте
 function showProductModal(index) {
     const product = products[index];
     
-    // Создаем модальное окно
     const modal = document.createElement('div');
     modal.classList.add('product-modal');
     modal.innerHTML = 
@@ -182,7 +178,6 @@ function showProductModal(index) {
     document.body.appendChild(modal);
 }
 
-// Функция для закрытия модального окна
 function closeModal() {
     const modal = document.querySelector('.product-modal');
     if (modal) {
@@ -190,7 +185,6 @@ function closeModal() {
     }
 }
 
-// Другие функции
 function changeQuantity(button, change) {
     const quantitySpan = button.parentNode.querySelector('.quantity');
     let quantity = parseInt(quantitySpan.textContent);
@@ -215,7 +209,7 @@ let selections = [null,null,null];
 
 function startDesign() {
     const container = document.getElementById("designerContainer");
-    container.innerHTML = ''; // Очистка окна
+    container.innerHTML = '';
     renderStep();
 }
 
@@ -246,7 +240,6 @@ const steps = [{
         { src: 'images_cake/self_conditer/designs/design_8.jpg', title: 'Мы вместе', description: '' }]}
     ];
 
-    //можно вынести
 function renderStep() {
     const container = document.getElementById("designerContainer");
     container.innerHTML = `
@@ -263,7 +256,6 @@ function renderStep() {
 
 function displayImages() {
     const imagesContainer = document.getElementById('imagesContainer');
-    //imagesContainer.innerHTML = ''; // Очищаем контейнер для нового шага
     let images = steps[currentStep-1].items;
     images.forEach((img, index) => {
         const imageDiv = document.createElement('div');
@@ -276,7 +268,6 @@ function displayImages() {
             imageDiv.classList.add('selected');
 
         imageDiv.addEventListener('click', () => {
-            // Снимаем отметку со всех изображений и затемняем выбранное
             document.querySelectorAll('.image-item').forEach(item => item.classList.remove('selected'));
             imageDiv.classList.add('selected');
             selections[currentStep-1] = index;
@@ -370,7 +361,6 @@ function fillForm(){
         wishForm.addEventListener('submit', function(event) {
             event.preventDefault();
             wishForm.reset();
-            //sweetCountInput.value = 1;
             successMessage.style.display = 'block';
             document.querySelector(".step-indicator").style.display = 'none';
             document.querySelector(".step-title").style.display = 'none';
@@ -384,6 +374,5 @@ function resetForm() {
     selections = [null,null,null];
     currentStep = 1;
     startDesign();
-     // Перезапуск страницы
   }
 

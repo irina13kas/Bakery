@@ -1,29 +1,38 @@
-﻿/* Изначально скрываем элементы до появления на экране */
-.animate-on-scroll {
+﻿.animate-on-scroll {
     opacity: 0;
-    transform: translateY(20em); /* Смещаем элементы вниз */
+    -webkit-transform: translateY(20em);
+    transform: translateY(20em);
+    -webkit-transition: opacity 1s ease-out, -webkit-transform 1s ease-out;
     transition: opacity 1s ease-out, transform 1s ease-out;
+    will-change: opacity, transform;
 }
 
-/* Когда элемент виден, добавляем анимацию */
 .animate-on-scroll.visible {
     opacity: 1;
-    transform: translateY(0); /* Элемент поднимается на место */
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
 }
 
-/* Основной блок с изображением и текстом */
 .about-me-section {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
-    justify-content: center;
-    padding: 0;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: space-between;
+    padding: 2vw;
 }
 
 .about-me-image-container img{
-    width: 100%; /* Полная ширина контейнера */
-    height: auto; /* Высота контейнера */
-    max-height:100vh;
+    width: 100%;
+    height: auto;
+    max-height: 100vh;
     object-fit: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
     background-repeat: no-repeat;
     padding-right: 3em;
 }
@@ -36,8 +45,8 @@
 
 .about-me-heading {
     display: flex;
+    display: -webkit-flex;
     justify-content: center;
-    font-family: 'Courier New', Courier, monospace;
     text-transform: uppercase;
     font-size: 2em;
     display: center;
@@ -45,51 +54,67 @@
 }
 
 .about-me-paragraph {
-    font-family: 'Courier New', Courier, monospace;
     line-height: 1.6em;
     color: #333;
     margin-bottom: 1.5em;
 }
 
 .scroll-image-1 {
-    background-image: url('images_about/scroll_image_1.jpg'); /* Укажи путь к твоему изображению */
-    background-size: cover; /* Масштабирование изображения, чтобы оно полностью покрывало блок */
-    background-attachment: fixed; /* Фиксация изображения для эффекта прокрутки */
-    background-position: center top; /* Начальная позиция фона */
-    width: 100vw; /* Во всю ширину экрана */
-    height: 100vh; /* Высота экрана */
-    overflow: hidden; /* Скрываем лишние части изображения */
+    background-image: url('images_about/scroll_image_1.jpg');
+    background-size: cover;
+    -webkit-background-size: cover;
+    background-attachment: fixed;
+    background-position: center top;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; 
     margin-top: 15%;
     margin-bottom: 5%;
 }
 
+@supports (-webkit-backdrop-filter: blur(0)) or (backdrop-filter: blur(0)) {
+    /* Специфические настройки для Safari для фиксированной прокрутки */
+    .scroll-image-1,
+    .scroll-image-2 {
+        background-attachment: fixed;
+        position: relative;
+        transform: translateZ(0);
+    }
+}
+
 .experience-columns {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction:row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: space-between;
-    gap: 2vw; /* Расстояние между колонками */
     padding: 2vw;
 }
 
 .experience-column-heading {
     font-family: 'Tempus Sans ITC', sans-serif;
-    font-size: 2em; /* Крупный заголовок */
+    font-size: 2em;
 }
 
 .experience-column-text {
-    line-height: 1.6em; /* Межстрочный интервал для удобства чтения */
+    line-height: 1.6em;
 }
 
 .my-priorities-image-text {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 5%;
 }
 
 .my-priorities-image img{
-    width: 100%; /* Полная ширина контейнера */
-    height: auto; /* Высота контейнера */
+    width: 100%;
+    height: auto;
     max-height: 70vh;
     padding-right: 2vw;
 }
@@ -116,11 +141,12 @@
 
 .our-difference {
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin-top: 10%;
-    gap: 3vw; /* Увеличен промежуток между блоками */
+    gap: 3vw;
     margin-bottom: 10%;
 }
 
@@ -134,7 +160,7 @@
 }
 
 .our-difference-left-content-image img{
-    width: 100%; /* Полная ширина контейнера */
+    width: 100%;
     height: auto;
     padding-right: 2vw;
 }
@@ -142,6 +168,7 @@
 .our-difference-left-content-second-part{  
     margin-top: 5%;
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -155,15 +182,16 @@
 
 .dream-pastry-image-text{
     display: flex;
+    display: -webkit-flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 3vw;
 }
 
 .dream-pastry-image img{
-    width: 100%; /* Полная ширина контейнера */
+    width: 100%;
     max-width: 50vw;
-    height: auto; /* Высота контейнера */
+    height: auto;
     padding-right: 2vw;
 }
 
@@ -186,13 +214,13 @@
 }
 
 .scroll-image-2{
-    background-image: url('images_about/scroll_image_2.jpg'); /* Укажи путь к твоему изображению */
-    background-size: cover; /* Масштабирование изображения, чтобы оно полностью покрывало блок */
-    background-attachment: fixed; /* Фиксация изображения для эффекта прокрутки */
-    background-position: center bottom; /* Начальная позиция фона */
-    width: 100vw; /* Во всю ширину экрана */
-    height: 95vh; /* Высота экрана */
-    overflow: hidden; /* Скрываем лишние части изображения */
+    background-image: url('images_about/scroll_image_2.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center bottom;
+    width: 100vw;
+    height: 95vh;
+    overflow: hidden;
     margin-top: 5%;
     margin-bottom: 10%;
 }
@@ -209,6 +237,7 @@
     cursor: pointer;
     font-size: 1.2em;
     opacity: 0;
+    -webkit-transition: opacity 0.5s ease;
     transition: opacity 0.5s ease;
     z-index: 1000;
 }
@@ -230,7 +259,8 @@
     .main-body{
         height: auto;
     }
-    .about-me-section{
+    .about-me-section {
+        -webkit-flex-direction: column;
         flex-direction: column;
     }
     .about-me-image-container img{
@@ -333,7 +363,6 @@
     }
 } 
 
-/* Для экрана шириной от 1440px до 1920px */
 @media (min-width: 1440px) and (max-width: 1920px) {
     .scroll-to-top {
         font-size: 1.7em;
@@ -352,7 +381,6 @@
     }
 }
 
-/* Для экранов шириной более 1920px */
 @media (min-width: 1920px) {
     .topic h1{
         font-size: 3em;
