@@ -3,6 +3,8 @@
 }
 
 .catalog-header {
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
     width: 100%;
 }
@@ -21,21 +23,31 @@
     font-size: 1.6em;
     padding: 0.5%;
     cursor: pointer;
+    -webkit-transition: background-color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, border-color 0.3s;
+    -ms-transition: background-color 0.3s, border-color 0.3s;
     transition: background-color 0.3s, border-color 0.3s;
 }
-
 .catalog-container {
     margin-top: 5%;
-    width:100%;
+    width: 100%;
     padding: 5%;
-    border: 2px solid transparent; /* Рамка по умолчанию прозрачная */
+    border: 2px solid transparent;
+    -o-transition: border-color 0.3s;
+    -moz-transition: border-color 0.3s;
+    -webkit-transition: border-color 0.3s;
+    -ms-transition: border-color 0.3s;
     transition: border-color 0.3s;
     display: none;
 }
 
 .catalog-container.visible {
     transform: translateY(0);
-    display:grid;
+    -webkit-fransform: translateY(0);
+    display: grid;
+    -webkit-grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    -ms-grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     gap: 2%;
 }
@@ -43,6 +55,7 @@
 .catalog-item {
     text-align: center;
     padding: 7%;
+    -webkit-transition: -webkit-transform 0.3s;
     transition: transform 0.3s;
 }
 
@@ -50,6 +63,16 @@
     width: 100%;
     height: auto;
     border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+@supports (-webkit-appearance: none) {
+    .catalog-item img {
+        width: 100%;
+        height: auto;
+        -webkit-border-radius: 5px; /* Для старых версий Safari */
+        border-radius: 5px;
+    }
 }
 
 .title {
@@ -62,12 +85,16 @@
     font-size: 1em;
 }
 .quantity-block{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
 .quantity-controls {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,6 +121,10 @@
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
     margin-right: 2%;
 }
 
@@ -103,6 +134,7 @@
 
 .catalog-item:hover {
     transform: translateY(-3%);
+    -webkit-transform: translateY(-3%);
 }
 
 .product-modal {
@@ -112,6 +144,8 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,9 +156,12 @@
     position: relative;
     background: #fff;
     padding: 2%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     max-width: 60em;
     border-radius: 8px;
+    -webkit-border-radius: 8px;
     align-items: center;
 }
 
@@ -172,6 +209,8 @@
 }
 
 .popup-overlay.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -181,18 +220,26 @@
     text-align: center;
     margin-top: 2%;
     display: block;
+    display: -webkit-box;
+    display: -ms-flexbox;
 }
 
 #designerContainer {
     margin-top: 5%;
     padding: 5%;
     width: 100%;
-    border: 2px solid transparent; /* Рамка по умолчанию прозрачная */
+    border: 2px solid transparent;
     transition: border-color 0.3s;
+    -o-transition: border-color 0.3s;
+    -moz-transition: border-color 0.3s;
+    -webkit-transition: border-color 0.3s;
+    -ms-transition: border-color 0.3s;
     display: none;
 }
 
 #designerContainer.visible{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
 }
@@ -202,6 +249,10 @@
     color: black;
     cursor: pointer;
     transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
     margin-top: 2%;
     padding: 0.8em;
 }
@@ -212,8 +263,12 @@
 
 .image-container {
     transform: translateY(0);
+    -webkit-transform: translateY(0);
     display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+    display: -ms-grid;
+    -webkit-grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Для Safari */
+        -ms-grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Для старых версий IE */
+        grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
     gap: 2%;
 }
 
@@ -221,13 +276,16 @@
     text-align: center;
     padding: 7%;
     transition: transform 0.3s;
+    -webkit-transition: -webkit-transform 0.3s;
     transform: translateY(0);
+    -webkit-transform: translateY(0);
 }
 
 .image-item img {
     width: 100%;
     height: auto;
     border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 
 .image-item.selected img {
@@ -239,12 +297,13 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 3em; /* Размер значка */
+    width: 3em;
     height: 3em;
-    background-image: url('images_cake/selected_img.svg'); /* Путь к загруженному значку */
+    background-image: url('images_cake/selected_img.svg');
     background-size: cover;
     background-position: center;
     transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 
 .image-item:hover img {
@@ -261,6 +320,7 @@
     line-height: 1.7em;
     border: 1px solid black;
     border-radius: 8px;
+    -webkit-border-radius: 8px;
     display: block;
 }
 
@@ -279,14 +339,18 @@
 .form-group input[type="text"],
 .form-group textarea {
     width: 100%;
-    padding: 1em;
+    padding: 0.5em;
+    font-size: 1em;
     border: 1px solid black;
     border-radius: 4px;
+    -webkit-border-radius: 4px;
 }
 .form-group textarea {
     resize: none;
 }
 .counter-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     align-items: center;
     gap: 2%;
@@ -298,6 +362,7 @@
     text-align: center;
     border: 1px solid black;
     border-radius: 4px;
+    -webkit-border-radius: 4px;
 }
 .counter-group button {
     width: 2em;
@@ -306,6 +371,7 @@
     border: none;
     border: 1px solid black;
     border-radius: 4px;
+    -webkit-border-radius: 4px;
     cursor: pointer;
     font-size: 1.2em;
 }
@@ -319,6 +385,7 @@
     background-color: #2846a7;
     border: 1px solid black;
     border-radius: 4px;
+    -webkit-border-radius: 4px;
     cursor: pointer;
 }
 .submit-btn:hover {
@@ -338,14 +405,17 @@
     color: black;
     border: none;
     border-radius: 20px;
+    -webkit-border-radius: 20px;
     padding: 1% 3%;
     font-size: 1em;
     cursor: pointer;
 }
 
 .button-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    gap: 3%; /* Отступ между кнопками */
+    gap: 3%;
 }
 
 .button-container.hidden{
@@ -354,25 +424,28 @@
 
 .prev-btn{
     content: '←';
-    background-color: #7B68EE; /* Фиолетовый полупрозрачный */
+    background-color: #7B68EE;
     color: black;
     border: none;
     border-radius: 50%;
-    width: 2.5em; /* Размер кнопки */
+    -webkit-border-radius: 50%;
+    width: 2.5em;
     height: 2.5em;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1em; /* Размер иконки */
+    font-size: 1em;
 }
 
 .prev-button:hover {
-    background-color: #7B68EE; /* Более насыщенный цвет */
+    background-color: #7B68EE;
 }
 
 .next-btn:hover{
-    background-color: #4326e2; /* Легкое затемнение фона */
+    background-color: #4326e2;
 }
 
 .next-btn.shake {
@@ -387,8 +460,13 @@
     color: black;
     border: 1px solid black;
     border-radius: 4px;
+    -webkit-border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
   }
 
   .reset-button:hover {
@@ -396,7 +474,7 @@
   }
 
   .reset-button.visible {
-    display: block; /* Показываем кнопку */
+    display: block;
   }
 
   .p{
@@ -414,11 +492,19 @@
     75% { transform: translateX(-3%); }
 }
 
+@-webkit-keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3%); }
+    50% { transform: translateX(3%); }
+    75% { transform: translateX(-3%); }
+}
 
-/* Базовые стили для больших экранов (больше 1200px) */
 @media (min-width: 1200px) and (max-width:1440px) {
     .catalog-container.visible {
         display:grid;
+        display: -ms-grid;
+        -webkit-grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Для Safari */
+        -ms-grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); /* Для старых версий IE */
         grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
         padding: 5%;
     }
@@ -432,7 +518,7 @@
         font-size: 1em;
     }
     .image-container {
-        width: 100%; /* Адаптивная ширина для меньших экранов */
+        width: 100%;
     }
     .catalog-header {
         display: block;
@@ -440,15 +526,19 @@
     .title{
         font-size: 1.1em;
     }
+
     .catalog-option {
         font-size: 1.3em;
         padding: 1.5%;
     }
     .catalog-container.visible {
         display:grid;
+        display: -ms-grid;
+        -webkit-grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); /* Для Safari */
+        -ms-grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); /* Для старых версий IE */
         grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
-        padding: 3%;
-        height: 80em;
+        padding-bottom: 20%;
+        height: auto;
     }
     .modal-content {
         max-width: 21em;
@@ -467,6 +557,8 @@
         font-size:0.8em;
     }
     .image-container{
+        -webkit-grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); /* Для Safari */
+        -ms-grid-template-columns: repeat(auto-fill, minmax(45%, 1fr)); /* Для старых версий IE */
         grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
     }
     .form-group input[type="text"],
@@ -508,12 +600,14 @@
         padding: 0.4em;
     }
 }
-@media (min-width:769px) and (max-width: 1270px){
+@media (min-width:769px) and (max-width: 1200px){
     .catalog-option {
         font-size: 1.4em;
         padding: 1%;
     }
     .catalog-container.visible {
+        -webkit-grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Для Safari */
+        -ms-grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Для старых версий IE */
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
         padding: 4%;
     }
@@ -543,6 +637,9 @@
     }
     .catalog-container.visible {
         display:grid;
+        display: -ms-grid;
+        -webkit-grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Для Safari */
+        -ms-grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Для старых версий IE */
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
         padding: 4%;
     }
@@ -608,6 +705,9 @@
     }
     .catalog-container.visible {
         display:grid;
+        display: -ms-grid;
+        -webkit-grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Для Safari */
+        -ms-grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Для старых версий IE */
         grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
         padding: 4%;
     }
