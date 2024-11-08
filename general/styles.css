@@ -26,8 +26,14 @@ header {
 }
 
 .header-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     width: 100%;
     margin: 0 auto;
@@ -35,6 +41,8 @@ header {
 }
 
 .links {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin-left: 10%;
     gap: 4vw;
@@ -61,6 +69,8 @@ nav a.active {
 .left-links {
     margin-right: 3vw;
     flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     justify-content: flex-end;
 }
@@ -68,6 +78,8 @@ nav a.active {
 .right-links {
     margin-left: 3vw;
     flex: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     justify-content: flex-start;
 }
@@ -76,6 +88,8 @@ nav a.active {
     margin-top: 5%;
     margin-left: 5%;
     margin-right: 5%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -93,6 +107,7 @@ nav a.active {
     padding: 0.5em 2em;
     border: 2px solid #d2691eb9;
     border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
     background-color: #d2691eb9;
     position: relative;
     overflow: hidden;
@@ -138,9 +153,15 @@ footer {
 }
 
 .footer-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -149,6 +170,8 @@ footer {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     gap: 2vw;
 }
@@ -170,13 +193,14 @@ footer {
 }
 
 .footer-copyright p {
-    font-family: 'Courier New', Courier, monospace;
     margin: 0;
     font-size: 1em;
 }
 
 @media (max-width: 1270px) {
     .main-body{
+        -webkit-box-align: center;
+        -ms-flex-align: center;
         align-items: center;
         min-height: 0;
     }
@@ -187,7 +211,7 @@ footer {
         padding: 2em;
     }
     .logo {
-        font-size: 1.2em; /* Еще меньше логотип */
+        font-size: 1.2em;
     }
     .header-nav .cart-button {
         display: none;
@@ -219,7 +243,9 @@ footer {
     }
 
     .links.active {
-        display: flex; /* Показываем меню, когда добавлен класс active */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
     }
 
     .links a {
@@ -227,28 +253,14 @@ footer {
         font-size: 1.2em;
     }
 
-    /* Футер */
     footer {
-        font-size: 0.8em; /* Сокращаем шрифт футера */
+        font-size: 0.8em;
     }
 
-    /* Убираем лишние отступы для иконок */
     .footer-icons a {
         font-size: 1em;
     }
 }
-
-/* @media (min-width: 769px) and (max-width: 1024px){
-    .topic h1{
-        font-size: 2.2em;
-    }
-    footer{
-        padding: 6vw 3vh;
-    }
-    .main-body{
-        min-height: 50vh;
-    }
-} */
 
 @media (min-width: 1440px) and (max-width: 1920px) {
     .topic h1{
