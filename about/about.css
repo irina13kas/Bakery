@@ -19,18 +19,18 @@
     padding: 0;
 }
 
-.about-me-image-container {
-    width: 38.5em; /* Полная ширина контейнера */
-    height: 40em; /* Высота контейнера */
-    background-image: url('images_about/about_child.jpg'); /* Путь к изображению */
-    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
-    background-position: left; /* Центрирование изображения */
+.about-me-image-container img{
+    width: 100%; /* Полная ширина контейнера */
+    height: auto; /* Высота контейнера */
+    max-height:100vh;
+    object-fit: cover;
     background-repeat: no-repeat;
     padding-right: 3em;
 }
 
 .about-me-text-container {
     flex: 1;
+    max-width:40vw;
     margin-right: 2em;
 }
 
@@ -77,7 +77,6 @@
 }
 
 .experience-column-text {
-    font-family: 'Courier New', Courier, monospace;
     line-height: 1.6em; /* Межстрочный интервал для удобства чтения */
 }
 
@@ -88,18 +87,16 @@
     margin-bottom: 5%;
 }
 
-.my-priorities-image {
-    width: 40%; /* Полная ширина контейнера */
-    height: 65vh; /* Высота контейнера */
-    background-image: url('images_about/cakes.jpg'); /* Путь к изображению */
-    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
-    background-position: left; /* Центрирование изображения */
-    background-repeat: no-repeat;
+.my-priorities-image img{
+    width: 100%; /* Полная ширина контейнера */
+    height: auto; /* Высота контейнера */
+    max-height: 70vh;
     padding-right: 2vw;
 }
 
 .my-priorities-text-content {
     flex: 1;
+    max-width: 40vw;
     margin-left: 8%;
 }
 
@@ -110,7 +107,6 @@
 }
 
 .my-priorities-extra-text {
-    font-family: 'Courier New', Courier, monospace;
     line-height: 1.6em;
 }
 
@@ -129,22 +125,17 @@
 }
 
 .our-difference-first-paragraph{
-    font-family: 'Courier New', Courier, monospace;
     margin-right: 15%;
     line-height: 1.6em;
 }
 .our-difference-second-paragraph{
-    font-family: 'Courier New', Courier, monospace;
     margin-left:5%;
     line-height: 1.6em;
 }
 
-.our-difference-left-content-image {
-    width: 150%; /* Полная ширина контейнера */
-    background-image: url('images_about/cookies.jpg'); /* Путь к изображению */
-    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
-    background-position: left; /* Центрирование изображения */
-    background-repeat: no-repeat;
+.our-difference-left-content-image img{
+    width: 100%; /* Полная ширина контейнера */
+    height: auto;
     padding-right: 2vw;
 }
 
@@ -155,13 +146,10 @@
     justify-content: space-between;
 }
 
-.our-difference-right-image{
-    width: 190%;
-    height: 60vh;
-    background-image: url('images_about/about_bareky_shop.jpg'); /* Путь к изображению */
-    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
-    background-position: left; /* Центрирование изображения */
-    background-repeat: no-repeat;
+.our-difference-right-image img{
+    width: 100%;
+    min-width:35vw;
+    height: auto;
     padding-right: 2vw;
 }
 
@@ -172,13 +160,10 @@
     margin-bottom: 3vw;
 }
 
-.dream-pastry-image {
-    width: 49%; /* Полная ширина контейнера */
-    height: 60vh; /* Высота контейнера */
-    background-image: url('images_about/cake_display.jpg'); /* Путь к изображению */
-    background-size: contain; /* Масштабирование изображения с сохранением пропорций */
-    background-position: left; /* Центрирование изображения */
-    background-repeat: no-repeat;
+.dream-pastry-image img{
+    width: 100%; /* Полная ширина контейнера */
+    max-width: 50vw;
+    height: auto; /* Высота контейнера */
     padding-right: 2vw;
 }
 
@@ -188,7 +173,6 @@
 }
 
 .dream-pastry-text{
-    font-family: 'Courier New', Courier, monospace;
     line-height: 1.6em;
     margin-top: 5%;
 }
@@ -226,6 +210,7 @@
     font-size: 1.2em;
     opacity: 0;
     transition: opacity 0.5s ease;
+    z-index: 1000;
 }
 
 .scroll-to-top.show {
@@ -241,71 +226,112 @@
     font-size: 1.2em;
 }
 
-@media (max-width: 1270px){
+@media (max-width: 768px){
     .main-body{
         height: auto;
     }
     .about-me-section{
         flex-direction: column;
     }
-    .about-me-image-container{
-        width: 100%;
-        height:80vh;
-        background-position: center;
+    .about-me-image-container img{
+        max-height: auto;
+        align-items: center;
         margin-bottom: 15%;
+        padding-right:0;
+    }
+    .about-me-text-container{
+        margin-right:0;
+        max-width: 80%;
     }
     .experience-columns {
         flex-direction: column;
+        align-items: center;
     }
     .my-priorities-image-text {
         flex-direction: column;
     }
-    .my-priorities-image {
-        width: 93%;
-        background-position: center;
+    .my-priorities-image img{
+        padding-right:0;
+        max-width:70vw;
         margin-bottom: 10%;
+    }
+    .my-priorities-text-content {
+        margin-right: 0;
+        max-width: 80%;
     }
     .our-difference {
         flex-direction: column-reverse;
     }
-    .our-difference-right-image {
-        width: 100%;
-        height: 50vh;
-        background-position: center;
+    .our-difference-right-image img{
+        padding-right: 0;
+        max-width:70vw;
+
     }
     .our-difference-left-content-image{
         display: none;
     }
     .our-difference-first-paragraph {
-        margin:5%;
+        margin-right:0;
+        margin-left:12%;
+        max-width: 80%;
     }
     .our-difference-second-paragraph {
-        margin:5%;
+        margin-right:0;
+        margin-left:12%;
+        max-width: 80%;
     }
     .dream-pastry-image-text {
         flex-direction: column;
     }
-    .dream-pastry-image {
-        width:100%;
-        height: 50vh;
+    .dream-pastry-image img {
+        max-width:80vw;
     }
     .dream-pastry-text{
         margin-top: 15%;
     }
 }
 
-@media (max-width: 769px) and (max-width: 1270px){
+@media (min-width: 769px) and (max-width: 1270px){
     .about-me-text-container {
-        margin-left:5%;
+        margin-left:0;
     }
     .scroll-image-1{
-        height: 80vh; /* Высота экрана */
+        height: 80vh;
     }
 
     .scroll-image-2{
-        height: 70vh; /* Высота экрана */
+        height: 70vh;
     }
-}
+    .our-difference {
+        flex-direction: column-reverse;
+    }
+    .our-difference-right-image img{
+        padding-right: 0;
+        position:center;
+    }
+    .our-difference-left-content-image{
+        display: none;
+    }
+    .our-difference-first-paragraph {
+        margin-right:0;
+        margin-left:12%;
+        max-width: 80%;
+    }
+    .our-difference-second-paragraph {
+        margin-right:0;
+        margin-left:12%;
+        max-width: 80%;
+    }
+    .dream-pastry-image-text {
+        flex-direction: column;
+    }
+    .dream-pastry-image img {
+        max-width:80vw;
+    }
+    .dream-pastry-text{
+        margin-top: 15%;
+    }
+} 
 
 /* Для экрана шириной от 1440px до 1920px */
 @media (min-width: 1440px) and (max-width: 1920px) {
@@ -340,7 +366,7 @@
     .about-me-heading {
         font-size: 3em;
     }
-    .our-difference-right-image {
+    .our-difference-right-image img{
         width:240%
     }
     .experience-column-heading {
@@ -349,7 +375,7 @@
     .my-priorities-main-paragraph {
         font-size: 2.3em;
     }
-    .our-difference-left-content-image {
+    .our-difference-left-content-image img{
         width: 184%;
     }
 }
