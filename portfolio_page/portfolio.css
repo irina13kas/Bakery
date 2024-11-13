@@ -15,11 +15,13 @@ td {
 tr:nth-child(odd) td:nth-child(even),
 tr:nth-child(even) td:nth-child(odd) {
     background-color: #f5f5f5;
+    border: 1px solid black;
 }
 
 tr:nth-child(odd) td:nth-child(odd),
 tr:nth-child(even) td:nth-child(even) {
     background-color: rgb(166,182,135);
+    border: 1px solid black;
     color: white;
 }
 
