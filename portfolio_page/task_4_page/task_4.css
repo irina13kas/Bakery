@@ -60,13 +60,17 @@ button {
     border: 1px solid red;
     margin-top: 5%;
     margin-left: 6.5%;
-    height: 3em;
+    min-height: 3em;
+    height:fit-content;
     width: 58%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2em;
-    white-space: nowrap;
+    overflow-wrap: break-word; /* Перенос слов при переполнении */
+    white-space: normal;
+    color: black;
+    font-size:1.2em;
 }
 
 .word {

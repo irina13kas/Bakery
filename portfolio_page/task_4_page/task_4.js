@@ -3,30 +3,31 @@ const block1 = document.getElementById("Block-1");
 const block2 = document.getElementById("Block-2");
 const block3 = document.getElementById("Block-3");
 const colors=[];
-const block_1_line = '';
+let block_1_line = '1111';
 
 function FillBlock2(){
+    block1.innerHTML = '';
     block2.innerHTML = '';
+    block3.innerHTML='';
     const inputField = document.getElementById("DisplayArea");
     const inputText = inputField.value;
         let line = inputText
             .split("-")
             .map(item => item.trim());
         
-        inputField.value = "";
 
         let lowercaseWords = [];
         let uppercaseWords = [];
         let numbers = [];
 
         for (const word of line) {
-            if (typeof word === "string") {
+            if (isNaN(parseFloat(word)) || !isFinite(word)) {
                 if (word[0] === word[0].toUpperCase()) {
                     uppercaseWords.push(word);
                 } else {
                     lowercaseWords.push(word);
                 }
-            } else if (typeof word === "number") {
+            } else{
                 numbers.push(word);
             }
         }
@@ -62,13 +63,16 @@ function FillBlock2(){
 
             colors.push({ id: key, color: initialColor });
 
-            //wordElement.style.position = 'relative';
             wordElement.innerHTML=`${key} ${words[key]}`;
     
             // Добавляем обработчики для перетаскивания
             wordElement.draggable = true;
             wordElement.addEventListener("dragstart", dragStart);
             wordElement.addEventListener("dragend", dragEnd);
+            wordElement.onclick = () => {
+                text = wordElement.textContent.split(" ");
+                block1.textContent += (block1.textContent? " ":"")+text[1];
+        };
     
             block2.appendChild(wordElement);
         }
@@ -103,13 +107,13 @@ block3.addEventListener("dragover", event => {
     event.preventDefault();
 });
 
+const block3Rect = block3.getBoundingClientRect();
 block3.addEventListener("drop", event => {
     event.preventDefault();
     if (draggedElement) {
-        const block3Rect = block3.getBoundingClientRect();
         // Вычисляем координаты внутри блока 3, чтобы элемент остался на месте
-        const offsetX = event.offsetX+block3Rect.left-draggedElement.clientWidth/2;
-        const offsetY = event.offsetY+block3Rect.top-draggedElement.clientHeight/2;
+        let offsetX =  event.offsetX+block3Rect.left- draggedElement.clientWidth / 2;
+        let offsetY = event.offsetY+block3Rect.top- draggedElement.clientHeight / 2;
 
         draggedElement.style.position = 'absolute';
         draggedElement.style.left = `${offsetX}px`;
@@ -121,13 +125,7 @@ block3.addEventListener("drop", event => {
 
         // Присваиваем всем словам в блоке 3 одинаковый цвет
         const wordsInBlock3 = block3.querySelectorAll(".word");
-        wordsInBlock3.forEach(word => word.style.backgroundColor = "lightgrey");
-
-        // Добавляем клик для отображения текста в блоке 1
-        draggedElement.onclick = () => {
-            block_1_line = block_1_line+draggedElement.innerText.split(": ").pop();
-            block1.innerText = block_1_line;
-        };
+        wordsInBlock3.forEach(word => word.style.backgroundColor = "lightgrey");       
     }
 });
 
