@@ -44,19 +44,15 @@ button {
     padding: 2%;
     font-size: 1.2em;
     cursor: pointer;
-    background-color: rgb(126, 153, 71);
+    background-color: rgb(200, 221, 159);
 }
 
-.displayArea {
+#DisplayArea {
     height: 3em;
     width: 58%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid black;
     font-size: 1.2em;
-    background-color: rgb(166,182,135);
-    white-space: nowrap;
+    border: 1px solid black;
+    background-color: rgb(200, 221, 159);
 }
 
 .block-1{
@@ -72,7 +68,7 @@ button {
     white-space: nowrap;
 }
 
-.color-block {
+.block {
     margin: 2%;
     width: 40%;
     height: 10%;
@@ -80,4 +76,10 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dropped {
+    background-color: lightgray;
 }
