@@ -1,14 +1,11 @@
 const words = [];
-const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFA533", "#A533FF","#FFC618","#DE18FF","#18FF3D","#FF9D18"];
-colors.sort(()=>Math.random()-0.5);
-const wordsLenght = words.length;
-
-let line = Object.values(words).sort(() => Math.random() - 0.5).join("-");
-document.getElementById("DisplayArea").textContent = line;
+//const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFA533", "#A533FF","#FFC618","#DE18FF","#18FF3D","#FF9D18"];
+//colors.sort(()=>Math.random()-0.5);
+const block2 = document.getElementById("Block-2");
+const block3 = document.getElementById("Block-3");
 
 function FillBlock2(){
-    const displayArea = document.getElementById("Block-2");
-    displayArea.innerHTML = '';
+    block2.innerHTML = '';
 
     const inputField = document.getElementById("DisplayArea");
     const inputText = inputField.value;
@@ -56,65 +53,68 @@ function FillBlock2(){
             index++;
         });
 
-        index = 0;
         for(let key in words){
-            const colorBlock = document.createElement("div");
-            colorBlock.classList.add("block");
+            const wordElement = document.createElement("div");
+            wordElement.classList.add("word");
 
-            // Добавляем начальную позицию
-            colorBlock.style.top = "400px";
-            colorBlock.style.left = "50px";
+            wordElement.style.backgroundColor = getRandomColor();
 
-            colorBlock.addEventListener("mousedown", (e) => startDrag(e, colorBlock));
-
-            const randomColor = colors[index];
-            index++;
-            colorBlock.style.backgroundColor = randomColor;
-            colorBlock.innerHTML=`${key} ${words[key]}`;
-                
-            displayArea.appendChild(colorBlock);
+            // const randomColor = colors[index];
+            // index++;
+            // colorBlock.style.backgroundColor = randomColor;
+            wordElement.innerHTML=`${key} ${words[key]}`;
+            
+            wordElement.style.left = `${Math.random() * (block2.clientWidth - 50)}px`;
+            wordElement.style.top = `${Math.random() * (block2.clientHeight - 30)}px`;
+    
+            // Добавляем обработчики для перетаскивания
+            wordElement.draggable = true;
+            wordElement.addEventListener("dragstart", dragStart);
+            wordElement.addEventListener("dragend", dragEnd);
+    
+            block2.appendChild(wordElement);
         }
+
 }
 
-let activeBlock = null;
-let offsetX, offsetY;
-
-function startDrag(e, block) {
-    activeBlock = block;
-    offsetX = e.clientX - block.getBoundingClientRect().left;
-    offsetY = e.clientY - block.getBoundingClientRect().top;
-    document.addEventListener("mousemove", drag);
-    document.addEventListener("mouseup", stopDrag);
-}
-
-function drag(e) {
-    if (activeBlock) {
-        activeBlock.style.left = `${e.clientX - offsetX}px`;
-        activeBlock.style.top = `${e.clientY - offsetY}px`;
+function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
     }
+    return color;
 }
 
-function stopDrag(e) {
-    if (activeBlock) {
-        const area2 = document.getElementById("Block-2").getBoundingClientRect();
-        const blockRect = activeBlock.getBoundingClientRect();
+let draggedElement = null;
 
-        if (
-            blockRect.left >= area2.left &&
-            blockRect.right <= area2.right &&
-            blockRect.top >= area2.top &&
-            blockRect.bottom <= area2.bottom
-        ) {
-            activeBlock.classList.add("dropped");
-            document.getElementById("Block-3").appendChild(activeBlock);
-            activeBlock.style.position = "relative";
-            activeBlock.style.left = "auto";
-            activeBlock.style.top = "auto";
-        }
-
-            // Убираем обработчики событий
-            document.removeEventListener("mousemove", drag);
-            document.removeEventListener("mouseup", stopDrag);
-            activeBlock = null;
-        }
+// Начало перетаскивания
+function dragStart(event) {
+    draggedElement = event.target;
+    draggedElement.classList.add("dragging");
 }
+
+// Конец перетаскивания
+function dragEnd(event) {
+    draggedElement.classList.remove("dragging");
+    draggedElement = null;
+}
+
+// Обработчики для зоны блоков
+block3.addEventListener("dragover", event => {
+    event.preventDefault();
+});
+
+block3.addEventListener("drop", event => {
+    event.preventDefault();
+    if (draggedElement) {
+        // Перемещение в блок 3
+        draggedElement.style.left = `${event.offsetX}px`;
+        draggedElement.style.top = `${event.offsetY}px`;
+        block3.appendChild(draggedElement);
+
+        // Изменение цвета всех элементов в блоке 3
+        const wordsInBlock3 = block3.querySelectorAll(".word");
+        wordsInBlock3.forEach(word => word.style.backgroundColor = "#87CEFA"); // Устанавливаем одинаковый цвет
+    }
+});

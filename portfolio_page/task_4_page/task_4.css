@@ -68,7 +68,7 @@ button {
     white-space: nowrap;
 }
 
-.block {
+.word {
     margin: 2%;
     width: 40%;
     height: 10%;
@@ -78,8 +78,13 @@ button {
     justify-content: center;
     cursor: pointer;
     transition: background-color 0.3s;
+    background-color: transparent;
 }
 
 .dropped {
     background-color: lightgray;
+}
+
+.word.dragging {
+    opacity: 1; /* Полупрозрачность блока во время перетаскивания */
 }
