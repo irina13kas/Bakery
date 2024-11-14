@@ -1,12 +1,12 @@
 const words = [];
-//const colors = ["#FF5733", "#33FF57", "#3357FF", "#FF33A1", "#FFA533", "#A533FF","#FFC618","#DE18FF","#18FF3D","#FF9D18"];
-//colors.sort(()=>Math.random()-0.5);
+const block1 = document.getElementById("Block-1");
 const block2 = document.getElementById("Block-2");
 const block3 = document.getElementById("Block-3");
+const colors=[];
+const block_1_line = '';
 
 function FillBlock2(){
     block2.innerHTML = '';
-
     const inputField = document.getElementById("DisplayArea");
     const inputText = inputField.value;
         let line = inputText
@@ -57,15 +57,13 @@ function FillBlock2(){
             const wordElement = document.createElement("div");
             wordElement.classList.add("word");
 
-            wordElement.style.backgroundColor = getRandomColor();
+            const initialColor = getRandomColor();
+            wordElement.style.backgroundColor = initialColor;
 
-            // const randomColor = colors[index];
-            // index++;
-            // colorBlock.style.backgroundColor = randomColor;
+            colors.push({ id: key, color: initialColor });
+
+            //wordElement.style.position = 'relative';
             wordElement.innerHTML=`${key} ${words[key]}`;
-            
-            wordElement.style.left = `${Math.random() * (block2.clientWidth - 50)}px`;
-            wordElement.style.top = `${Math.random() * (block2.clientHeight - 30)}px`;
     
             // Добавляем обработчики для перетаскивания
             wordElement.draggable = true;
@@ -108,13 +106,57 @@ block3.addEventListener("dragover", event => {
 block3.addEventListener("drop", event => {
     event.preventDefault();
     if (draggedElement) {
-        // Перемещение в блок 3
-        draggedElement.style.left = `${event.offsetX}px`;
-        draggedElement.style.top = `${event.offsetY}px`;
-        block3.appendChild(draggedElement);
+        const block3Rect = block3.getBoundingClientRect();
+        // Вычисляем координаты внутри блока 3, чтобы элемент остался на месте
+        const offsetX = event.offsetX+block3Rect.left-draggedElement.clientWidth/2;
+        const offsetY = event.offsetY+block3Rect.top-draggedElement.clientHeight/2;
 
-        // Изменение цвета всех элементов в блоке 3
+        draggedElement.style.position = 'absolute';
+        draggedElement.style.left = `${offsetX}px`;
+        draggedElement.style.top = `${offsetY}px`;
+
+        if (draggedElement.parentNode !== block3) {
+            block3.appendChild(draggedElement);
+        }
+
+        // Присваиваем всем словам в блоке 3 одинаковый цвет
         const wordsInBlock3 = block3.querySelectorAll(".word");
-        wordsInBlock3.forEach(word => word.style.backgroundColor = "#87CEFA"); // Устанавливаем одинаковый цвет
+        wordsInBlock3.forEach(word => word.style.backgroundColor = "lightgrey");
+
+        // Добавляем клик для отображения текста в блоке 1
+        draggedElement.onclick = () => {
+            block_1_line = block_1_line+draggedElement.innerText.split(": ").pop();
+            block1.innerText = block_1_line;
+        };
+    }
+});
+
+// Обработка возвращения элемента в блок 2
+block2.addEventListener("dragover", event => {
+    event.preventDefault();
+});
+
+block2.addEventListener("drop", event => {
+    event.preventDefault();
+    if (draggedElement) {
+        // Находим данные слова для восстановления начальных стилей
+        const wordData = colors.find(data => data.id === draggedElement.innerText);
+
+        if (wordData) {
+            draggedElement.style.position = 'relative';
+            draggedElement.style.left = 'auto';
+            draggedElement.style.top = 'auto';
+            draggedElement.style.backgroundColor = colors.color;
+
+            block2.appendChild(draggedElement);
+
+            // Сортируем элементы в блоке 2
+            const sortedWords = Array.from(block2.querySelectorAll(".word"))
+                .sort((a, b) => a.innerText.localeCompare(b.innerText));
+            block2.innerHTML = ""; // Очищаем блок 2
+
+            // Добавляем элементы в отсортированном порядке
+            sortedWords.forEach(word => block2.appendChild(word));
+        }
     }
 });

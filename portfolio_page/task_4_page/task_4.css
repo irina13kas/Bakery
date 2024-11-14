@@ -21,6 +21,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    gap:2%;
 }
 
 .container-block-1{
@@ -69,9 +70,9 @@ button {
 }
 
 .word {
-    margin: 2%;
-    width: 40%;
-    height: 10%;
+    width: fit-content;
+    min-width: 5em;
+    height: 3em;
     border: 1px solid black;
     display: flex;
     align-items: center;
@@ -86,5 +87,5 @@ button {
 }
 
 .word.dragging {
-    opacity: 1; /* Полупрозрачность блока во время перетаскивания */
+    opacity: 1;
 }
