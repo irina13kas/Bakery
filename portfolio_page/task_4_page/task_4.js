@@ -99,7 +99,7 @@ function handleDropToBlock3(event) {
     if (draggedElement) {
         const block3Rect = block3.getBoundingClientRect();
         const offsetX = event.clientX + block3Rect.left - 2*draggedElement.clientWidth;
-        const offsetY = event.clientY + block3Rect.top - 2*draggedElement.clientHeight;
+        const offsetY = event.clientY;
         
         draggedElement.style.position = 'absolute';
         draggedElement.style.left = `${offsetX}px`;
