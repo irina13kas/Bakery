@@ -41,7 +41,7 @@ body {
     font-size: 3rem;
     color: #d81b60;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    margin-bottom: 20px;
+    margin-bottom: 5%;
   }
   
   /* Кнопка "Играть" */
@@ -94,5 +94,217 @@ body {
   .icon {
     font-size: 1.2rem;
     color: #d81b60;
+  }
+
+  .background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Чтобы видео заполнило весь экран */
+    z-index: -1; /* Размещаем видео за остальным контентом */
+  }
+  
+  /* Слой поверх видео */
+  .overlay {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+
+/* Стили всплывающего окна */
+.auth-modal {
+    position: fixed;
+    bottom: -120%; /* Начальная позиция вне экрана */
+    left:0;
+    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+    width: 100%;
+    height: 100%;
+    transition: bottom 0.4s ease; /* Анимация появления */
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1% 0;
+}
+
+.auth-modal.active {
+    bottom: 0; /* Всплывает в область видимости */   
+}
+
+.auth-content {
+    background: #fce4ec;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px; /* Максимальная ширина окна */
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #d81b60;
+    background: none;
+    border: none;
+}
+
+.close-btn:hover {
+    color: #ad1457;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+form input {
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #d81b60;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #ad1457;
+}
+
+/* Окно настроек */
+.settings-modal {
+    position: fixed;
+    bottom: -120%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    transition: bottom 0.4s ease;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .settings-modal.active {
+    bottom: 0;
+  }
+  
+  .settings-content {
+    background: #fce4ec;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    position: relative;
+  }
+  
+  .settings-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Настройка звука */
+  .sound-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+  
+  .sound-setting img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
+  }
+  
+  .sound-setting img:hover {
+    transform: scale(1.1);
+  }
+  
+  .sound-setting p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Настройка языка */
+  .language-setting {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .language-option {
+    padding: 10px 20px;
+    background-color: #f79ebd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .language-option.active {
+    background-color: #d81b60;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .language-option:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Кнопка рейтинга игроков */
+#rankList {
+    background-color: #f79ebd;
+    color: black;
+    padding: 10px 20px;
+    width: 16em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  #rankList:hover {
+    transform: scale(1.1);
+  }
+
+  /* Иконка звука */
+.sound-icon {
+    font-size: 2.5em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .sound-icon:hover {
+    transform: scale(1.1);
   }
   
