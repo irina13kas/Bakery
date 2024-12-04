@@ -31,6 +31,8 @@ function resetBlocks() {
     block1.innerHTML = "";
     block2.innerHTML = "";
     block3.innerHTML = "";
+    draggedElement = null;
+    canClick = true;
     words=[];
     colors = [];
 }
@@ -56,6 +58,7 @@ function sortWords(inputText) {
 
 function addWordToCollection(id, word) {
     words[id] = word;
+    words[id].click = false;
     colors.push({ id, color: getRandomColor() });
 }
 
@@ -95,17 +98,19 @@ function dragEnd() {
 }
 
 function handleDropToBlock3(event) {
+    bl_3 = document.getElementById("Block-3");
+    bl_3.style.backgroundColor = "red";
     event.preventDefault();
     if (draggedElement) {
         const block3Rect = block3.getBoundingClientRect();
         const offsetX = event.clientX + block3Rect.left - 2*draggedElement.clientWidth;
         const offsetY = event.clientY;
-        
         draggedElement.style.position = 'absolute';
         draggedElement.style.left = `${offsetX}px`;
         draggedElement.style.top = `${offsetY}px`;
+        
         draggedElement.style.pointerEvents='auto';
-
+    
         if (draggedElement.parentNode !== block3) {
             block3.appendChild(draggedElement);
         }
@@ -124,9 +129,8 @@ function handleDropToBlock2(event) {
             resetElementStyle(draggedElement, wordData.color);
             block2.appendChild(draggedElement);
             sortAndRenderBlock2();
-
             canClick = false;
-            addClickEventToWords(block2);
+            //addClickEventToWords(block2);
         }
     }
 }
