@@ -1,0 +1,98 @@
+/* Общие стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+  }
+  
+  .game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fce4ec;
+    overflow: hidden;
+  }
+  
+  .background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #ffccbc, #ffe0b2, #ffccbc);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s infinite;
+    z-index: -1;
+  }
+  
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Заголовок */
+  .game-title {
+    font-size: 3rem;
+    color: #d81b60;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+  }
+  
+  /* Кнопка "Играть" */
+  .play-button {
+    background-color: #d81b60;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .play-button:hover {
+    transform: scale(1.1);
+    background-color: #ad1457;
+  }
+  
+  /* Нижние кнопки */
+  .bottom-buttons {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .settings-button,
+  .help-button {
+    background-color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  
+  .settings-button:hover,
+  .help-button:hover {
+    transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+  
+  .icon {
+    font-size: 1.2rem;
+    color: #d81b60;
+  }
+  
