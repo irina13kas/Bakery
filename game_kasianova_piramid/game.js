@@ -1,3 +1,4 @@
+
 function openAuthModal() {
     const authModal = document.getElementById("auth-modal");
     authModal.classList.add("active");
@@ -24,14 +25,25 @@ document.querySelector(".settings-button").addEventListener("click", () => {
   function closeSettingsModal() {
     document.getElementById("settings-modal").classList.remove("active");
   }
-  
-  // Переключение звука
-let soundEnabled = true;
-function toggleSound() {
-  const soundIcon = document.getElementById("sound-icon");
-  soundEnabled = !soundEnabled;
-  soundIcon.innerHTML = soundEnabled ? "🔊" : "🔇";
-  console.log(soundEnabled ? "Звук включен." : "Звук отключен.");
+
+document.addEventListener("DOMContentLoaded", function() {
+    const backgroundMusic = document.getElementById("background-music");
+    backgroundMusic.play();  // Начинаем воспроизведение музыки
+});
+
+// Переключение музыки
+let musicPlaying = true;  // Изначально музыка включена
+
+function toggleMusic() {
+    const backgroundMusic = document.getElementById("background-music");
+  if (musicPlaying) {
+    backgroundMusic.pause();  // Останавливаем музыку
+    document.getElementById("sound-icon").innerHTML = "🔇";  // Изменяем иконку на перечеркнутую
+  } else {
+    backgroundMusic.play();  // Включаем музыку
+    document.getElementById("sound-icon").innerHTML = "🔊";  // Включаем нормальную иконку
+  }
+  musicPlaying = !musicPlaying;  // Переключаем состояние
 }
 
 // Установка языка
@@ -51,4 +63,14 @@ function setLanguage(lang) {
     alert("Рейтинг игроков пока недоступен.");
     // Добавить логику для отображения рейтинга
   }
+
+  // Функции для открытия и закрытия окна справки
+  document.querySelector(".help-button").addEventListener("click", () => {
+    document.getElementById('help-modal').classList.add('active');
+});
+  
+  function closeHelpModal() {
+    document.getElementById('help-modal').classList.remove('active');
+  }
+  
   

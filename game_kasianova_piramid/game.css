@@ -307,4 +307,45 @@ form button:hover {
   .sound-icon:hover {
     transform: scale(1.1);
   }
+
+  /* Стили всплывающего окна справки */
+.help-modal {
+    position: fixed;
+    bottom: -120%; /* Начальная позиция вне экрана */
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+    width: 100%;
+    height: 100%;
+    transition: bottom 0.4s ease; /* Анимация появления */
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1% 0;
+  }
+  
+  .help-modal.active {
+    bottom: 0; /* Всплывает в область видимости */
+  }
+  
+  .help-content {
+    background: #fce4ec;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 600px; /* Максимальная ширина окна */
+    position: relative;
+  }
+  
+  .help-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .help-content p {
+    font-size: 1rem;
+    color: black;
+    margin-bottom: 15px;
+  }
+  
   
