@@ -51,7 +51,7 @@
           <div class="language-option active" id="language-ru" onclick="setLanguage('ru')">Русский</div>
           <div class="language-option" id="language-en" onclick="setLanguage('en')">English</div>
         </div>
-        <button id="rankList" onclick="showLeaderboard()">Рейтинг игроков</button>
+        <button class="rank-button" id="rankList" onclick="showLeaderboard()">Рейтинг игроков</button>
       </div>
     </div>
   </div>
@@ -63,6 +63,22 @@
       <p>В этой игре вам предстоит собрать торт, используя элементы, похожие на пирамиду. Каждый уровень представляет собой задание, в котором необходимо правильно разместить элементы так, чтобы каждый следующий слой был меньше предыдущего. В процессе игры вам нужно будет собрать торт, начиная с самого большого слоя внизу и постепенно переходя к более мелким.</p>
       <p>Игра состоит из <strong>трех уровней</strong> сложности. На первом уровне задача будет достаточно простой, но с каждым новым уровнем сложность увеличивается, и правила немного меняются. Например, на следующих уровнях вам могут быть предложены дополнительные ингредиенты или ограничения на время.</p>
       <p>Цель игры — собрать торт по подобию пирамиды, следуя правилам и собирая все нужные слои. Успех зависит от вашего внимательности и способности следовать инструкциям.</p>
+    </div>
+  </div>
+
+  <div class="leaderboard-modal" id="rank-modal">
+    <div class="rank-content">
+        <span class="close-btn" onclick="closeLeaderboard()">&times;</span>
+      <h2>Рейтинг игроков</h2>
+      <table id="leaderboard-table">
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Очки</th>
+          </tr>
+        </thead>
+        <tbody id="leaderboard-list"></tbody>
+      </table>
     </div>
   </div>
 
