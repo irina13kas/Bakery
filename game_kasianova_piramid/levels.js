@@ -24,7 +24,7 @@ function loadUserData() {
   let completedLevels = [];
 
     function startLevel(level) {
-        alert(`Начинаем ${level} уровень!`);
+      window.location.href = 'level-1.html';
     }
 
     function checkLevel(level) {
