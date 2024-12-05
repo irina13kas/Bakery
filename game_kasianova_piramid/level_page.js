@@ -87,6 +87,26 @@ function getUsersFromStorage() {
     window.location.href = 'index.html';
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    const backgroundMusic = document.getElementById('background-music'); 
+      backgroundMusic.play();
+});
+
+// Управление музыкой
+let musicPlaying = true;
+function toggleMusic() {
+    const backgroundMusic = document.getElementById('background-music');
+    const soundIcon = document.getElementById('sound-icon');
+    if (musicPlaying) {
+        backgroundMusic.pause();
+        soundIcon.textContent = '🔇';
+    } else {
+        backgroundMusic.play();
+        soundIcon.textContent = '🔊';
+    }
+    musicPlaying = !musicPlaying;
+}
+
 
 document.querySelector('.rank-button').addEventListener('click', showLeaderboard);
 document.querySelector('.settings-button').addEventListener('click', () => toggleModal('settings-modal', 'open'));

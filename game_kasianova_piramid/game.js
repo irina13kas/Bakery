@@ -86,17 +86,9 @@ function setLanguage(lang) {
 }
 // Инициализация
 document.addEventListener('DOMContentLoaded', function () {
-  const backgroundMusic = document.getElementById('background-music');
-  const enableMusic = () => {
-    backgroundMusic.play()
-        .then(() => {
-            console.log('Музыка воспроизводится');
-        })
-        .catch((error) => {
-            console.error('Ошибка при воспроизведении музыки:', error);
-        });
-      }
-    });
+  const backgroundMusic = document.getElementById('background-music'); 
+    backgroundMusic.play();
+});
 
 // Привязка событий
 document.querySelector('.rank-button').addEventListener('click', showLeaderboard);
