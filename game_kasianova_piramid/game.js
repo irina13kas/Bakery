@@ -1,115 +1,93 @@
+// Универсальная функция для открытия и закрытия модальных окон
+function toggleModal(modalId, action) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+      modal.classList[action === 'open' ? 'add' : 'remove']('active');
+  }
+}
 
+// Функции открытия и закрытия модальных окон
 function openAuthModal() {
-    const authModal = document.getElementById("auth-modal");
-    authModal.classList.add("active");
+  toggleModal('auth-modal', 'open');
 }
 
 function closeAuthModal() {
-    const authModal = document.getElementById("auth-modal");
-    authModal.classList.remove("active");
+  toggleModal('auth-modal', 'close');
 }
 
-document.getElementById("auth-form").addEventListener("submit", function (event) {
-    event.preventDefault();
-    const username = document.getElementById("username").value;
-    saveUser(username);
-    closeAuthModal();
-});
-
-// Сохраняем данные пользователя при авторизации
-function saveUser(name) {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    const newUser = {
-      name: name,
-      score: 0
-    };
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-  }
-
-// Функция для отображения окна с рейтингом
 function showLeaderboard() {
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    
-    // Сортируем пользователей по убыванию очков
-    users.sort((a, b) => b.score - a.score);
-    
-    // Получаем контейнер для списка
-    const leaderboardList = document.getElementById('leaderboard-list');
-    leaderboardList.innerHTML = ''; // Очищаем таблицу перед добавлением новых строк
-  
-    // Добавляем каждого пользователя в таблицу
-    users.forEach(user => {
-      const tr = document.createElement('tr');
-      const tdName = document.createElement('td');
-      const tdScore = document.createElement('td');
-      
-      tdName.textContent = user.name;
-      tdScore.textContent = user.score;
-  
-      tr.appendChild(tdName);
-      tr.appendChild(tdScore);
-      leaderboardList.appendChild(tr);
-    });
+  const users = getUsersFromStorage();
+  const leaderboardList = document.getElementById('leaderboard-list');
+  leaderboardList.innerHTML = users.map(user => 
+      `<tr><td>${user.name}</td><td>${user.score}</td></tr>`
+  ).join('');
+  toggleModal('settings-modal', 'close');
+  toggleModal('rank-modal', 'open');
 }
 
-document.querySelector(".rank-button").addEventListener("click", () => {
-    document.getElementById("leaderboard-modal").classList.add("active");
-});
-  
-  // Функция для закрытия окна рейтинга
-  function closeLeaderboard() {
-    document.getElementById("leaderboard-modal").classList.remove("active");
-  }
-  
-// Открытие окна настроек
-document.querySelector(".settings-button").addEventListener("click", () => {
-    document.getElementById("settings-modal").classList.add("active");
-  });
-  
-  // Закрытие окна настроек
-  function closeSettingsModal() {
-    document.getElementById("settings-modal").classList.remove("active");
-  }
+function closeLeaderboard() {
+  toggleModal('rank-modal', 'close');
+}
 
-document.addEventListener("DOMContentLoaded", function() {
-    const backgroundMusic = document.getElementById("background-music");
-    backgroundMusic.play();  // Начинаем воспроизведение музыки
+function closeSettingsModal() {
+  toggleModal('settings-modal', 'close');
+}
+
+function closeHelpModal() {
+  toggleModal('help-modal', 'close');
+}
+
+// Управление пользователями в локальном хранилище
+function getUsersFromStorage() {
+  return JSON.parse(localStorage.getItem('users')) || [];
+}
+
+function saveUser(name) {
+  const users = getUsersFromStorage();
+  users.push({ name, score: 0 });
+  localStorage.setItem('users', JSON.stringify(users));
+}
+
+// Обработка отправки формы авторизации
+document.getElementById('auth-form').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const username = document.getElementById('username').value;
+  saveUser(username);
+  closeAuthModal();
 });
 
-// Переключение музыки
-let musicPlaying = true;  // Изначально музыка включена
+// Управление музыкой
+let musicPlaying = true;
 
 function toggleMusic() {
-    const backgroundMusic = document.getElementById("background-music");
+  const backgroundMusic = document.getElementById('background-music');
+  const soundIcon = document.getElementById('sound-icon');
   if (musicPlaying) {
-    backgroundMusic.pause();  // Останавливаем музыку
-    document.getElementById("sound-icon").innerHTML = "🔇";  // Изменяем иконку на перечеркнутую
+      backgroundMusic.pause();
+      soundIcon.textContent = '🔇';
   } else {
-    backgroundMusic.play();  // Включаем музыку
-    document.getElementById("sound-icon").innerHTML = "🔊";  // Включаем нормальную иконку
+      backgroundMusic.play();
+      soundIcon.textContent = '🔊';
   }
-  musicPlaying = !musicPlaying;  // Переключаем состояние
+  musicPlaying = !musicPlaying;
 }
 
 // Установка языка
-let activeLanguage = "ru";
 function setLanguage(lang) {
   activeLanguage = lang;
-  document.querySelectorAll(".language-option").forEach((option) => {
-    option.classList.remove("active");
+  document.querySelectorAll('.language-option').forEach(option => {
+      option.classList.toggle('active', option.id === `language-${lang}`);
   });
-  document.getElementById(`language-${lang}`).classList.add("active");
-  console.log(`Язык установлен: ${lang === "ru" ? "Русский" : "English"}`);
+  console.log(`Язык установлен: ${lang === 'ru' ? 'Русский' : 'English'}`);
 }
 
-  // Функции для открытия и закрытия окна справки
-  document.querySelector(".help-button").addEventListener("click", () => {
-    document.getElementById('help-modal').classList.add('active');
+// Инициализация
+document.addEventListener('DOMContentLoaded', function () {
+  const backgroundMusic = document.getElementById('background-music');
+  backgroundMusic.play();
 });
-  
-  function closeHelpModal() {
-    document.getElementById('help-modal').classList.remove('active');
-  }
-  
-  
+
+// Привязка событий
+document.querySelector('.rank-button').addEventListener('click', showLeaderboard);
+document.querySelector('.settings-button').addEventListener('click', () => toggleModal('settings-modal', 'open'));
+document.querySelector('.help-button').addEventListener('click', () => toggleModal('help-modal', 'open'));

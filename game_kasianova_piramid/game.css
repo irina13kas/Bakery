@@ -105,22 +105,9 @@ body {
     object-fit: cover; /* Чтобы видео заполнило весь экран */
     z-index: -1; /* Размещаем видео за остальным контентом */
   }
-  
-  /* Слой поверх видео */
-  .overlay {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    color: white;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  }
 
 /* Стили всплывающего окна */
-.auth-modal {
+.modal {
     position: fixed;
     bottom: -120%; /* Начальная позиция вне экрана */
     left:0;
@@ -135,16 +122,16 @@ body {
     padding: 1% 0;
 }
 
-.auth-modal.active {
+.modal.active {
     bottom: 0; /* Всплывает в область видимости */   
 }
 
-.auth-content {
+.content {
     background: #fce4ec;
     padding: 20px 30px;
     border-radius: 10px;
     text-align: center;
-    max-width: 600px; /* Максимальная ширина окна */
+    max-width: 400px; /* Максимальная ширина окна */
     position: relative;
 }
 
@@ -197,34 +184,6 @@ form button {
 form button:hover {
     background-color: #ad1457;
 }
-
-/* Окно настроек */
-.settings-modal {
-    position: fixed;
-    bottom: -120%;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    transition: bottom 0.4s ease;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .settings-modal.active {
-    bottom: 0;
-  }
-  
-  .settings-content {
-    background: #fce4ec;
-    padding: 20px 30px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    position: relative;
-  }
   
   .settings-options {
     display: flex;
@@ -250,11 +209,6 @@ form button:hover {
   
   .sound-setting img:hover {
     transform: scale(1.1);
-  }
-  
-  .sound-setting p {
-    font-size: 1rem;
-    color: #555;
   }
   
   /* Настройка языка */
@@ -307,35 +261,6 @@ form button:hover {
   .sound-icon:hover {
     transform: scale(1.1);
   }
-
-  /* Стили всплывающего окна справки */
-.help-modal {
-    position: fixed;
-    bottom: -120%; /* Начальная позиция вне экрана */
-    left: 0;
-    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
-    width: 100%;
-    height: 100%;
-    transition: bottom 0.4s ease; /* Анимация появления */
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1% 0;
-  }
-  
-  .help-modal.active {
-    bottom: 0; /* Всплывает в область видимости */
-  }
-  
-  .help-content {
-    background: #fce4ec;
-    padding: 20px 30px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 600px; /* Максимальная ширина окна */
-    position: relative;
-  }
   
   .help-content h2 {
     font-size: 1.8rem;
@@ -347,37 +272,6 @@ form button:hover {
     color: black;
     margin-bottom: 15px;
   }
-
-  /* Окно рейтинга */
-.leaderboard-modal {
-    position: fixed;
-    bottom: -120%;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100%;
-    transition: bottom 0.4s ease;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-.leaderboard-modal.active{
-    bottom: 0;
-}
-  
-  /* Контент окна */
-  .rank-content {
-    background: #fce4ec;
-    padding: 20px 30px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px;
-    position: relative;
-  }
-
-  
   /* Таблица */
   #leaderboard-table {
     width: 100%;
@@ -386,12 +280,13 @@ form button:hover {
   
   #leaderboard-table th,
   #leaderboard-table td {
-    border: 1px solid #ddd;
+    border: 1px solid black;
     padding: 8px;
     text-align: center;
+    font-size: 1.2rem;
+    background-color: rgb(189, 245, 172);
   }
-  
   #leaderboard-table th {
-    background-color: #f2f2f2;
+    background-color: rgb(82, 190, 49);
   }
   
