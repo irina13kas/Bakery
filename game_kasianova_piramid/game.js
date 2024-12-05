@@ -1,5 +1,4 @@
 let Score = 0;
-
 // Универсальная функция для открытия и закрытия модальных окон
 function toggleModal(modalId, action) {
   const modal = document.getElementById(modalId);
@@ -19,8 +18,9 @@ function closeAuthModal() {
 
 function showLeaderboard() {
   const users = getUsersFromStorage();
+  const sortedUsers = users.sort((a, b) => b.score - a.score);
   const leaderboardList = document.getElementById('leaderboard-list');
-  leaderboardList.innerHTML = users.map(user => 
+  leaderboardList.innerHTML = sortedUsers.map(user => 
       `<tr><td>${user.name}</td><td>${user.score}</td></tr>`
   ).join('');
   toggleModal('settings-modal', 'close');
@@ -55,6 +55,7 @@ document.getElementById('auth-form').addEventListener('submit', function (event)
   event.preventDefault();
   const username = document.getElementById('username').value;
   saveUser(username);
+  Score = 0;
   window.location.href = 'level_page.html'; // Переход на страницу уровня
 });
 
@@ -83,12 +84,19 @@ function setLanguage(lang) {
   });
   console.log(`Язык установлен: ${lang === 'ru' ? 'Русский' : 'English'}`);
 }
-
 // Инициализация
 document.addEventListener('DOMContentLoaded', function () {
   const backgroundMusic = document.getElementById('background-music');
-  backgroundMusic.play();
-});
+  const enableMusic = () => {
+    backgroundMusic.play()
+        .then(() => {
+            console.log('Музыка воспроизводится');
+        })
+        .catch((error) => {
+            console.error('Ошибка при воспроизведении музыки:', error);
+        });
+      }
+    });
 
 // Привязка событий
 document.querySelector('.rank-button').addEventListener('click', showLeaderboard);

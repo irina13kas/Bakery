@@ -10,9 +10,9 @@
     </head>
 <body>
     <audio id="background-music" loop>
-    <source src="content/sound/background-sound.mp3" type="audio/mpeg">
+        <source src="content/sound/background-music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает элемент audio.
-    </audio>
+      </audio>
     <div class="game-container">
         <h1 class="game-title" >Уровни</h1>
         <div class="user-info">
@@ -45,6 +45,7 @@
                   <div class="language-option" id="language-en" onclick="setLanguage('en')">English</div>
                 </div>
                 <button class="rank-button" id="rankList" onclick="showLeaderboard()">Рейтинг игроков</button>
+                <button class="return-btn" onclick="toggleModal('reset-warning-modal', 'open')">В начало</button>
               </div>
             </div>
           </div>
@@ -58,6 +59,23 @@
               <p>Цель игры — собрать торт по подобию пирамиды, следуя правилам и собирая все нужные слои. Успех зависит от вашего внимательности и способности следовать инструкциям.</p>
             </div>
           </div>
+
+          <div class="modal" id="rank-modal">
+            <div class="content" style="max-width: 600px; width: 100%;">
+                <span class="close-btn" onclick="closeLeaderboard()">&times;</span>
+              <h2>Рейтинг игроков</h2>
+              <table id="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>Имя</th>
+                    <th>Очки</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboard-list"></tbody>
+            </table>
+            </div>
+          </div>
+
         <!-- Модальное окно предупреждения -->
   <div class="modal" id="warningModal">
     <div class="content">
@@ -66,9 +84,16 @@
       <button class="close-btn" onclick="closeModalLevels()">&times;</button>
     </div>
   </div>
-      </div>
-    </div>   
+
+  <div class="modal" id="reset-warning-modal">
+    <div class="content" style="max-width: 400px; width: 100%; text-align: center;">
+        <p>Все очки будут потеряны, и игра начнётся заново. Вы уверены?</p>
+        <button class="confirm-btn" onclick="confirmReset()">Да, начать заново</button>
+        <button class="cancel-btn" onclick="toggleModal('reset-warning-modal', 'close')">Отмена</button>
+    </div>
+  </div>
+
+      </div> 
       <script src="level_page.js"></script>
-      <script src="game.js"></script>
 </body>
 </html>

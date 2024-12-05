@@ -45,3 +45,45 @@ body {
     background-color: #bdbdbd;
     box-shadow: none;
 }
+
+.return-btn {
+    padding: 10px 20px;
+    background-color:#858484; /* Синий фон */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    color: black;
+    width: 16em;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.return-btn:hover {
+    background-color: #f79ebd; /* Темно-синий при наведении */
+}
+
+.confirm-btn {
+    background-color: #d9534f; /* Красная кнопка */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 5%;
+}
+
+.confirm-btn:hover {
+    background-color: #c9302c;
+}
+
+.cancel-btn {
+    background-color: #5bc0de; /* Синяя кнопка */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.cancel-btn:hover {
+    background-color: #31b0d5;
+}
+
