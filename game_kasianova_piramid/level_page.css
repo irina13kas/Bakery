@@ -43,6 +43,5 @@ body {
 
 .level-btn:disabled {
     background-color: #bdbdbd;
-    cursor: not-allowed;
     box-shadow: none;
 }
