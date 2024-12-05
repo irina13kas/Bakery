@@ -1,3 +1,5 @@
+let Score = 0;
+
 // Универсальная функция для открытия и закрытия модальных окон
 function toggleModal(modalId, action) {
   const modal = document.getElementById(modalId);
@@ -44,7 +46,7 @@ function getUsersFromStorage() {
 
 function saveUser(name) {
   const users = getUsersFromStorage();
-  users.push({ name, score: 0 });
+  users.push({ name, score: Score });
   localStorage.setItem('users', JSON.stringify(users));
 }
 
@@ -53,8 +55,9 @@ document.getElementById('auth-form').addEventListener('submit', function (event)
   event.preventDefault();
   const username = document.getElementById('username').value;
   saveUser(username);
-  closeAuthModal();
+  window.location.href = 'level_page.html'; // Переход на страницу уровня
 });
+
 
 // Управление музыкой
 let musicPlaying = true;

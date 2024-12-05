@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="/general/images/icon.ico" type="image/x-icon">
+        <title>Кондитерская</title>
+        <link rel="stylesheet" href="/game_kasianova_piramid/level_page.css">
+        <link rel="stylesheet" href="/game_kasianova_piramid/game.css">
+    </head>
+<body>
+    <div class="game-container">
+        <h1 class="game-title" >Уровни</h1>
+        <div class="user-info">
+          <span id="user-name"></span>
+          <span id="user-score"></span>
+        </div>
+        <div class="level-buttons">
+          <button class="level-btn" id="level-1" onclick="startLevel(1)">1 уровень</button>
+          <button class="level-btn" id="level-2" onclick="startLevel(2)" disabled>2 уровень</button>
+          <button class="level-btn" id="level-3" onclick="startLevel(3)" disabled>3 уровень</button>
+        </div>
+        <!-- Модальное окно предупреждения -->
+  <div class="modal" id="warningModal">
+    <div class="content">
+      <h2>Уровень недоступен</h2>
+      <p>Для начала пройдите предыдущий уровень, чтобы открыть следующий.</p>
+      <button class="close-btn" onclick="closeModal()">Закрыть</button>
+    </div>
+  </div>
+      </div>
+    </div>   
+      <script src="level_page.js"></script>
+</body>
+</html>
