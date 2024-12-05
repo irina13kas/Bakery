@@ -1,280 +1,228 @@
 /* Общие стили */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    overflow: hidden;
-  }
-  
-  .game-container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #fce4ec;
-    overflow: hidden;
-  }
-  
-  @keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  
-  /* Заголовок */
-  .game-title {
-    font-size: 3rem;
-    color: #d81b60;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    margin-bottom: 5%;
-  }
-  
-  /* Кнопка "Играть" */
-  .play-button {
-    background-color: #d81b60;
-    color: white;
-    font-size: 1.5rem;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
-  }
-  
-  .play-button:hover {
-    transform: scale(1.1);
-    background-color: #ad1457;
-  }
-  
-  /* Нижние кнопки */
-  .bottom-buttons {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-  }
-  
-  .settings-button,
-  .help-button {
-    background-color: white;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-  }
-  
-  .settings-button:hover,
-  .help-button:hover {
-    transform: scale(1.2);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  }
-  
-  .icon {
-    font-size: 1.2rem;
-    color: #d81b60;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+}
 
-  .background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Чтобы видео заполнило весь экран */
-    z-index: -1; /* Размещаем видео за остальным контентом */
-  }
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fce4ec;
+  overflow: hidden;
+}
+
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Заголовок */
+.game-title {
+  font-size: 3rem;
+  color: #d81b60;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 5%;
+}
+
+.bottom-buttons {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.settings-button,
+.help-button {
+  background-color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.settings-button:hover,
+.help-button:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: #d81b60;
+}
 
 /* Стили всплывающего окна */
 .modal {
-    position: fixed;
-    bottom: -120%; /* Начальная позиция вне экрана */
-    left:0;
-    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
-    width: 100%;
-    height: 100%;
-    transition: bottom 0.4s ease; /* Анимация появления */
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1% 0;
+  position: fixed;
+  bottom: -120%; /* Начальная позиция вне экрана */
+  left:0;
+  background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+  width: 100%;
+  height: 100%;
+  transition: bottom 0.4s ease; /* Анимация появления */
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1% 0;
 }
 
 .modal.active {
-    bottom: 0; /* Всплывает в область видимости */   
+  bottom: 0; /* Всплывает в область видимости */   
 }
 
 .content {
-    background: #fce4ec;
-    padding: 20px 30px;
-    border-radius: 10px;
-    text-align: center;
-    max-width: 400px; /* Максимальная ширина окна */
-    position: relative;
+  background: #fce4ec;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px; /* Максимальная ширина окна */
+  position: relative;
 }
 
 .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #d81b60;
-    background: none;
-    border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #d81b60;
+  background: none;
+  border: none;
 }
 
 .close-btn:hover {
-    color: #ad1457;
+  color: #ad1457;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 form label {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: #555;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #555;
 }
 
-form input {
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 1rem;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.settings-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
-form button {
-    background-color: #d81b60;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Настройка звука */
+.sound-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
-form button:hover {
-    background-color: #ad1457;
+.sound-setting img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease;
 }
-  
-  .settings-options {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  /* Настройка звука */
-  .sound-setting {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-  }
-  
-  .sound-setting img {
-    width: 50px;
-    height: 50px;
-    transition: transform 0.3s ease;
-  }
-  
-  .sound-setting img:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Настройка языка */
-  .language-setting {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .language-option {
-    padding: 10px 20px;
-    background-color: #f79ebd;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  .language-option.active {
-    background-color: #d81b60;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .language-option:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Кнопка рейтинга игроков */
+
+.sound-setting img:hover {
+  transform: scale(1.1);
+}
+
+/* Настройка языка */
+.language-setting {
+  display: flex;
+  gap: 10px;
+}
+
+.language-option {
+  padding: 10px 20px;
+  background-color: #f79ebd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.language-option.active {
+  background-color: #d81b60;
+  color: white;
+  font-weight: bold;
+}
+
+.language-option:hover {
+  transform: scale(1.1);
+}
+
+/* Кнопка рейтинга игроков */
 #rankList {
-    background-color: #f79ebd;
-    color: black;
-    padding: 10px 20px;
-    width: 16em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-  }
-  
-  #rankList:hover {
-    transform: scale(1.1);
-  }
+  background-color: #f79ebd;
+  color: black;
+  padding: 10px 20px;
+  width: 16em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
 
-  /* Иконка звука */
+#rankList:hover {
+  transform: scale(1.1);
+}
+
+/* Иконка звука */
 .sound-icon {
-    font-size: 2.5em;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .sound-icon:hover {
-    transform: scale(1.1);
-  }
-  
-  .help-content h2 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-  }
+  font-size: 2.5em;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
 
-  .help-content p {
-    font-size: 1rem;
-    color: black;
-    margin-bottom: 15px;
-  }
-  /* Таблица */
-  #leaderboard-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  #leaderboard-table th,
-  #leaderboard-table td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
-    font-size: 1.2rem;
-    background-color: rgb(189, 245, 172);
-  }
-  #leaderboard-table th {
-    background-color: rgb(82, 190, 49);
-  }
-  
+.sound-icon:hover {
+  transform: scale(1.1);
+}
+
+.help-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.help-content p {
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 15px;
+}
+/* Таблица */
+#leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#leaderboard-table th,
+#leaderboard-table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  background-color: rgb(189, 245, 172);
+}
+#leaderboard-table th {
+  background-color: rgb(82, 190, 49);
+}

@@ -1,19 +1,9 @@
-let Score = 0;
 // Универсальная функция для открытия и закрытия модальных окон
 function toggleModal(modalId, action) {
   const modal = document.getElementById(modalId);
   if (modal) {
       modal.classList[action === 'open' ? 'add' : 'remove']('active');
   }
-}
-
-// Функции открытия и закрытия модальных окон
-function openAuthModal() {
-  toggleModal('auth-modal', 'open');
-}
-
-function closeAuthModal() {
-  toggleModal('auth-modal', 'close');
 }
 
 function showLeaderboard() {
@@ -49,16 +39,6 @@ function saveUser(name) {
   users.push({ name, score: Score });
   localStorage.setItem('users', JSON.stringify(users));
 }
-
-// Обработка отправки формы авторизации
-document.getElementById('auth-form').addEventListener('submit', function (event) {
-  event.preventDefault();
-  const username = document.getElementById('username').value;
-  saveUser(username);
-  Score = 0;
-  window.location.href = 'level_page.html'; // Переход на страницу уровня
-});
-
 
 // Управление музыкой
 let musicPlaying = true;
