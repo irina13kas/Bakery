@@ -1,0 +1,143 @@
+.top-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+  /* Таймер и кнопки в углах */
+.game-header {
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    margin: 10px;
+    font-size: 1.5rem;
+    font-family: Arial, sans-serif;
+}
+
+#timer {
+    top: 10px;
+    left: 10px;
+    color: red;
+}
+
+#controls {
+    top: 10px;
+    right: 10px;
+}
+
+.content p {
+    font-size: 1rem;
+    color: black;
+    margin-bottom: 15px;
+    line-height: 2.5em;
+}
+
+.left, .right {
+    width: 45%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+  }
+
+  
+  /* Коржи */
+  .layer {
+    height: 40px; /* Высота коржа */
+    margin-bottom: 10px;
+    border-top: 5px solid rgb(77, 29, 10);
+    border-radius: 5px;
+  }
+  
+  .pole {
+    width: 7px;
+    height: 80%;
+    background-color: #7b1fa2;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .base {
+    content: "";
+    width: 250px; /* Ширина основания */
+    height: 10px; /* Высота основания */
+    background-color: #4a148c;
+    position: absolute;
+    bottom: -10px; /* Расположение основания */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .pole-container {
+    position: relative;
+    width: 250px; /* Ширина контейнера */
+    height: 65%;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .level-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 80vh;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .check-btn {
+    background-color: #d81b60;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .check-btn:hover {
+    transform: scale(1.1);
+    background-color: #ad1457;
+  }
+
+  #result-modal.success .content{
+    background-color: #4caf50;
+    color: black;
+  }
+  
+  #result-modal.fail .content{
+    background-color: #f44336;
+    color: black;
+  }
+
+  .modal-buttons button{
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .retry-btn, .levels-btn{
+    background-color: #f79ebd;
+  color: black;
+  padding: 10px 20px;
+  width: 16em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .retry-btn:hover, .levels-btn:hover{
+    transform: scale(1.1);
+  }
+  
+  

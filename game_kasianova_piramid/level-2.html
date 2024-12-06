@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/general/images/icon.ico" type="image/x-icon">
+    <title>Кондитерская</title>
+    <link rel="stylesheet" href="/game_kasianova_piramid/game.css">
+    <link rel="stylesheet" href="/game_kasianova_piramid/level-2.css">
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="content/sound/background-music.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает элемент audio.
+      </audio> 
+    <div class="game-container">
+        <!-- Таймер -->
+        <div id="timer" class="game-header">03:00</div>
+        <div class="top-buttons">
+            <button class="settings-button" title="Настройки">
+              <span class="icon">&#9881;</span>
+            </button>
+            <button class="help-button" title="Справка">
+              <span class="icon">&#10067;</span>
+            </button>
+          </div>
+          <button class="check-btn" id="check-button">Проверить</button>
+
+          <div class="modal" id="settings-modal">
+            <div class="content">
+              <span class="close-btn" onclick="closeSettingsModal()">&times;</span>
+              <h2>Настройки</h2>
+              <div class="settings-options">
+                <div class="sound-setting">
+                    <span id="sound-icon" class="sound-icon" onclick="toggleMusic()">🔊</span>
+                </div>
+                <div class="language-setting">
+                  <div class="language-option active" id="language-ru" onclick="setLanguage('ru')">Русский</div>
+                  <div class="language-option" id="language-en" onclick="setLanguage('en')">English</div>
+                </div>
+                <button class="rank-button" id="rankList" onclick="showLeaderboard()">Рейтинг игроков</button>
+                <button class="retry-btn">Еще раз</button>
+                <button class="levels-btn">Уровни</button>
+              </div>
+            </div>
+          </div>
+        
+          <div class="modal" id="help-modal">
+            <div class="content" style="max-width: 600px; width: 100%;">
+              <span class="close-btn" onclick="closeHelpModal()">&times;</span>
+              <h2>Правила раунда</h2>
+              <p>Добро пожаловать в раунд по созданию идеального торта! Ваша задача — собрать 5-этажный торт, выкладывая коржи в строгом порядке: каждый следующий этаж должен быть уже предыдущего. Покажите свою внимательность и мастерство кондитера, чтобы торт не рухнул. Удачи в создании сладкого шедевра! </p>
+            </div>
+          </div>
+
+          <div class="modal" id="rank-modal">
+            <div class="content" style="max-width: 600px; width: 100%;">
+                <span class="close-btn" onclick="closeLeaderboard()">&times;</span>
+              <h2>Рейтинг игроков</h2>
+              <table id="leaderboard-table">
+                <thead>
+                  <tr>
+                    <th>Имя</th>
+                    <th>Очки</th>
+                  </tr>
+                </thead>
+                <tbody id="leaderboard-list"></tbody>
+              </table>
+            </div>
+          </div>
+        
+        <div class="level-container">
+          <div id="layers-container" class="left"></div>
+          <div class="right">
+          <div class="pole-container">
+            <div class="pole">
+              <div class="base"></div>
+            </div>
+          </div>
+        </div>
+      </div>  
+
+      <div class="modal" id="result-modal">
+        <div class="content">
+          <h1 id="result-title"></h1>
+          <p id="result-info"></p>
+          <div class="modal-buttons">
+            <button class="retry-btn-res">Еще раз</button>
+            <button class="levels-btn-res">Уровни</button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <script src="game.js" defer></script>
+    <script src="level-2.js" defer></script>
+</body>
+</html>
