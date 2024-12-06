@@ -1,6 +1,11 @@
+let isPaused = false; // Флаг паузы
+let timerInterval;
+let timeRemaining;
+  
+
 function startTimer(duration) {
     const timerElement = document.getElementById('timer');
-    let timeRemaining = duration;
+    timeRemaining = duration;
   
     function updateTimerDisplay() {
       const minutes = Math.floor(timeRemaining / 60);
@@ -14,15 +19,49 @@ function startTimer(duration) {
       } else {
         clearInterval(timerInterval);
         timerElement.textContent = 'Время вышло!';
+        const backgroundMusic = document.getElementById('background-music'); 
+        backgroundMusic.pause();
       }
     }
   
     // Обновляем отображение каждую секунду
+    timerInterval = setInterval(updateTimerDisplay, 1000);
     updateTimerDisplay();
-    const timerInterval = setInterval(updateTimerDisplay, 1000);
+  }
+
+  function pauseTimer() {
+    if (!isPaused) {
+      clearInterval(timerInterval);
+      isPaused = true;
+    }
   }
   
-  // Задаем начальное время (в секундах)
+  function resumeTimer() {
+    if (isPaused) {
+      startTimer(timeRemaining);
+      isPaused = false;
+    }
+  }
+
+  function closeLeaderboard() {
+    toggleModal('rank-modal', 'close');
+    resumeTimer();
+  }
+  
+  function closeSettingsModal() {
+    toggleModal('settings-modal', 'close');
+    resumeTimer();
+  }
+  
+  function closeHelpModal() {
+    toggleModal('help-modal', 'close');
+    resumeTimer();
+  }
+  
+  // События для кнопок
+  document.querySelector('.help-button').addEventListener('click', pauseTimer);
+  document.querySelector('.settings-button').addEventListener('click', pauseTimer);
+
   const initialTime = 180; // 2 минуты
   startTimer(initialTime);
-  
+
