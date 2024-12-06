@@ -24,6 +24,7 @@
               <span class="icon">&#10067;</span>
             </button>
           </div>
+          <button class="check-btn" id="check-button">Проверить</button>
 
           <div class="modal" id="settings-modal">
             <div class="content">
@@ -76,7 +77,19 @@
           </div>
         </div>
       </div>  
+
+      <div class="modal" id="result-modal">
+        <div class="content">
+          <h1 id="result-title"></h1>
+          <p id="result-info"></p>
+          <div class="modal-buttons">
+            <button class="retry-btn">Еще раз</button>
+            <button class="levels-btn">Уровни</button>
+          </div>
+        </div>
       </div>
+    </div>
+
     <script src="game.js" defer></script>
     <script src="level-1.js" defer></script>
 </body>

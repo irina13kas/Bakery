@@ -78,6 +78,7 @@
     width: 250px; /* Ширина контейнера */
     height: 65%;
     margin: 0 auto;
+    overflow: visible;
   }
 
   .level-container {
@@ -89,3 +90,44 @@
     margin-top: 20px;
     position: relative;
   }
+
+  .check-btn {
+    background-color: #d81b60;
+    color: white;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+  }
+  
+  .check-btn:hover {
+    transform: scale(1.1);
+    background-color: #ad1457;
+  }
+
+  #result-modal.success .content{
+    background-color: #4caf50;
+    color: black;
+  }
+  
+  #result-modal.fail .content{
+    background-color: #f44336;
+    color: black;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .modal-buttons button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  

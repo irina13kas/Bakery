@@ -24,16 +24,19 @@ function initializeGame() {
   
     // Ширины коржей
     const widths = [200, 180, 160, 140, 120];
-  
-    // Создаем коржи
+    
     const layers = widths.map((width, index) => {
-      const layer = document.createElement('div');
-      layer.classList.add('layer');
-      layer.style.width = `${width}px`;
-      layer.style.backgroundColor = colors[index];
-      layer.setAttribute('draggable', 'true');
-      return layer;
-    });
+        const layer = document.createElement('div');
+        layer.classList.add('layer');
+        layer.style.width = `${width}px`;
+        layer.style.backgroundColor = colors[index];
+        layer.setAttribute('draggable', 'true');
+        
+        // Добавляем атрибут веса (чем меньше ширина, тем больше вес)
+        layer.setAttribute('data-weight', 1000 - width); 
+        
+        return layer;
+      });
   
     // Перемешиваем коржи в случайном порядке
     layers.sort(() => Math.random() - 0.5);
@@ -165,10 +168,74 @@ function startTimer(duration) {
     toggleModal('help-modal', 'close');
     resumeTimer();
   }
+
+  document.querySelector('.check-btn').addEventListener('click', () => {
+    clearInterval(timerInterval);
+  
+    const poleContainer = document.querySelector('.right');
+    const layers = Array.from(poleContainer.querySelectorAll('.layer'));
+  
+    if (layers.length === 0) {
+      alert('Коржи не установлены!');
+      return;
+    }
+  
+    let isCorrect = true;
+  
+    for (let i = 0; i < layers.length - 1; i++) {
+      const currentWeight = parseInt(layers[i].getAttribute('data-weight'), 10);
+      const nextWeight = parseInt(layers[i + 1].getAttribute('data-weight'), 10);
+  
+      if (currentWeight > nextWeight) {
+        isCorrect = false;
+        break;
+      }
+    }  
+    // Отображение результата
+    const resultModal = document.getElementById('result-modal');
+    const resultTitle = document.getElementById('result-title');
+    const resultInfo = document.getElementById('result-info');
+  
+    if (isCorrect) {
+      resultModal.classList.add('success');
+      resultTitle.textContent = 'ПОБЕДА!!!';
+      const timeUsed = initialTime - timeRemaining;
+  const maxPoints = 500; // Максимальное количество очков
+  let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
+      resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
+      //completedLevels.push(1);
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+    const username = users[users.length - 1]; // Предположим, что последний пользователь — это текущий
+    if (username) 
+     username.score=username.score+ points;
+    localStorage.setItem('users', JSON.stringify(users));
+    } else {
+      resultModal.classList.add('fail');
+      resultTitle.textContent = 'ПРОВАЛ!!!';
+      resultInfo.textContent = `Очки: 0`;
+    }
+  
+  });
+
+  function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  }
+  
   
   // События для кнопок
   document.querySelector('.help-button').addEventListener('click', pauseTimer);
   document.querySelector('.settings-button').addEventListener('click', pauseTimer);
+  document.querySelector('.check-btn').addEventListener('click', () => toggleModal('result-modal', 'open'));
+  document.querySelector('.retry-btn').addEventListener('click', () => {
+    location.reload();
+  });
+
+  document.querySelector('.levels-btn').addEventListener('click', () => {
+    window.location.href = 'levels.html';
+  });
   
   const initialTime = 180; // 3 минуты
   startTimer(initialTime);
+
