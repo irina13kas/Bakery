@@ -130,7 +130,6 @@ function handleDropToBlock2(event) {
             block2.appendChild(draggedElement);
             sortAndRenderBlock2();
             canClick = false;
-            //addClickEventToWords(block2);
         }
     }
 }
