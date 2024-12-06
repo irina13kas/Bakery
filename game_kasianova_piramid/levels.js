@@ -7,19 +7,6 @@ function loadUserData() {
       document.getElementById('user-score').textContent = username.score+" очков";
     }
 }
-
-// function handleLevelButtons() {
-//     const users = JSON.parse(localStorage.getItem('users')) || [];
-//     const username = users[users.length - 1]; // Получаем текущего пользователя
-  
-//     // Разблокируем 2 и 3 уровни только если предыдущий пройден
-//     if (username && username.score >= 10) { // Например, 10 очков = прохождение 1 уровня
-//       document.getElementById('level-2').disabled = false;
-//     }
-//     if (username && username.score >= 20) { // Например, 20 очков = прохождение 2 уровня
-//       document.getElementById('level-3').disabled = false;
-//     }
-//   }
   
   let completedLevels = [];
 

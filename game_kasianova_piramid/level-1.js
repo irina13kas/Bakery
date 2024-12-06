@@ -1,43 +1,28 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('help-modal');
-    const okButton = document.getElementById('ok-button');
-    const timerDisplay = document.getElementById('timer');
-
-    // Показываем модальное окно при загрузке страницы
-    modal.classList.add('open');
-
-    // Закрытие модального окна и старт игры
-    okButton.addEventListener('click', () => {
-        modal.classList.remove('open');
-        startGame();
-    });
-
-    // Функция запуска игры
-    function startGame() {
-        let timeLeft = 180; // 3 минуты в секундах
-
-        // Таймер обратного отсчета
-        const timer = setInterval(() => {
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                endGame();
-            } else {
-                timeLeft--;
-                updateTimerDisplay(timeLeft);
-            }
-        }, 1000);
+function startTimer(duration) {
+    const timerElement = document.getElementById('timer');
+    let timeRemaining = duration;
+  
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+  
+      // Форматируем время
+      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+  
+      if (timeRemaining > 0) {
+        timeRemaining -= 1;
+      } else {
+        clearInterval(timerInterval);
+        timerElement.textContent = 'Время вышло!';
+      }
     }
-
-    // Обновление таймера на экране
-    function updateTimerDisplay(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const remainingSeconds = seconds % 60;
-        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-    }
-
-    // Завершение игры
-    function endGame() {
-        alert('Время вышло! Игра окончена.');
-        // Логика окончания игры
-    }
-});
+  
+    // Обновляем отображение каждую секунду
+    updateTimerDisplay();
+    const timerInterval = setInterval(updateTimerDisplay, 1000);
+  }
+  
+  // Задаем начальное время (в секундах)
+  const initialTime = 180; // 2 минуты
+  startTimer(initialTime);
+  
