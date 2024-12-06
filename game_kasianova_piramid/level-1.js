@@ -2,6 +2,17 @@ let isPaused = false; // Флаг паузы
 let timerInterval;
 let timeRemaining;
   
+// Открытие модального окна при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    const helpModal = document.getElementById('help-modal');
+    openHelpModal(helpModal);
+  });
+  
+  // Функция для отображения модального окна
+  function openHelpModal(modal) {
+    modal.classList.add('active');
+    pauseTimer();
+  }
 
 function startTimer(duration) {
     const timerElement = document.getElementById('timer');
