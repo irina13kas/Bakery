@@ -140,4 +140,17 @@
     transform: scale(1.1);
   }
   
-  
+  #cake-container .layer {
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    bottom: 0;
+    border: 1px solid #000;
+  }
+
+  #cake-container{
+    position: relative; 
+    height: 300px;
+    width: 200px;
+    margin: 0 auto;
+  }

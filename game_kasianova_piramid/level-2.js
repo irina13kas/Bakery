@@ -2,19 +2,57 @@ let isPaused = false; // Флаг паузы
 let timerInterval;
 let timeRemaining;
 let draggedLayer = null; // Корж, который перетаскивается
+let resultCakeColors = [];
 const colors = ['rgb(255, 138, 128)', 'rgb(255, 128, 171)', 'rgb(234, 128, 252)', 'rgb(179, 136, 255)', 'rgb(140, 158, 255)'];
 
 document.addEventListener('DOMContentLoaded', () => {
-  const helpModal = document.getElementById('help-modal');
-  openHelpModal(helpModal);
-  initializeGame();
-});
+    const helpModal = document.getElementById('help-modal');
+    openHelpModal(helpModal);
+    initializeGame();
+  });
+  
+  let isCakeShown = false; // Флаг для проверки, показывался ли торт
+  function openHelpModal(modal) {
+    modal.classList.add('active');
+    pauseTimer();
+  }
+  
+  
+  // Функция для отображения окна с тортом
+  function showCakeModal() {
+    const cakeModal = document.getElementById('cake-modal');
+    const cakeContainer = document.getElementById('cake-container');
+    resultCakeColors = shuffleArray(colors);
+  
+    // Создать слои торта
+    resultCakeColors.forEach((color, index) => {
+      const layer = document.createElement('div');
+      layer.classList.add('layer');
+      layer.style.backgroundColor = color;
+      layer.style.bottom = `${index * 20}%`; // Смещение по высоте
+      cakeContainer.appendChild(layer);
+    });
+  
+    // Закрыть окно через 10 секунд
+    setTimeout(() => closeCakeModal(), 10000);
+  }
 
-// Функция для отображения модального окна
-function openHelpModal(modal) {
-  modal.classList.add('active');
-  pauseTimer();
-}
+  function shuffleArray(array) {
+    res_array = [...array];
+    for (let i = res_array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [res_array[i], res_array[j]] = [res_array[j], res_array[i]];
+    }
+    return res_array;
+  }
+  
+  // Функция для закрытия окна с тортом
+  function closeCakeModal() {
+    const cakeModal = document.getElementById('cake-modal');
+    resumeTimer()
+    toggleModal('cake-modal', 'close');
+  }
+  
 function initializeGame() {
     const layersContainer = document.getElementById('layers-container');
 
@@ -110,10 +148,10 @@ function dropRight(event) {
 }
 
 function resetLayer(layer) {
-    // Эта функция может быть использована для сброса позиции элемента, если нужно.
     layer.style.left = '';
     layer.style.top = '';
   }
+
   function startTimer(duration) {
       const timerElement = document.getElementById('timer');
       timeRemaining = duration;
@@ -130,6 +168,8 @@ function resetLayer(layer) {
         } else {
           clearInterval(timerInterval);
           timerElement.textContent = 'Время вышло!';
+          checkResult();
+          toggleModal('result-modal', 'open')
           const backgroundMusic = document.getElementById('background-music');
           backgroundMusic.pause();
         }
@@ -154,68 +194,63 @@ function resetLayer(layer) {
       }
     }
     
-    function closeLeaderboard() {
-      toggleModal('rank-modal', 'close');
-      resumeTimer();
-    }
-    
-    function closeSettingsModal() {
-      toggleModal('settings-modal', 'close');
-      resumeTimer();
-    }
-    
-    function closeHelpModal() {
-      toggleModal('help-modal', 'close');
-      resumeTimer();
-    }
-  
-    document.querySelector('.check-btn').addEventListener('click', () => {
-      clearInterval(timerInterval);
-    
-      const poleContainer = document.querySelector('.right');
-      const layers = Array.from(poleContainer.querySelectorAll('.layer'));
-    
-      if (layers.length === 0) {
-        alert('Коржи не установлены!');
-        return;
-      }
-    
-      let isCorrect = true;
-    
-      for (let i = 0; i < layers.length - 1; i++) {
-        const currentWeight = parseInt(layers[i].getAttribute('data-weight'), 10);
-        const nextWeight = parseInt(layers[i + 1].getAttribute('data-weight'), 10);
-    
-        if (currentWeight > nextWeight) {
-          isCorrect = false;
-          break;
+    function checkResult(){
+        clearInterval(timerInterval);
+      
+        const poleContainer = document.querySelector('.right');
+        const layers = Array.from(poleContainer.querySelectorAll('.layer'));
+      
+        let isCorrect = true;
+      
+        for (let i = 0; i < layers.length - 1; i++) {
+          const currentWeight = parseInt(layers[i].getAttribute('data-weight'), 10);
+          const nextWeight = parseInt(layers[i + 1].getAttribute('data-weight'), 10);
+      
+          if (currentWeight > nextWeight) {
+            isCorrect = false;
+            break;
+          }
+        }  
+        // Отображение результата
+        const resultModal = document.getElementById('result-modal');
+        const resultTitle = document.getElementById('result-title');
+        const resultInfo = document.getElementById('result-info');
+      
+        if (isCorrect && layers.length===5) {
+          resultModal.classList.add('success');
+          resultTitle.textContent = 'ПОБЕДА!!!';
+          const timeUsed = initialTime - timeRemaining;
+      const maxPoints = 500; // Максимальное количество очков
+      let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
+          resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
+          completedLevels.push(1);
+          const users = JSON.parse(localStorage.getItem('users')) || [];
+        const username = users[users.length - 1]; // Предположим, что последний пользователь — это текущий
+        if (username) 
+         username.score=username.score+ points;
+        localStorage.setItem('users', JSON.stringify(users));
+        } else {
+          resultModal.classList.add('fail');
+          resultTitle.textContent = 'ПРОВАЛ!!!';
+          resultInfo.textContent = `Очки: 0`;
         }
-      }  
-      // Отображение результата
-      const resultModal = document.getElementById('result-modal');
-      const resultTitle = document.getElementById('result-title');
-      const resultInfo = document.getElementById('result-info');
-    
-      if (isCorrect) {
-        resultModal.classList.add('success');
-        resultTitle.textContent = 'ПОБЕДА!!!';
-        const timeUsed = initialTime - timeRemaining;
-    const maxPoints = 500; // Максимальное количество очков
-    let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
-        resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
-        completedLevels.push(1);
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-      const username = users[users.length - 1]; // Предположим, что последний пользователь — это текущий
-      if (username) 
-       username.score=username.score+ points;
-      localStorage.setItem('users', JSON.stringify(users));
-      } else {
-        resultModal.classList.add('fail');
-        resultTitle.textContent = 'ПРОВАЛ!!!';
-        resultInfo.textContent = `Очки: 0`;
       }
-    
-    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          checkResult();
+          toggleModal('result-modal', 'open')
+        }
+      });
+
+
+    function arraysEqual(arr1, arr2) {
+        if (arr1.length !== arr2.length) return false;
+        for (let i = 0; i < arr1.length; i++) {
+          if (arr1[i] !== arr2[i]) return false;
+        }
+        return true;
+      }
   
     function formatTime(seconds) {
       const minutes = Math.floor(seconds / 60);
@@ -240,8 +275,37 @@ function resetLayer(layer) {
     document.querySelector('.levels-btn-res').addEventListener('click', () => {
       window.location.href = 'levels.html';
     });
+
+    // Функция для закрытия активного модального окна
+function closeActiveModal() {
+    const activeModal = document.querySelector('.modal.active');
+    if (activeModal) {
+      activeModal.classList.remove('active');
+    }
+    // Показать торт только при первом закрытии окна справки
+    if (!isCakeShown) {
+        isCakeShown = true; // Устанавливаем флаг
+        toggleModal('cake-modal', 'open')
+        showCakeModal();
+      }
+      else{
+          resumeTimer();
+      }
+  }
+  
+  // Обработчик клика на кнопке закрытия
+  document.querySelectorAll('.close-btn').forEach(button => {
+    button.addEventListener('click', (event) => closeActiveModal());
+  });
+  
+  // Обработчик нажатия клавиши Esc
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeActiveModal();
+    }
+  });
     
-    const initialTime = 180; // 3 минуты
+    const initialTime = 150; // 3 минуты
     startTimer(initialTime);
   
   

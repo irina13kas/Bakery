@@ -18,18 +18,6 @@ function showLeaderboard() {
   toggleModal('rank-modal', 'open');
 }
 
-function closeLeaderboard() {
-  toggleModal('rank-modal', 'close');
-}
-
-function closeSettingsModal() {
-  toggleModal('settings-modal', 'close');
-}
-
-function closeHelpModal() {
-  toggleModal('help-modal', 'close');
-}
-
 // Управление пользователями в локальном хранилище
 function getUsersFromStorage() {
   return JSON.parse(localStorage.getItem('users')) || [];

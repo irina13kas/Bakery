@@ -130,6 +130,8 @@ function startTimer(duration) {
       } else {
         clearInterval(timerInterval);
         timerElement.textContent = 'Время вышло!';
+        checkResult();
+        toggleModal('result-modal', 'open')
         const backgroundMusic = document.getElementById('background-music');
         backgroundMusic.pause();
       }
@@ -154,31 +156,31 @@ function startTimer(duration) {
     }
   }
   
-  function closeLeaderboard() {
-    toggleModal('rank-modal', 'close');
+   // Функция для закрытия активного модального окна
+   function closeActiveModal() {
+    const activeModal = document.querySelector('.modal.active');
+    if (activeModal) {
+      activeModal.classList.remove('active');
+    }
     resumeTimer();
   }
   
-  function closeSettingsModal() {
-    toggleModal('settings-modal', 'close');
-    resumeTimer();
-  }
-  
-  function closeHelpModal() {
-    toggleModal('help-modal', 'close');
-    resumeTimer();
-  }
+  // Обработчик клика на кнопке закрытия
+  document.querySelectorAll('.close-btn').forEach(button => {
+    button.addEventListener('click', (event) => closeActiveModal());
+  });
+  // Обработчик нажатия клавиши Esc
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeActiveModal();
+    }
+  });
 
-  document.querySelector('.check-btn').addEventListener('click', () => {
+  function checkResult(){
     clearInterval(timerInterval);
   
     const poleContainer = document.querySelector('.right');
     const layers = Array.from(poleContainer.querySelectorAll('.layer'));
-  
-    if (layers.length === 0) {
-      alert('Коржи не установлены!');
-      return;
-    }
   
     let isCorrect = true;
   
@@ -196,7 +198,7 @@ function startTimer(duration) {
     const resultTitle = document.getElementById('result-title');
     const resultInfo = document.getElementById('result-info');
   
-    if (isCorrect) {
+    if (isCorrect && layers.length===5) {
       resultModal.classList.add('success');
       resultTitle.textContent = 'ПОБЕДА!!!';
       const timeUsed = initialTime - timeRemaining;
@@ -214,8 +216,15 @@ function startTimer(duration) {
       resultTitle.textContent = 'ПРОВАЛ!!!';
       resultInfo.textContent = `Очки: 0`;
     }
-  
+  }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      checkResult();
+      toggleModal('result-modal', 'open')
+    }
   });
+
 
   function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
@@ -240,6 +249,7 @@ function startTimer(duration) {
   document.querySelector('.levels-btn-res').addEventListener('click', () => {
     window.location.href = 'levels.html';
   });
+
   
   const initialTime = 180; // 3 минуты
   startTimer(initialTime);

@@ -4,6 +4,12 @@ let Score = 0;
 function openAuthModal() {
     toggleModal('auth-modal', 'open');
   }
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      toggleModal('auth-modal', 'open');// Имитируем клик по кнопке
+    }
+  });
   
   function closeAuthModal() {
     toggleModal('auth-modal', 'close');
