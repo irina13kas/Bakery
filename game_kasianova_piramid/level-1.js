@@ -203,7 +203,7 @@ function startTimer(duration) {
   const maxPoints = 500; // Максимальное количество очков
   let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
       resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
-      //completedLevels.push(1);
+      completedLevels.push(1);
       const users = JSON.parse(localStorage.getItem('users')) || [];
     const username = users[users.length - 1]; // Предположим, что последний пользователь — это текущий
     if (username) 
@@ -231,8 +231,13 @@ function startTimer(duration) {
   document.querySelector('.retry-btn').addEventListener('click', () => {
     location.reload();
   });
-
   document.querySelector('.levels-btn').addEventListener('click', () => {
+    window.location.href = 'levels.html';
+  });
+  document.querySelector('.retry-btn-res').addEventListener('click', () => {
+    location.reload();
+  });
+  document.querySelector('.levels-btn-res').addEventListener('click', () => {
     window.location.href = 'levels.html';
   });
   

@@ -1,3 +1,4 @@
+var completedLevels = [];
 // Универсальная функция для открытия и закрытия модальных окон
 function toggleModal(modalId, action) {
   const modal = document.getElementById(modalId);

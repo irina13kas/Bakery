@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function handleLevelButtons() {  
     // Разблокируем 2 и 3 уровни только если предыдущий пройден
     if (completedLevels.includes(1)) { // Например, 10 очков = прохождение 1 уровня
-      document.getElementById('level-2').style.background = "#d81b60";
+      document.getElementById('level-2').style.backgroundColor = "#d81b60";
     }
     if (completedLevels.includes(2)) { // Например, 20 очков = прохождение 2 уровня
       document.getElementById('level-3').disabled = false;
@@ -21,9 +21,7 @@ function loadUserData() {
       document.getElementById('user-name').textContent = "Имя: " + username.name;
       document.getElementById('user-score').textContent = username.score+" очков";
     }
-}
-  
-  let completedLevels = [];
+  }
 
     function startLevel(level) {
       if(level===1)
