@@ -41,7 +41,7 @@ body {
 }
 
 .settings-button,
-.help-button {
+.help-button, .prompt-button {
   background-color: white;
   border: none;
   width: 40px;
@@ -56,7 +56,7 @@ body {
 }
 
 .settings-button:hover,
-.help-button:hover {
+.help-button:hover, .prompt-button:hover {
   transform: scale(1.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
@@ -199,20 +199,34 @@ body {
 }
 /* Таблица */
 #leaderboard-table {
-  width: 100%;
-  border-collapse: collapse;
+  
+  max-height: 300px; /* Ограничиваем высоту таблицы */
+  overflow-y: auto;  /* Добавляем вертикальную прокрутку */
+  display: block; /* Применяем прокрутку к телу таблицы */
 }
 
 #leaderboard-table th,
 #leaderboard-table td {
+  width: 100%;
   border: 1px solid black;
   padding: 8px;
-  text-align: center;
+  text-align: left;
   font-size: 1.2rem;
   background-color: rgb(189, 245, 172);
+  width: 150px;
+  max-width: 350px; 
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
+
 #leaderboard-table th {
   background-color: rgb(82, 190, 49);
+}
+
+#leaderboard-table td {
+  width: 400px;
 }
 
 .level{

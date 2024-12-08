@@ -1,4 +1,5 @@
 const initialTime = 150;
+let finePoints = 0;
 let resultCakeColors = [];
 let colors = null;
 let Level = null;
@@ -143,7 +144,20 @@ function dropLeft(event) {
 }
     
     function checkResult(){
+      let maxPoints = 0;
         clearInterval(timerInterval);
+
+        switch (Level) {
+          case 1:
+            maxPoints = 1000;
+            break;
+          case 2:
+            maxPoints = 1100;
+            break;
+          case 3:
+            maxPoints = 1200;
+            break;
+        }
       
         const poleContainer = document.querySelector('.right');
         const layers = Array.from(poleContainer.querySelectorAll('.layer'));
@@ -170,7 +184,7 @@ function dropLeft(event) {
           resultTitle.textContent = 'ПОБЕДА!!!';
           const timeUsed = initialTime - timeRemaining;
       const maxPoints = 500; // Максимальное количество очков
-      let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
+      let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0) - finePoints;
           resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
           completedLevels.push(1);
           const users = JSON.parse(localStorage.getItem('users')) || [];
@@ -194,4 +208,8 @@ function dropLeft(event) {
       }
 
       document.querySelector('.check-btn').addEventListener('click', checkResult);
+      document.querySelector('.prompt-button').addEventListener('click', () => {
+        toggleModal('cake-modal', 'open');
+        finePoints = 50;
+    });
   

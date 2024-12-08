@@ -6,7 +6,6 @@ let draggedLayer = null; // Корж, который перетаскивает�
 document.addEventListener('DOMContentLoaded', () => {
     const helpModal = document.getElementById('help-modal');
     openHelpModal(helpModal);
-    //initializeGame();
   });
 
   function openHelpModal(modal) {
