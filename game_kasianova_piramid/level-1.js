@@ -2,7 +2,6 @@ const initialTime = 180; // 3 минуты
 startTimer(initialTime);
 
 let Level = null;
-let numberOfLayers = null;
 
 function closeActiveModal() {
   const activeModal = document.querySelectorAll('.modal.active');
@@ -85,6 +84,7 @@ function dropLeft(event) {
       draggedLayer.style.top = 'auto'; 
       draggedLayer.style.left = 'auto'; 
       draggedLayer.style.transform = 'none';
+      topLayer = prevLayer;
       leftArea.appendChild(draggedLayer);
     }
     topLayer = null;

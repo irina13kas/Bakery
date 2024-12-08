@@ -1,7 +1,10 @@
 const initialTime = 150;
 let resultCakeColors = [];
-const colors = ['rgb(255, 138, 128)', 'rgb(255, 128, 171)', 'rgb(234, 128, 252)', 'rgb(179, 136, 255)', 'rgb(140, 158, 255)'];
-let isCakeShown = false; // Флаг для проверки, показывался ли торт
+let colors = null;
+let Level = null;
+const colors_easy = ['rgb(255, 248, 220)', 'rgb(123, 63, 0)', 'rgb(255, 102, 102)', 'rgb(70, 50, 120)', 'rgb(147, 197, 114)'];
+const colors_middle = ['rgb(42, 31, 20)', 'rgb(79, 28, 25)', 'rgb(88, 56, 39)', 'rgb(194, 154, 105)', 'rgb(33, 23, 17)'];
+const colors_hard = ['rgb(210, 140, 87)', 'rgb(119, 73, 53)', 'rgb(144, 106, 58)', 'rgb(129, 94, 63)', 'rgb(194, 154, 105)'];
 
 startTimer(initialTime);
 
@@ -10,18 +13,24 @@ startTimer(initialTime);
     activeModal.forEach(modal => {
       modal.classList.remove('active');
     });
-    // Показать торт только при первом закрытии окна справки
-    if (!isCakeShown) {
-        isCakeShown = true; // Устанавливаем флаг
-        toggleModal('cake-modal', 'open')
-        showCakeModal();
-      }
-      else{
-          resumeTimer();
-      }
+    if (Level===null) {
+      toggleModal('level-modal', 'open');
+    }
   }
   
+  function chooseLevel(level){
+    Level = level;
+    closeLevelModal();
+  }
   
+  function closeLevelModal() {
+    resumeTimer();
+    toggleModal('level-modal', 'close');
+    initializeGame();
+      toggleModal('cake-modal', 'open');
+      showCakeModal();
+        resumeTimer();
+  }
   // Функция для отображения окна с тортом
   function showCakeModal() {
     const cakeModal = document.getElementById('cake-modal');
@@ -58,10 +67,20 @@ startTimer(initialTime);
   
 function initializeGame() {
     const layersContainer = document.getElementById('layers-container');
-
-
     // Ширины коржей
     const widths = [200, 180, 160, 140, 120];
+
+    switch (Level) {
+      case 1:
+        colors = colors_easy;
+        break;
+      case 2:
+        colors = colors_middle;
+        break;
+      case 3:
+        colors = colors_hard;
+        break;
+    }
 
     const layers = widths.map((width, index) => {
         const layer = document.createElement('div');
@@ -120,6 +139,7 @@ function dropLeft(event) {
         draggedLayer.style.backgroundColor = '#bdbdbd'; // Сбрасываем цвет в белый при возврате в левую область
         leftArea.appendChild(draggedLayer);
     }
+    topLayer = null;
 }
     
     function checkResult(){
