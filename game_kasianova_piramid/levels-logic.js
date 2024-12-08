@@ -32,7 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function dragStart(event) {
     draggedLayer = event.target;
-    setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
+
+    if (draggedLayer !== topLayer && topLayer!==null && prevLayer!==null) {
+      event.preventDefault();  // Отменить перетаскивание, если это не верхний корж
+      prevLayer=null;
+      return;
+    }
+      setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
   }
   
   function dragEnd() {
@@ -44,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
   }
 
+  let topLayer = null;
+  let prevLayer = null;
+
   function dropRight(event) {
     event.preventDefault();
     if (draggedLayer) {
@@ -54,6 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         draggedLayer.style.bottom = `${stackHeight}px`;
         draggedLayer.style.left = '50%';
         draggedLayer.style.transform = 'translateX(-50%)';
+        prevLayer = topLayer;
+        topLayer = draggedLayer;
         rightArea.appendChild(draggedLayer);
     }
 }

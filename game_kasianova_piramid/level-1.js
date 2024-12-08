@@ -87,6 +87,7 @@ function dropLeft(event) {
       draggedLayer.style.transform = 'none';
       leftArea.appendChild(draggedLayer);
     }
+    topLayer = null;
   } 
 
   function checkResult(){
