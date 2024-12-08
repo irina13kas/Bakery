@@ -55,9 +55,35 @@ function setLanguage(lang) {
 }
 // Инициализация
 document.addEventListener('DOMContentLoaded', function () {
-  const backgroundMusic = document.getElementById('background-music'); 
-    backgroundMusic.play();
+  // const backgroundMusic = document.getElementById('background-music'); 
+  //   backgroundMusic.play();
 });
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    checkResult();
+    toggleModal('auth-modal', 'open')
+  }
+});
+
+function closeActiveModal() {
+  const activeModal = document.querySelectorAll('.modal.active');
+  activeModal.forEach(modal => {
+    modal.classList.remove('active');
+  });
+}
+
+  // Обработчик клика на кнопке закрытия
+  document.querySelectorAll('.close-btn').forEach(button => {
+    button.addEventListener('click', (event) => closeActiveModal());
+  });
+  
+  // Обработчик нажатия клавиши Esc
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeActiveModal();
+    }
+  });
 
 // Привязка событий
 document.querySelector('.rank-button').addEventListener('click', showLeaderboard);

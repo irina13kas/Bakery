@@ -1,19 +1,21 @@
-let isPaused = false; // Флаг паузы
-let timerInterval;
-let timeRemaining;
-let draggedLayer = null; // Корж, который перетаскивается
+const initialTime = 180; // 3 минуты
+startTimer(initialTime);
+// let isPaused = false; // Флаг паузы
+// let timerInterval;
+// let timeRemaining;
+// let draggedLayer = null; // Корж, который перетаскивается
 
-document.addEventListener('DOMContentLoaded', () => {
-  const helpModal = document.getElementById('help-modal');
-  openHelpModal(helpModal);
-  initializeGame();
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   const helpModal = document.getElementById('help-modal');
+//   openHelpModal(helpModal);
+//   initializeGame();
+// });
 
 // Функция для отображения модального окна
-function openHelpModal(modal) {
-  modal.classList.add('active');
-  pauseTimer();
-}
+// function openHelpModal(modal) {
+//   modal.classList.add('active');
+//   pauseTimer();
+// }
 
 function initializeGame() {
     // Контейнер для коржей
@@ -48,35 +50,35 @@ function initializeGame() {
     addDragAndDropListeners(layers);
   }
 
-function addDragAndDropListeners(layers) {
-  const leftArea = document.querySelector('.left'); // левая область
-  const rightArea = document.querySelector('.right'); // правая область
+// function addDragAndDropListeners(layers) {
+//   const leftArea = document.querySelector('.left'); // левая область
+//   const rightArea = document.querySelector('.right'); // правая область
 
-  layers.forEach(layer => {
-    layer.addEventListener('dragstart', dragStart);
-    layer.addEventListener('dragend', dragEnd);
-  });
+//   layers.forEach(layer => {
+//     layer.addEventListener('dragstart', dragStart);
+//     layer.addEventListener('dragend', dragEnd);
+//   });
 
-  leftArea.addEventListener('dragover', dragOver);
-  leftArea.addEventListener('drop', dropLeft);
+//   leftArea.addEventListener('dragover', dragOver);
+//   leftArea.addEventListener('drop', dropLeft);
 
-  rightArea.addEventListener('dragover', dragOver);
-  rightArea.addEventListener('drop', dropRight);
-}
+//   rightArea.addEventListener('dragover', dragOver);
+//   rightArea.addEventListener('drop', dropRight);
+// }
 
-function dragStart(event) {
-  draggedLayer = event.target;
-  setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
-}
+// function dragStart(event) {
+//   draggedLayer = event.target;
+//   setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
+// }
 
-function dragEnd() {
-  draggedLayer.style.opacity = '1';
-  draggedLayer = null;
-}
+// function dragEnd() {
+//   draggedLayer.style.opacity = '1';
+//   draggedLayer = null;
+// }
 
-function dragOver(event) {
-  event.preventDefault();
-}
+// function dragOver(event) {
+//   event.preventDefault();
+// }
 
 function dropLeft(event) {
     event.preventDefault();
@@ -91,90 +93,70 @@ function dropLeft(event) {
     }
   }
   
-  function dropRight(event) {
-    event.preventDefault();
-    if (draggedLayer) {
-        const rightArea = document.querySelector('.right');
-        rightArea.style.position = 'relative'; // Контейнер должен быть относительно позиционирован
+  // function dropRight(event) {
+  //   event.preventDefault();
+  //   if (draggedLayer) {
+  //       const rightArea = document.querySelector('.right');
+  //       rightArea.style.position = 'relative'; // Контейнер должен быть относительно позиционирован
     
-        draggedLayer.style.position = 'absolute'; // Абсолютное позиционирование для коржей
-        const layersAbove = rightArea.querySelectorAll('.layer');
-        const stackHeight = layersAbove.length * draggedLayer.offsetHeight+148; // Высота "стопки" коржей
+  //       draggedLayer.style.position = 'absolute'; // Абсолютное позиционирование для коржей
+  //       const layersAbove = rightArea.querySelectorAll('.layer');
+  //       const stackHeight = layersAbove.length * draggedLayer.offsetHeight+148; // Высота "стопки" коржей
     
-        draggedLayer.style.bottom = `${stackHeight}px`; // Располагаем новый слой поверх предыдущих
-        draggedLayer.style.left = '50%'; // Центрируем корж
-        draggedLayer.style.transform = 'translateX(-50%)'; // Корректируем позиционирование для центрирования
-        rightArea.appendChild(draggedLayer);
-      }
-  }
+  //       draggedLayer.style.bottom = `${stackHeight}px`; // Располагаем новый слой поверх предыдущих
+  //       draggedLayer.style.left = '50%'; // Центрируем корж
+  //       draggedLayer.style.transform = 'translateX(-50%)'; // Корректируем позиционирование для центрирования
+  //       rightArea.appendChild(draggedLayer);
+  //     }
+  // }
   
 
-function resetLayer(layer) {
-  // Эта функция может быть использована для сброса позиции элемента, если нужно.
-  layer.style.left = '';
-  layer.style.top = '';
-}
-function startTimer(duration) {
-    const timerElement = document.getElementById('timer');
-    timeRemaining = duration;
+// function resetLayer(layer) {
+//   // Эта функция может быть использована для сброса позиции элемента, если нужно.
+//   layer.style.left = '';
+//   layer.style.top = '';
+// }
+// function startTimer(duration) {
+//     const timerElement = document.getElementById('timer');
+//     timeRemaining = duration;
   
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeRemaining / 60);
-      const seconds = timeRemaining % 60;
+//     function updateTimerDisplay() {
+//       const minutes = Math.floor(timeRemaining / 60);
+//       const seconds = timeRemaining % 60;
   
-      // Форматируем время
-      timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+//       // Форматируем время
+//       timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   
-      if (timeRemaining > 0) {
-        timeRemaining -= 1;
-      } else {
-        clearInterval(timerInterval);
-        timerElement.textContent = 'Время вышло!';
-        checkResult();
-        toggleModal('result-modal', 'open')
-        const backgroundMusic = document.getElementById('background-music');
-        backgroundMusic.pause();
-      }
-    }
+//       if (timeRemaining > 0) {
+//         timeRemaining -= 1;
+//       } else {
+//         clearInterval(timerInterval);
+//         timerElement.textContent = 'Время вышло!';
+//         checkResult();
+//         toggleModal('result-modal', 'open')
+//         const backgroundMusic = document.getElementById('background-music');
+//         backgroundMusic.pause();
+//       }
+//     }
   
-    // Обновляем отображение каждую секунду
-    timerInterval = setInterval(updateTimerDisplay, 1000);
-    updateTimerDisplay();
-  }
+//     // Обновляем отображение каждую секунду
+//     timerInterval = setInterval(updateTimerDisplay, 1000);
+//     updateTimerDisplay();
+//   }
   
-  function pauseTimer() {
-    if (!isPaused) {
-      clearInterval(timerInterval);
-      isPaused = true;
-    }
-  }
+  // function pauseTimer() {
+  //   if (!isPaused) {
+  //     clearInterval(timerInterval);
+  //     isPaused = true;
+  //   }
+  // }
   
-  function resumeTimer() {
-    if (isPaused) {
-      startTimer(timeRemaining);
-      isPaused = false;
-    }
-  }
-  
-   // Функция для закрытия активного модального окна
-   function closeActiveModal() {
-    const activeModal = document.querySelector('.modal.active');
-    if (activeModal) {
-      activeModal.classList.remove('active');
-    }
-    resumeTimer();
-  }
-  
-  // Обработчик клика на кнопке закрытия
-  document.querySelectorAll('.close-btn').forEach(button => {
-    button.addEventListener('click', (event) => closeActiveModal());
-  });
-  // Обработчик нажатия клавиши Esc
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      closeActiveModal();
-    }
-  });
+  // function resumeTimer() {
+  //   if (isPaused) {
+  //     startTimer(timeRemaining);
+  //     isPaused = false;
+  //   }
+  // }
 
   function checkResult(){
     clearInterval(timerInterval);
@@ -218,39 +200,38 @@ function startTimer(duration) {
     }
   }
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      checkResult();
-      toggleModal('result-modal', 'open')
-    }
-  });
+  // document.addEventListener('keydown', (event) => {
+  //   if (event.key === 'Enter') {
+  //     checkResult();
+  //     toggleModal('result-modal', 'open')
+  //   }
+  // });
 
 
-  function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-  }
+  // function formatTime(seconds) {
+  //   const minutes = Math.floor(seconds / 60);
+  //   const remainingSeconds = seconds % 60;
+  //   return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  // }
   
   
   // События для кнопок
-  document.querySelector('.help-button').addEventListener('click', pauseTimer);
-  document.querySelector('.settings-button').addEventListener('click', pauseTimer);
-  document.querySelector('.check-btn').addEventListener('click', () => toggleModal('result-modal', 'open'));
-  document.querySelector('.retry-btn').addEventListener('click', () => {
-    location.reload();
-  });
-  document.querySelector('.levels-btn').addEventListener('click', () => {
-    window.location.href = 'levels.html';
-  });
-  document.querySelector('.retry-btn-res').addEventListener('click', () => {
-    location.reload();
-  });
-  document.querySelector('.levels-btn-res').addEventListener('click', () => {
-    window.location.href = 'levels.html';
-  });
+  // document.querySelector('.help-button').addEventListener('click', pauseTimer);
+  // document.querySelector('.settings-button').addEventListener('click', pauseTimer);
+  // document.querySelector('.check-btn').addEventListener('click', () => toggleModal('result-modal', 'open'));
+  // document.querySelector('.retry-btn').addEventListener('click', () => {
+  //   location.reload();
+  // });
+  // document.querySelector('.levels-btn').addEventListener('click', () => {
+  //   window.location.href = 'levels.html';
+  // });
+  // document.querySelector('.retry-btn-res').addEventListener('click', () => {
+  //   location.reload();
+  // });
+  // document.querySelector('.levels-btn-res').addEventListener('click', () => {
+  //   window.location.href = 'levels.html';
+  // });
 
-  
-  const initialTime = 180; // 3 минуты
-  startTimer(initialTime);
+  //const initialTime = 180; // 3 минуты
+  //startTimer(initialTime);
 
