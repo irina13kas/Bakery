@@ -1,84 +1,80 @@
 const initialTime = 180; // 3 минуты
 startTimer(initialTime);
-// let isPaused = false; // Флаг паузы
-// let timerInterval;
-// let timeRemaining;
-// let draggedLayer = null; // Корж, который перетаскивается
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const helpModal = document.getElementById('help-modal');
-//   openHelpModal(helpModal);
-//   initializeGame();
-// });
+let Level = null;
+let numberOfLayers = null;
 
-// Функция для отображения модального окна
-// function openHelpModal(modal) {
-//   modal.classList.add('active');
-//   pauseTimer();
-// }
+function closeActiveModal() {
+  const activeModal = document.querySelectorAll('.modal.active');
+  activeModal.forEach(modal => {
+    modal.classList.remove('active');
+  });
+  if (Level===null) {
+    toggleModal('level-modal', 'open');
+  }
+  else{
+      resumeTimer();
+  }
+}
+
+function chooseLevel(level){
+  Level = level;
+  closeLevelModal();
+}
+
+function closeLevelModal() {
+  resumeTimer();
+  toggleModal('level-modal', 'close');
+  initializeGame();
+}
+
 
 function initializeGame() {
     // Контейнер для коржей
-    const layersContainer = document.getElementById('layers-container');
-  
+    const layersContainer = document.getElementById('layers-container');  
     // Список цветов для коржей
-    const colors = ['#ff8a80', '#ff80ab', '#ea80fc', '#b388ff', '#8c9eff'];
-  
+    const colors = ['rgb(255, 248, 220)', 'rgb(123, 63, 0)', 'rgb(255, 102, 102)', 'rgb(70, 50, 120)', 'rgb(147, 197, 114)','rgb(234, 176, 69)','rgb(210, 105, 30)','rgb(138, 43, 226)','rgb(200, 190, 140)','rgb(220, 20, 60)']; 
     // Ширины коржей
-    const widths = [200, 180, 160, 140, 120];
+    const widths = [220, 200, 180, 160, 140, 120, 100, 80, 60, 40];
+
+    switch (Level) {
+      case 1:
+        numberOfLayers = 5;
+        break;
+      case 2:
+        numberOfLayers = 7;
+        break;
+      case 3:
+        numberOfLayers = 10;
+        break;
+    }
+
+    const layers = [];
+
+    for (let i = 0; i < numberOfLayers; i++) {
+      const widthIndex = i % widths.length;  // Цикличное использование ширины из массива
+      const colorIndex = i % colors.length;  // Цикличное использование цветов из массива
     
-    const layers = widths.map((width, index) => {
-        const layer = document.createElement('div');
-        layer.classList.add('layer');
-        layer.style.width = `${width}px`;
-        layer.style.backgroundColor = colors[index];
-        layer.setAttribute('draggable', 'true');
-        
-        // Добавляем атрибут веса (чем меньше ширина, тем больше вес)
-        layer.setAttribute('data-weight', 1000 - width); 
-        
-        return layer;
-      });
-  
-    // Перемешиваем коржи в случайном порядке
+      const layer = document.createElement('div');
+      layer.classList.add('layer');
+      layer.style.width = `${widths[widthIndex]}px`;  // Ширина слоя
+      if(Level===3)
+        layer.style.height= `30px`; /* Высота коржа */
+      layer.style.backgroundColor = colors[colorIndex];  // Цвет слоя
+      layer.setAttribute('draggable', 'true');
+      
+      // Добавляем атрибут веса (чем меньше ширина, тем больше вес)
+      layer.setAttribute('data-weight', 1000 - widths[widthIndex]);
+      
+      layers.push(layer);  // Добавляем слой в массив
+    }
+
     layers.sort(() => Math.random() - 0.5);
-  
-    // Добавляем коржи в контейнер
+
     layers.forEach(layer => layersContainer.appendChild(layer));
-  
-    // Логика перетаскивания коржей
+
     addDragAndDropListeners(layers);
   }
-
-// function addDragAndDropListeners(layers) {
-//   const leftArea = document.querySelector('.left'); // левая область
-//   const rightArea = document.querySelector('.right'); // правая область
-
-//   layers.forEach(layer => {
-//     layer.addEventListener('dragstart', dragStart);
-//     layer.addEventListener('dragend', dragEnd);
-//   });
-
-//   leftArea.addEventListener('dragover', dragOver);
-//   leftArea.addEventListener('drop', dropLeft);
-
-//   rightArea.addEventListener('dragover', dragOver);
-//   rightArea.addEventListener('drop', dropRight);
-// }
-
-// function dragStart(event) {
-//   draggedLayer = event.target;
-//   setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
-// }
-
-// function dragEnd() {
-//   draggedLayer.style.opacity = '1';
-//   draggedLayer = null;
-// }
-
-// function dragOver(event) {
-//   event.preventDefault();
-// }
 
 function dropLeft(event) {
     event.preventDefault();
@@ -91,74 +87,21 @@ function dropLeft(event) {
       draggedLayer.style.transform = 'none';
       leftArea.appendChild(draggedLayer);
     }
-  }
-  
-  // function dropRight(event) {
-  //   event.preventDefault();
-  //   if (draggedLayer) {
-  //       const rightArea = document.querySelector('.right');
-  //       rightArea.style.position = 'relative'; // Контейнер должен быть относительно позиционирован
-    
-  //       draggedLayer.style.position = 'absolute'; // Абсолютное позиционирование для коржей
-  //       const layersAbove = rightArea.querySelectorAll('.layer');
-  //       const stackHeight = layersAbove.length * draggedLayer.offsetHeight+148; // Высота "стопки" коржей
-    
-  //       draggedLayer.style.bottom = `${stackHeight}px`; // Располагаем новый слой поверх предыдущих
-  //       draggedLayer.style.left = '50%'; // Центрируем корж
-  //       draggedLayer.style.transform = 'translateX(-50%)'; // Корректируем позиционирование для центрирования
-  //       rightArea.appendChild(draggedLayer);
-  //     }
-  // }
-  
-
-// function resetLayer(layer) {
-//   // Эта функция может быть использована для сброса позиции элемента, если нужно.
-//   layer.style.left = '';
-//   layer.style.top = '';
-// }
-// function startTimer(duration) {
-//     const timerElement = document.getElementById('timer');
-//     timeRemaining = duration;
-  
-//     function updateTimerDisplay() {
-//       const minutes = Math.floor(timeRemaining / 60);
-//       const seconds = timeRemaining % 60;
-  
-//       // Форматируем время
-//       timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-  
-//       if (timeRemaining > 0) {
-//         timeRemaining -= 1;
-//       } else {
-//         clearInterval(timerInterval);
-//         timerElement.textContent = 'Время вышло!';
-//         checkResult();
-//         toggleModal('result-modal', 'open')
-//         const backgroundMusic = document.getElementById('background-music');
-//         backgroundMusic.pause();
-//       }
-//     }
-  
-//     // Обновляем отображение каждую секунду
-//     timerInterval = setInterval(updateTimerDisplay, 1000);
-//     updateTimerDisplay();
-//   }
-  
-  // function pauseTimer() {
-  //   if (!isPaused) {
-  //     clearInterval(timerInterval);
-  //     isPaused = true;
-  //   }
-  // }
-  
-  // function resumeTimer() {
-  //   if (isPaused) {
-  //     startTimer(timeRemaining);
-  //     isPaused = false;
-  //   }
-  // }
+  } 
 
   function checkResult(){
+    let maxPoints = 0;
+    switch (Level) {
+      case 1:
+        maxPoints = 500;
+        break;
+      case 2:
+        maxPoints = 550;
+        break;
+      case 3:
+        maxPoints = 600;
+        break;
+    }
     clearInterval(timerInterval);
   
     const poleContainer = document.querySelector('.right');
@@ -174,17 +117,17 @@ function dropLeft(event) {
         isCorrect = false;
         break;
       }
-    }  
+    }
+    toggleModal('result-modal', 'open'); 
     // Отображение результата
     const resultModal = document.getElementById('result-modal');
     const resultTitle = document.getElementById('result-title');
     const resultInfo = document.getElementById('result-info');
   
-    if (isCorrect && layers.length===5) {
+    if (isCorrect && layers.length===numberOfLayers) {
       resultModal.classList.add('success');
       resultTitle.textContent = 'ПОБЕДА!!!';
       const timeUsed = initialTime - timeRemaining;
-  const maxPoints = 500; // Максимальное количество очков
   let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
       resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
       completedLevels.push(1);
@@ -200,38 +143,4 @@ function dropLeft(event) {
     }
   }
 
-  // document.addEventListener('keydown', (event) => {
-  //   if (event.key === 'Enter') {
-  //     checkResult();
-  //     toggleModal('result-modal', 'open')
-  //   }
-  // });
-
-
-  // function formatTime(seconds) {
-  //   const minutes = Math.floor(seconds / 60);
-  //   const remainingSeconds = seconds % 60;
-  //   return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-  // }
-  
-  
-  // События для кнопок
-  // document.querySelector('.help-button').addEventListener('click', pauseTimer);
-  // document.querySelector('.settings-button').addEventListener('click', pauseTimer);
-  // document.querySelector('.check-btn').addEventListener('click', () => toggleModal('result-modal', 'open'));
-  // document.querySelector('.retry-btn').addEventListener('click', () => {
-  //   location.reload();
-  // });
-  // document.querySelector('.levels-btn').addEventListener('click', () => {
-  //   window.location.href = 'levels.html';
-  // });
-  // document.querySelector('.retry-btn-res').addEventListener('click', () => {
-  //   location.reload();
-  // });
-  // document.querySelector('.levels-btn-res').addEventListener('click', () => {
-  //   window.location.href = 'levels.html';
-  // });
-
-  //const initialTime = 180; // 3 минуты
-  //startTimer(initialTime);
-
+  document.querySelector('.check-btn').addEventListener('click', checkResult);

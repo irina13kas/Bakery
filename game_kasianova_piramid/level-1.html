@@ -34,10 +34,6 @@
                 <div class="sound-setting">
                     <span id="sound-icon" class="sound-icon" onclick="toggleMusic()">🔊</span>
                 </div>
-                <div class="language-setting">
-                  <div class="language-option active" id="language-ru" onclick="setLanguage('ru')">Русский</div>
-                  <div class="language-option" id="language-en" onclick="setLanguage('en')">English</div>
-                </div>
                 <button class="rank-button" id="rankList" onclick="showLeaderboard()">Рейтинг игроков</button>
                 <button class="retry-btn">Еще раз</button>
                 <button class="levels-btn">Уровни</button>
@@ -87,6 +83,17 @@
           <div class="modal-buttons">
             <button class="retry-btn-res">Еще раз</button>
             <button class="levels-btn-res">Уровни</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="level-modal">
+        <div class="content" style="max-width: 600px; width: 100%; text-align: center;">
+          <h2>Выбери уровень сложности</h2>
+          <div class="modal-buttons">
+            <button class="level" id="easy" onclick="chooseLevel(1)">Легкий</button>
+            <button class="level" id="middle" onclick="chooseLevel(2)">Средний</button>
+            <button class="level" id="hard" onclick="chooseLevel(3)">Сложный</button>
           </div>
         </div>
       </div>

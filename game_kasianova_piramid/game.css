@@ -214,3 +214,16 @@ body {
 #leaderboard-table th {
   background-color: rgb(82, 190, 49);
 }
+
+.level{
+  padding: 10px 20px;
+  background-color: #d81b60;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.level:hover{
+  transform: scale(1.1);
+}

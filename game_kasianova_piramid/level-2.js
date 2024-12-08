@@ -1,29 +1,15 @@
 const initialTime = 150;
-startTimer(initialTime);
-// let isPaused = false; // Флаг паузы
-// let timerInterval;
-// let timeRemaining;
-// let draggedLayer = null; // Корж, который перетаскивается
 let resultCakeColors = [];
 const colors = ['rgb(255, 138, 128)', 'rgb(255, 128, 171)', 'rgb(234, 128, 252)', 'rgb(179, 136, 255)', 'rgb(140, 158, 255)'];
+let isCakeShown = false; // Флаг для проверки, показывался ли торт
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const helpModal = document.getElementById('help-modal');
-//     openHelpModal(helpModal);
-//     initializeGame();
-//   });
-  
-  let isCakeShown = false; // Флаг для проверки, показывался ли торт
-  // function openHelpModal(modal) {
-  //   modal.classList.add('active');
-  //   pauseTimer();
-  // }
+startTimer(initialTime);
 
   function closeActiveModal() {
-    const activeModal = document.querySelector('.modal.active');
-    if (activeModal) {
-      activeModal.classList.remove('active');
-    }
+    const activeModal = document.querySelectorAll('.modal.active');
+    activeModal.forEach(modal => {
+      modal.classList.remove('active');
+    });
     // Показать торт только при первом закрытии окна справки
     if (!isCakeShown) {
         isCakeShown = true; // Устанавливаем флаг
@@ -35,7 +21,7 @@ const colors = ['rgb(255, 138, 128)', 'rgb(255, 128, 171)', 'rgb(234, 128, 252)'
       }
   }
   
-   
+  
   // Функция для отображения окна с тортом
   function showCakeModal() {
     const cakeModal = document.getElementById('cake-modal');
@@ -66,8 +52,7 @@ const colors = ['rgb(255, 138, 128)', 'rgb(255, 128, 171)', 'rgb(234, 128, 252)'
   
   // Функция для закрытия окна с тортом
   function closeCakeModal() {
-    const cakeModal = document.getElementById('cake-modal');
-    resumeTimer()
+    resumeTimer();
     toggleModal('cake-modal', 'close');
   }
   
@@ -136,81 +121,6 @@ function dropLeft(event) {
         leftArea.appendChild(draggedLayer);
     }
 }
-
-// function dragStart(event) {
-//     draggedLayer = event.target;
-//     setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
-//   }
-
-//   function dragEnd() {
-//     draggedLayer.style.opacity = '1';
-//     draggedLayer = null;
-//   }
-  
-//   function dragOver(event) {
-//     event.preventDefault();
-//   }
-
-// function dropRight(event) {
-//     event.preventDefault();
-//     if (draggedLayer) {
-//         const rightArea = document.querySelector('.right');
-//         draggedLayer.style.position = 'absolute';
-//         const layersAbove = rightArea.querySelectorAll('.layer');
-//         const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 148; // Высота "стопки"
-//         draggedLayer.style.bottom = `${stackHeight}px`;
-//         draggedLayer.style.left = '50%';
-//         draggedLayer.style.transform = 'translateX(-50%)';
-//         rightArea.appendChild(draggedLayer);
-//     }
-// }
-
-// function resetLayer(layer) {
-//     layer.style.left = '';
-//     layer.style.top = '';
-//   }
-
-  // function startTimer(duration) {
-  //     const timerElement = document.getElementById('timer');
-  //     timeRemaining = duration;
-    
-  //     function updateTimerDisplay() {
-  //       const minutes = Math.floor(timeRemaining / 60);
-  //       const seconds = timeRemaining % 60;
-    
-  //       // Форматируем время
-  //       timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-    
-  //       if (timeRemaining > 0) {
-  //         timeRemaining -= 1;
-  //       } else {
-  //         clearInterval(timerInterval);
-  //         timerElement.textContent = 'Время вышло!';
-  //         checkResult();
-  //         toggleModal('result-modal', 'open')
-  //         const backgroundMusic = document.getElementById('background-music');
-  //         backgroundMusic.pause();
-  //       }
-  //     }
-    
-    //   // Обновляем отображение каждую секунду
-    //   timerInterval = setInterval(updateTimerDisplay, 1000);
-    //   updateTimerDisplay();
-    // }
-    
-    // function pauseTimer() {
-    //   if (!isPaused) {
-    //     clearInterval(timerInterval);
-    //     isPaused = true;
-    //   }
-    // }
-    
-    // function resumeTimer() {
-    //   if (isPaused) {
-    //     startTimer(timeRemaining);
-    //     isPaused = false;
-    //   }
-    // }
     
     function checkResult(){
         clearInterval(timerInterval);
@@ -228,7 +138,8 @@ function dropLeft(event) {
             isCorrect = false;
             break;
           }
-        }  
+        } 
+        toggleModal('result-modal', 'open');
         // Отображение результата
         const resultModal = document.getElementById('result-modal');
         const resultTitle = document.getElementById('result-title');
@@ -261,29 +172,6 @@ function dropLeft(event) {
         }
         return true;
       }
-  
-    // function formatTime(seconds) {
-    //   const minutes = Math.floor(seconds / 60);
-    //   const remainingSeconds = seconds % 60;
-    //   return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
-    // }
-     
-    // События для кнопок
-    // document.querySelector('.help-button').addEventListener('click', pauseTimer);
-    // document.querySelector('.settings-button').addEventListener('click', pauseTimer);
-    // document.querySelector('.check-btn').addEventListener('click', () => toggleModal('result-modal', 'open'));
-    // document.querySelector('.retry-btn').addEventListener('click', () => {
-    //   location.reload();
-    // });
-    // document.querySelector('.levels-btn').addEventListener('click', () => {
-    //   window.location.href = 'levels.html';
-    // });
-    // document.querySelector('.retry-btn-res').addEventListener('click', () => {
-    //   location.reload();
-    // });
-    // document.querySelector('.levels-btn-res').addEventListener('click', () => {
-    //   window.location.href = 'levels.html';
-    // });
-    
-  
+
+      document.querySelector('.check-btn').addEventListener('click', checkResult);
   

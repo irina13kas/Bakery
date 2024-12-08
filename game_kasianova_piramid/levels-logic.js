@@ -6,20 +6,12 @@ let draggedLayer = null; // Корж, который перетаскивает�
 document.addEventListener('DOMContentLoaded', () => {
     const helpModal = document.getElementById('help-modal');
     openHelpModal(helpModal);
-    initializeGame();
+    //initializeGame();
   });
 
   function openHelpModal(modal) {
     modal.classList.add('active');
     pauseTimer();
-  }
-
-function closeActiveModal() {
-    const activeModal = document.querySelectorAll('.modal.active');
-    activeModal.forEach(modal => {
-      modal.classList.remove('active');
-    });
-    resumeTimer();
   }
 
   function addDragAndDropListeners(layers) {
@@ -116,7 +108,6 @@ function startTimer(duration) {
 
   document.querySelector('.help-button').addEventListener('click', pauseTimer);
   document.querySelector('.settings-button').addEventListener('click', pauseTimer);
-  document.querySelector('.check-btn').addEventListener('click', () => toggleModal('result-modal', 'open'));
   document.querySelector('.retry-btn').addEventListener('click', () => {
     location.reload();
   });
@@ -136,3 +127,16 @@ function startTimer(duration) {
       toggleModal('result-modal', 'open')
     }
   });
+
+  function preventEscCloseForModal(modalId) {
+    document.addEventListener('keydown', function(event) {
+      const activeModal = document.getElementById(modalId);
+      
+      if (event.key === 'Escape' && activeModal && activeModal.classList.contains('active')) {
+        event.preventDefault();
+        console.log('Закрытие модального окна заблокировано');
+      }
+    });
+  }
+
+  preventEscCloseForModal('level-modal');
