@@ -51,25 +51,24 @@ function initializeGame() {
     const layers = [];
 
     for (let i = 0; i < numberOfLayers; i++) {
-      const widthIndex = i % widths.length;  // Цикличное использование ширины из массива
-      const colorIndex = i % colors.length;  // Цикличное использование цветов из массива
+      const widthIndex = i;
+      const colorIndex = i;
     
       const layer = document.createElement('div');
       layer.classList.add('layer');
-      layer.style.width = `${widths[widthIndex]}px`;  // Ширина слоя
+      layer.style.width = `${widths[widthIndex]}px`;
       if(Level===3)
-        layer.style.height= `30px`; /* Высота коржа */
-      layer.style.backgroundColor = colors[colorIndex];  // Цвет слоя
+        layer.style.height= `30px`;
+      layer.style.backgroundColor = colors[colorIndex];
       layer.setAttribute('draggable', 'true');
       
-      // Добавляем атрибут веса (чем меньше ширина, тем больше вес)
       layer.setAttribute('data-weight', 1000 - widths[widthIndex]);
 
       const randomDuration = 1 + Math.random() * 3;
       layer.style.animationDuration = `${randomDuration}s`;
   
       
-      layers.push(layer);  // Добавляем слой в массив
+      layers.push(layer);
     }
 
     layers.sort(() => Math.random() - 0.5);
@@ -88,10 +87,8 @@ function dropLeft(event) {
       draggedLayer.style.top = 'auto'; 
       draggedLayer.style.left = 'auto'; 
       draggedLayer.style.transform = 'none';
-      //topLayer = prevLayer;
       leftArea.appendChild(draggedLayer);
     }
-    //topLayer = null;
   } 
 
   function checkResult(){
@@ -124,7 +121,7 @@ function dropLeft(event) {
       }
     }
     toggleModal('result-modal', 'open'); 
-    // Отображение результата
+
     const resultModal = document.getElementById('result-modal');
     const resultTitle = document.getElementById('result-title');
     const resultInfo = document.getElementById('result-info');
@@ -137,10 +134,11 @@ function dropLeft(event) {
       resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
       completedLevels.push(1);
       const users = JSON.parse(localStorage.getItem('users')) || [];
-    const username = users[users.length - 1]; // Предположим, что последний пользователь — это текущий
+    const username = users[users.length - 1];
+    users[users.length-1]['level_1'] = true;
+    localStorage.setItem('users', JSON.stringify(users));
     if (username) 
      username.score=username.score+ points;
-    localStorage.setItem('users', JSON.stringify(users));
     } else {
       resultModal.classList.add('fail');
       resultTitle.textContent = 'ПРОВАЛ!!!';
@@ -149,3 +147,5 @@ function dropLeft(event) {
   }
 
   document.querySelector('.check-btn').addEventListener('click', checkResult);
+
+  //localStorage.clear();

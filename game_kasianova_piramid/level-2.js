@@ -32,22 +32,20 @@ startTimer(initialTime);
       showCakeModal();
         resumeTimer();
   }
-  // Функция для отображения окна с тортом
+
   function showCakeModal() {
     const cakeModal = document.getElementById('cake-modal');
     const cakeContainer = document.getElementById('cake-container');
     resultCakeColors = shuffleArray(colors);
   
-    // Создать слои торта
     resultCakeColors.forEach((color, index) => {
       const layer = document.createElement('div');
       layer.classList.add('layer');
       layer.style.backgroundColor = color;
-      layer.style.bottom = `${index * 20}%`; // Смещение по высоте
+      layer.style.bottom = `${index * 20}%`;
       cakeContainer.appendChild(layer);
     });
-  
-    // Закрыть окно через 10 секунд
+
     setTimeout(() => closeCakeModal(), 10000);
   }
 
@@ -60,7 +58,6 @@ startTimer(initialTime);
     return res_array;
   }
   
-  // Функция для закрытия окна с тортом
   function closeCakeModal() {
     resumeTimer();
     toggleModal('cake-modal', 'close');
@@ -68,7 +65,7 @@ startTimer(initialTime);
   
 function initializeGame() {
     const layersContainer = document.getElementById('layers-container');
-    // Ширины коржей
+
     const widths = [200, 180, 160, 140, 120];
 
     switch (Level) {
@@ -87,31 +84,32 @@ function initializeGame() {
         const layer = document.createElement('div');
         layer.classList.add('layer');
         layer.style.width = `${width}px`;
-        layer.style.backgroundColor = '#bdbdbd'; // Устанавливаем начальный белый цвет
+        layer.style.backgroundColor = '#bdbdbd';
         layer.setAttribute('draggable', 'true');
-        layer.setAttribute('data-weight', 1000 - width); // Вес зависит от ширины
+        layer.setAttribute('data-weight', 1000 - width);
+
+        const randomDuration = 1 + Math.random() * 3;
+        layer.style.animationDuration = `${randomDuration}s`;
         return layer;
     });
 
-    // Перемешиваем коржи в случайном порядке
+
     layers.sort(() => Math.random() - 0.5);
 
-    // Добавляем коржи в контейнер
     layers.forEach(layer => layersContainer.appendChild(layer));
 
-    // Логика перетаскивания коржей
     addDragAndDropListeners(layers);
 }
 
 function addDragAndDropListeners(layers) {
-    const leftArea = document.querySelector('.left'); // левая область
-    const rightArea = document.querySelector('.right'); // правая область
+    const leftArea = document.querySelector('.left');
+    const rightArea = document.querySelector('.right');
 
     layers.forEach(layer => {
         layer.addEventListener('dragstart', dragStart);
         layer.addEventListener('dragend', dragEnd);
 
-        // Логика смены цвета при двойном клике
+
         layer.addEventListener('dblclick', () => {
             if (layer.parentElement === rightArea) {
                 const currentColorIndex = colors.indexOf(layer.style.backgroundColor);
@@ -137,7 +135,7 @@ function dropLeft(event) {
         draggedLayer.style.top = 'auto';
         draggedLayer.style.left = 'auto';
         draggedLayer.style.transform = 'none';
-        draggedLayer.style.backgroundColor = '#bdbdbd'; // Сбрасываем цвет в белый при возврате в левую область
+        draggedLayer.style.backgroundColor = '#bdbdbd';
         leftArea.appendChild(draggedLayer);
     }
     topLayer = null;
@@ -174,7 +172,7 @@ function dropLeft(event) {
           }
         } 
         toggleModal('result-modal', 'open');
-        // Отображение результата
+
         const resultModal = document.getElementById('result-modal');
         const resultTitle = document.getElementById('result-title');
         const resultInfo = document.getElementById('result-info');
@@ -183,15 +181,16 @@ function dropLeft(event) {
           resultModal.classList.add('success');
           resultTitle.textContent = 'ПОБЕДА!!!';
           const timeUsed = initialTime - timeRemaining;
-      const maxPoints = 500; // Максимальное количество очков
-      let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0) - finePoints;
+          const maxPoints = 500;
+          let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0) - finePoints;
           resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
           completedLevels.push(1);
           const users = JSON.parse(localStorage.getItem('users')) || [];
-        const username = users[users.length - 1]; // Предположим, что последний пользователь — это текущий
+          const username = users[users.length - 1];
+          users[users.length-1]['level_2'] = true;
+          localStorage.setItem('users', JSON.stringify(users));
         if (username) 
          username.score=username.score+ points;
-        localStorage.setItem('users', JSON.stringify(users));
         } else {
           resultModal.classList.add('fail');
           resultTitle.textContent = 'ПРОВАЛ!!!';

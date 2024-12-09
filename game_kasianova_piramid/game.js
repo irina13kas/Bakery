@@ -25,7 +25,7 @@ function getUsersFromStorage() {
 
 function saveUser(name) {
   const users = getUsersFromStorage();
-  users.push({ name, score: Score });
+  users.push({ name, score: Score, level_1: false, level_2: false});
   localStorage.setItem('users', JSON.stringify(users));
 }
 
