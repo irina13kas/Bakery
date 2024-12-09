@@ -55,8 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
   }
 
-  //let topLayer = null;
-  //let prevLayer = null;
 
   function dropRight(event) {
     event.preventDefault();
@@ -68,8 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         draggedLayer.style.bottom = `${stackHeight}px`;
         draggedLayer.style.left = '50%';
         draggedLayer.style.transform = 'translateX(-50%)';
-        //prevLayer = topLayer;
-        //topLayer = draggedLayer;
         rightArea.appendChild(draggedLayer);
     }
 }
@@ -120,6 +116,15 @@ function startTimer(duration) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  }
+
+  function shuffleArray(array) {
+    res_array = [...array];
+    for (let i = res_array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [res_array[i], res_array[j]] = [res_array[j], res_array[i]];
+    }
+    return res_array;
   }
 
   document.querySelector('.help-button').addEventListener('click', pauseTimer);

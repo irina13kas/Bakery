@@ -28,6 +28,8 @@ function loadUserData() {
         window.location.href = 'level-1.html';
       else if(level===2)
         window.location.href = 'level-2.html';
+      else
+        window.location.href = 'level-3.html';
     }
 
     function checkLevel(level) {
