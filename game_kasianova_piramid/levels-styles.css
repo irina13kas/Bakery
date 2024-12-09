@@ -53,6 +53,24 @@
     border-top: 5px solid rgb(77, 29, 10);
     border-radius: 5px;
   }
+
+  .left .layer{
+    animation: moveX;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+  @keyframes moveX {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(100px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
   
   .pole {
     width: 7px;

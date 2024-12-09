@@ -64,6 +64,10 @@ function initializeGame() {
       
       // Добавляем атрибут веса (чем меньше ширина, тем больше вес)
       layer.setAttribute('data-weight', 1000 - widths[widthIndex]);
+
+      const randomDuration = 1 + Math.random() * 3;
+      layer.style.animationDuration = `${randomDuration}s`;
+  
       
       layers.push(layer);  // Добавляем слой в массив
     }
@@ -84,10 +88,10 @@ function dropLeft(event) {
       draggedLayer.style.top = 'auto'; 
       draggedLayer.style.left = 'auto'; 
       draggedLayer.style.transform = 'none';
-      topLayer = prevLayer;
+      //topLayer = prevLayer;
       leftArea.appendChild(draggedLayer);
     }
-    topLayer = null;
+    //topLayer = null;
   } 
 
   function checkResult(){

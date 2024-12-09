@@ -198,11 +198,10 @@ body {
   margin-bottom: 15px;
 }
 /* Таблица */
-#leaderboard-table {
-  
-  max-height: 300px; /* Ограничиваем высоту таблицы */
-  overflow-y: auto;  /* Добавляем вертикальную прокрутку */
-  display: block; /* Применяем прокрутку к телу таблицы */
+#leaderboard-table { 
+  max-height: 300px;
+  overflow-y: auto;
+  display: block;
 }
 
 #leaderboard-table th,
@@ -213,20 +212,18 @@ body {
   text-align: left;
   font-size: 1.2rem;
   background-color: rgb(189, 245, 172);
-  width: 150px;
-  max-width: 350px; 
-  word-wrap: break-word;
-  text-overflow: ellipsis;
+  max-width: 450px;
+  width: 400px;
   overflow: hidden;
-  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+#leaderboard-table td:first-child {
+  max-width: 400px; /* Ограничение ширины для первого столбца */
 }
 
 #leaderboard-table th {
   background-color: rgb(82, 190, 49);
-}
-
-#leaderboard-table td {
-  width: 400px;
 }
 
 .level{

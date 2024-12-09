@@ -14,28 +14,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addDragAndDropListeners(layers) {
-    const leftArea = document.querySelector('.left'); // левая область
-    const rightArea = document.querySelector('.right'); // правая область
-  
+    const leftArea = document.querySelector('.left'); // Левая область
+    const rightArea = document.querySelector('.right'); // Правая область
+
+    // Добавляем обработчики для слоев в левой области
     layers.forEach(layer => {
-      layer.addEventListener('dragstart', dragStart);
-      layer.addEventListener('dragend', dragEnd);
+        layer.addEventListener('dragstart', dragStart);
+        layer.addEventListener('dragend', dragEnd);
     });
-  
+
+    // Добавляем обработчики для зон дропа
     leftArea.addEventListener('dragover', dragOver);
-    leftArea.addEventListener('drop', dropLeft);
-  
     rightArea.addEventListener('dragover', dragOver);
+    leftArea.addEventListener('drop', dropLeft);
     rightArea.addEventListener('drop', dropRight);
   }
 
   function dragStart(event) {
     draggedLayer = event.target;
 
-    if (draggedLayer !== topLayer && topLayer!==null && prevLayer!==null) {
-      event.preventDefault();  // Отменить перетаскивание, если это не верхний корж
-      prevLayer=null;
-      return;
+    const rightArea = document.querySelector('.right');
+    const layers = Array.from(rightArea.querySelectorAll('.layer'));
+    const topLayer = layers[layers.length - 1]; // Последний добавленный слой в правой области
+    const isLayedInLeft = draggedLayer.closest('.left');
+
+    if (draggedLayer !== topLayer && topLayer && isLayedInLeft === null) {
+        event.preventDefault(); // Отменить перетаскивание
+        draggedLayer = null;    // Сбросить переменную
+        return;
     }
       setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
   }
@@ -49,8 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
   }
 
-  let topLayer = null;
-  let prevLayer = null;
+  //let topLayer = null;
+  //let prevLayer = null;
 
   function dropRight(event) {
     event.preventDefault();
@@ -58,12 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const rightArea = document.querySelector('.right');
         draggedLayer.style.position = 'absolute';
         const layersAbove = rightArea.querySelectorAll('.layer');
-        const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 148; // Высота "стопки"
+        const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 142; // Высота "стопки"
         draggedLayer.style.bottom = `${stackHeight}px`;
         draggedLayer.style.left = '50%';
         draggedLayer.style.transform = 'translateX(-50%)';
-        prevLayer = topLayer;
-        topLayer = draggedLayer;
+        //prevLayer = topLayer;
+        //topLayer = draggedLayer;
         rightArea.appendChild(draggedLayer);
     }
 }
