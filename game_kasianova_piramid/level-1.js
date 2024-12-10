@@ -121,6 +121,8 @@ function dropLeft(event) {
       }
     }
     toggleModal('result-modal', 'open'); 
+    const backgroundMusic = document.getElementById('background-music');
+    backgroundMusic.pause();
 
     const resultModal = document.getElementById('result-modal');
     const resultTitle = document.getElementById('result-title');
@@ -132,7 +134,6 @@ function dropLeft(event) {
       const timeUsed = initialTime - timeRemaining;
   let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
       resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
-      completedLevels.push(1);
       const users = JSON.parse(localStorage.getItem('users')) || [];
     const username = users[users.length - 1];
     users[users.length-1]['level_1'] = true;

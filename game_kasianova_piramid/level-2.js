@@ -172,6 +172,8 @@ function dropLeft(event) {
           }
         } 
         toggleModal('result-modal', 'open');
+        const backgroundMusic = document.getElementById('background-music');
+    backgroundMusic.pause();
 
         const resultModal = document.getElementById('result-modal');
         const resultTitle = document.getElementById('result-title');

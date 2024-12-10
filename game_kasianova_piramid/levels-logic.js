@@ -1,9 +1,13 @@
-let isPaused = false; // Флаг паузы
+let isPaused = false;
 let timerInterval;
 let timeRemaining;
-let draggedLayer = null; // Корж, который перетаскивается
+let draggedLayer = null;
 
 document.addEventListener('DOMContentLoaded', () => {
+  const backgroundMusic = document.getElementById('background-music');
+    backgroundMusic.play().catch(error => {
+        console.error("Музыка не может быть запущена:", error);
+    });
     const helpModal = document.getElementById('help-modal');
     openHelpModal(helpModal);
   });
@@ -14,16 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addDragAndDropListeners(layers) {
-    const leftArea = document.querySelector('.left'); // Левая область
-    const rightArea = document.querySelector('.right'); // Правая область
+    const leftArea = document.querySelector('.left');
+    const rightArea = document.querySelector('.right');
 
-    // Добавляем обработчики для слоев в левой области
     layers.forEach(layer => {
         layer.addEventListener('dragstart', dragStart);
         layer.addEventListener('dragend', dragEnd);
     });
 
-    // Добавляем обработчики для зон дропа
     leftArea.addEventListener('dragover', dragOver);
     rightArea.addEventListener('dragover', dragOver);
     leftArea.addEventListener('drop', dropLeft);
@@ -35,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const rightArea = document.querySelector('.right');
     const layers = Array.from(rightArea.querySelectorAll('.layer'));
-    const topLayer = layers[layers.length - 1]; // Последний добавленный слой в правой области
+    const topLayer = layers[layers.length - 1];
     const isLayedInLeft = draggedLayer.closest('.left');
 
     if (draggedLayer !== topLayer && topLayer && isLayedInLeft === null) {
-        event.preventDefault(); // Отменить перетаскивание
-        draggedLayer = null;    // Сбросить переменную
+        event.preventDefault();
+        draggedLayer = null;
         return;
     }
       setTimeout(() => (draggedLayer.style.opacity = '0.5'), 0);
@@ -62,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rightArea = document.querySelector('.right');
         draggedLayer.style.position = 'absolute';
         const layersAbove = rightArea.querySelectorAll('.layer');
-        const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 142; // Высота "стопки"
+        const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 142;
         draggedLayer.style.bottom = `${stackHeight}px`;
         draggedLayer.style.left = '50%';
         draggedLayer.style.transform = 'translateX(-50%)';
@@ -78,7 +80,6 @@ function startTimer(duration) {
       const minutes = Math.floor(timeRemaining / 60);
       const seconds = timeRemaining % 60;
   
-      // Форматируем время
       timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
   
       if (timeRemaining > 0) {
@@ -93,7 +94,6 @@ function startTimer(duration) {
       }
     }
 
-     // Обновляем отображение каждую секунду
      timerInterval = setInterval(updateTimerDisplay, 1000);
      updateTimerDisplay();
    }
@@ -145,7 +145,7 @@ function startTimer(duration) {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
       checkResult();
-      toggleModal('result-modal', 'open')
+      toggleModal('result-modal', 'open');
     }
   });
 
@@ -155,7 +155,6 @@ function startTimer(duration) {
       
       if (event.key === 'Escape' && activeModal && activeModal.classList.contains('active')) {
         event.preventDefault();
-        console.log('Закрытие модального окна заблокировано');
       }
     });
   }

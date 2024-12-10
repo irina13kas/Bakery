@@ -1,4 +1,4 @@
-const initialTime = 120; // 2 минуты
+const initialTime = 120;
 const targetSumElement = document.getElementById('target-sum');
 let targetSum;
 let numberOfLayers;
@@ -16,11 +16,8 @@ function closeActiveModal() {
 }
 
 function initializeGame() {
-    // Контейнер для коржей
     const layersContainer = document.getElementById('layers-container');  
-    // Список цветов для коржей
     const colors = ['rgb(255, 248, 220)', 'rgb(123, 63, 0)', 'rgb(255, 102, 102)', 'rgb(70, 50, 120)', 'rgb(147, 197, 114)','rgb(234, 176, 69)','rgb(210, 105, 30)','rgb(138, 43, 226)']; 
-    // Ширины коржей
     const widths = [220, 200, 180, 160, 140, 120, 100, 80];
 
     const layers = [];
@@ -43,13 +40,12 @@ function initializeGame() {
     
       const layer = document.createElement('div');
       layer.classList.add('layer');
-      layer.style.width = `${widths[widthIndex]}px`;  // Ширина слоя
-        layer.style.height= `32px`; /* Высота коржа */
-      layer.style.backgroundColor = colors[colorIndex];  // Цвет слоя
+      layer.style.width = `${widths[widthIndex]}px`;
+        layer.style.height= `32px`;
+      layer.style.backgroundColor = colors[colorIndex];
       layer.textContent = allWeightComponents[i];
       layer.setAttribute('draggable', 'true');
       
-      // Добавляем атрибут веса (чем меньше ширина, тем больше вес)
       layer.setAttribute('width', 1000 - widths[widthIndex]);
       layer.setAttribute('weight', allWeightComponents[i]);
 
@@ -57,7 +53,7 @@ function initializeGame() {
       layer.style.animationDuration = `${randomDuration}s`;
   
       
-      layers.push(layer);  // Добавляем слой в массив
+      layers.push(layer);
     }
 
     layers.sort(() => Math.random() - 0.5);
@@ -97,7 +93,7 @@ function dropRight(event) {
         const rightArea = document.querySelector('.right');
         draggedLayer.style.position = 'absolute';
         const layersAbove = rightArea.querySelectorAll('.layer');
-        const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 123; // Высота "стопки"
+        const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 123;
         draggedLayer.style.bottom = `${stackHeight}px`;
         draggedLayer.style.left = '50%';
         draggedLayer.style.transform = 'translateX(-50%)';
@@ -137,7 +133,9 @@ function dropLeft(event) {
       }
     }
     toggleModal('result-modal', 'open'); 
-    // Отображение результата
+    const backgroundMusic = document.getElementById('background-music');
+    backgroundMusic.pause();
+
     const resultModal = document.getElementById('result-modal');
     const resultTitle = document.getElementById('result-title');
     const resultInfo = document.getElementById('result-info');
@@ -154,7 +152,7 @@ function dropLeft(event) {
       resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
       completedLevels.push(1);
       const users = JSON.parse(localStorage.getItem('users')) || [];
-    const username = users[users.length - 1]; // Предположим, что последний пользователь — это текущий
+    const username = users[users.length - 1];
     if (username) 
      username.score=username.score+ points;
     localStorage.setItem('users', JSON.stringify(users));
