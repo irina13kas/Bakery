@@ -69,6 +69,7 @@
     height: 80%;
     background-color: #7b1fa2;
     margin: 0 auto;
+    bottom: 0;
     position: relative;
   }
   
@@ -76,9 +77,9 @@
     content: "";
     width: 15em;
     height: 0.5em;
+    bottom: -0.5em;
     background-color: #4a148c;
     position: absolute;
-    bottom: -0.5em;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -137,7 +138,18 @@
   transition: background-color 0.3s ease, transform 0.3s ease;
   }
 
-  .modal-buttons button:hover{
+  .retry-btn, .levels-btn{
+    background-color: #f79ebd;
+  color: black;
+  padding: 10px 20px;
+  width: 16em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .retry-btn:hover, .levels-btn:hover{
     transform: scale(1.1);
   }
   

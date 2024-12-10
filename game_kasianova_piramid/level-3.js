@@ -26,7 +26,7 @@ function initializeGame() {
 
     targetSum = getRandomInt(7,20);
     targetNumOfLayers = getRandomInt(4, 6);
-    numberOfLayers = getRandomInt(targetNumOfLayers, targetSum);
+    numberOfLayers = getRandomInt(targetNumOfLayers, 10);
 
     targetSumElement.textContent = targetSum;
 
@@ -38,8 +38,8 @@ function initializeGame() {
     const heightOfLayer = Math.floor(rightContainer.offsetHeight/numberOfLayers);
 
     for (let i = 0; i < numberOfLayers; i++) {
-      const widthIndex = i;
-      const colorIndex = i;
+      const widthIndex = i%widths.length;
+      const colorIndex = i%colors.length;
     
       const layer = document.createElement('div');
       layer.classList.add('layer');
@@ -94,9 +94,15 @@ function dropRight(event) {
     event.preventDefault();
     if (draggedLayer) {
         const rightArea = document.querySelector('.right');
+        const base = rightArea.querySelector('.base');
+
+        const baseBottom = base.getBoundingClientRect().bottom;
+        const rightAreaBottom = rightArea.getBoundingClientRect().bottom;
+        const baseOffset = rightAreaBottom - baseBottom;
+      
         draggedLayer.style.position = 'absolute';
         const layersAbove = rightArea.querySelectorAll('.layer');
-        const stackHeight = layersAbove.length * draggedLayer.offsetHeight + 123;
+        const stackHeight =baseOffset + layersAbove.length * draggedLayer.offsetHeight;
         draggedLayer.style.bottom = `${stackHeight}px`;
         draggedLayer.style.left = '50%';
         draggedLayer.style.transform = 'translateX(-50%)';

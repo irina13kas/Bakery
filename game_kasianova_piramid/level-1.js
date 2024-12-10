@@ -1,4 +1,4 @@
-const initialTime = 180; // 3 минуты
+const initialTime = 180;
 startTimer(initialTime);
 
 let Level = null;
