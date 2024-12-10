@@ -1,4 +1,3 @@
-/* Общие стили */
 body {
   margin: 0;
   padding: 0;
@@ -24,7 +23,6 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Заголовок */
 .game-title {
   font-size: 3rem;
   color: #d81b60;
@@ -34,18 +32,18 @@ body {
 
 .bottom-buttons {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 5%;
+  right: 2%;
   display: flex;
-  gap: 10px;
+  gap: 15%;
 }
 
 .settings-button,
 .help-button, .prompt-button {
   background-color: white;
   border: none;
-  width: 40px;
-  height: 40px;
+  width: 3.5em;
+  height: 3em;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -66,15 +64,14 @@ body {
   color: #d81b60;
 }
 
-/* Стили всплывающего окна */
 .modal {
   position: fixed;
-  bottom: -120%; /* Начальная позиция вне экрана */
+  bottom: -120%;
   left:0;
-  background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+  background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
-  transition: bottom 0.4s ease; /* Анимация появления */
+  transition: bottom 0.4s ease;
   z-index: 10;
   display: flex;
   justify-content: center;
@@ -83,22 +80,31 @@ body {
 }
 
 .modal.active {
-  bottom: 0; /* Всплывает в область видимости */   
+  bottom: 0;
 }
 
 .content {
   background: #fce4ec;
-  padding: 20px 30px;
+  padding: 1.5em 2em;
   border-radius: 10px;
   text-align: center;
-  max-width: 400px; /* Максимальная ширина окна */
+  max-width: 20em;
   position: relative;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+}
+
+.content p {
+  font-size: 1rem;
+  color: black;
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0.5em;
+  right: 0.5em;
   font-size: 1.5rem;
   cursor: pointer;
   color: #d81b60;
@@ -114,57 +120,30 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1em;
 }
 
-/* Настройка звука */
 .sound-setting {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
   cursor: pointer;
 }
 
-.sound-setting img {
-  width: 50px;
-  height: 50px;
+.sound-icon {
+  font-size: 2.5em;
+  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.sound-setting img:hover {
+.sound-icon:hover {
   transform: scale(1.1);
 }
 
-/* Настройка языка */
-.language-setting {
-  display: flex;
-  gap: 10px;
-}
-
-.language-option {
-  padding: 10px 20px;
-  background-color: #f79ebd;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.language-option.active {
-  background-color: #d81b60;
-  color: white;
-  font-weight: bold;
-}
-
-.language-option:hover {
-  transform: scale(1.1);
-}
-
-/* Кнопка рейтинга игроков */
 #rankList {
   background-color: #f79ebd;
   color: black;
-  padding: 10px 20px;
+  padding: 1em 2em;
   width: 16em;
   border: none;
   border-radius: 5px;
@@ -176,30 +155,8 @@ body {
   transform: scale(1.1);
 }
 
-/* Иконка звука */
-.sound-icon {
-  font-size: 2.5em;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.sound-icon:hover {
-  transform: scale(1.1);
-}
-
-.content h2 {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-}
-
-.content p {
-  font-size: 1rem;
-  color: black;
-  margin-bottom: 15px;
-}
-/* Таблица */
 #leaderboard-table { 
-  max-height: 300px;
+  max-height: 15em;
   overflow-y: auto;
   display: block;
 }
@@ -208,18 +165,18 @@ body {
 #leaderboard-table td {
   width: 100%;
   border: 1px solid black;
-  padding: 8px;
+  padding: 0.7em;
   text-align: left;
   font-size: 1.2rem;
   background-color: rgb(189, 245, 172);
-  max-width: 450px;
-  width: 400px;
+  max-width: 15em;
+  width: 15em;
   overflow: hidden;
   word-wrap: break-word;
 }
 
 #leaderboard-table td:first-child {
-  max-width: 400px; /* Ограничение ширины для первого столбца */
+  max-width: 12em;
 }
 
 #leaderboard-table th {
@@ -227,7 +184,7 @@ body {
 }
 
 .level{
-  padding: 10px 20px;
+  padding: 1.5em 2em;
   background-color: #d81b60;
   border-radius: 5px;
   cursor: pointer;

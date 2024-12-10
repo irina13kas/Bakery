@@ -4,10 +4,6 @@ let timeRemaining;
 let draggedLayer = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const backgroundMusic = document.getElementById('background-music');
-    backgroundMusic.play().catch(error => {
-        console.error("Музыка не может быть запущена:", error);
-    });
     const helpModal = document.getElementById('help-modal');
     openHelpModal(helpModal);
   });
