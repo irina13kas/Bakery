@@ -29,12 +29,12 @@ function closeLevelModal() {
 
 
 function initializeGame() {
-    // Контейнер для коржей
-    const layersContainer = document.getElementById('layers-container');  
-    // Список цветов для коржей
+    const layersContainer = document.getElementById('layers-container');
+    const rightContainer = document.querySelector('.pole-container');
     const colors = ['rgb(255, 248, 220)', 'rgb(123, 63, 0)', 'rgb(255, 102, 102)', 'rgb(70, 50, 120)', 'rgb(147, 197, 114)','rgb(234, 176, 69)','rgb(210, 105, 30)','rgb(138, 43, 226)','rgb(200, 190, 140)','rgb(220, 20, 60)']; 
-    // Ширины коржей
     const widths = [220, 200, 180, 160, 140, 120, 100, 80, 60, 40];
+
+    const res_colors = shuffleArray(colors);
 
     switch (Level) {
       case 1:
@@ -53,13 +53,14 @@ function initializeGame() {
     for (let i = 0; i < numberOfLayers; i++) {
       const widthIndex = i;
       const colorIndex = i;
+     
+      const heightOfLayer = Math.floor(rightContainer.offsetHeight/numberOfLayers);
     
       const layer = document.createElement('div');
       layer.classList.add('layer');
       layer.style.width = `${widths[widthIndex]}px`;
-      if(Level===3)
-        layer.style.height= `30px`;
-      layer.style.backgroundColor = colors[colorIndex];
+      layer.style.height= `${heightOfLayer}px`;
+      layer.style.backgroundColor = res_colors[colorIndex];
       layer.setAttribute('draggable', 'true');
       
       layer.setAttribute('data-weight', 1000 - widths[widthIndex]);
@@ -137,9 +138,9 @@ function dropLeft(event) {
       const users = JSON.parse(localStorage.getItem('users')) || [];
     const username = users[users.length - 1];
     users[users.length-1]['level_1'] = true;
-    localStorage.setItem('users', JSON.stringify(users));
     if (username) 
      username.score=username.score+ points;
+    localStorage.setItem('users', JSON.stringify(users));
     } else {
       resultModal.classList.add('fail');
       resultTitle.textContent = 'ПРОВАЛ!!!';

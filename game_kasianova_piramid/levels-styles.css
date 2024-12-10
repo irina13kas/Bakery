@@ -52,6 +52,8 @@
     margin-bottom: 10px;
     border-top: 5px solid rgb(77, 29, 10);
     border-radius: 5px;
+    font-size: 1.2em;
+    text-align: center;
   }
 
   .left .layer{

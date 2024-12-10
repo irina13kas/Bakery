@@ -16,15 +16,17 @@ function closeActiveModal() {
 }
 
 function initializeGame() {
-    const layersContainer = document.getElementById('layers-container');  
+    const layersContainer = document.getElementById('layers-container');
+    const rightContainer = document.querySelector('.pole-container');
     const colors = ['rgb(255, 248, 220)', 'rgb(123, 63, 0)', 'rgb(255, 102, 102)', 'rgb(70, 50, 120)', 'rgb(147, 197, 114)','rgb(234, 176, 69)','rgb(210, 105, 30)','rgb(138, 43, 226)']; 
     const widths = [220, 200, 180, 160, 140, 120, 100, 80];
-
     const layers = [];
+
+    const res_colors = shuffleArray(colors);
 
     targetSum = getRandomInt(7,20);
     targetNumOfLayers = getRandomInt(4, 6);
-    numberOfLayers = getRandomInt(targetNumOfLayers, 8);
+    numberOfLayers = getRandomInt(targetNumOfLayers, targetSum);
 
     targetSumElement.textContent = targetSum;
 
@@ -33,6 +35,7 @@ function initializeGame() {
     let allWeightComponents = [...targetSumComponents, ...extraNumbers];
 
     allWeightComponents.sort(() => Math.random() - 0.5);
+    const heightOfLayer = Math.floor(rightContainer.offsetHeight/numberOfLayers);
 
     for (let i = 0; i < numberOfLayers; i++) {
       const widthIndex = i;
@@ -41,8 +44,8 @@ function initializeGame() {
       const layer = document.createElement('div');
       layer.classList.add('layer');
       layer.style.width = `${widths[widthIndex]}px`;
-        layer.style.height= `32px`;
-      layer.style.backgroundColor = colors[colorIndex];
+      layer.style.height= `${heightOfLayer}px`;
+      layer.style.backgroundColor = res_colors[colorIndex];
       layer.textContent = allWeightComponents[i];
       layer.setAttribute('draggable', 'true');
       
@@ -81,7 +84,7 @@ function initializeGame() {
 function addExtraNumbers(extraNum, total){
     let numbers = [];
     while(extraNum>0){
-        numbers.push(Math.floor(Math.random() * (total/2)));
+        numbers.push(Math.floor(Math.random() * (total/3)));
         extraNum--;
     }
     return numbers;

@@ -1,5 +1,6 @@
 const initialTime = 150;
 let finePoints = 0;
+const numberOfLayers = 5;
 let resultCakeColors = [];
 let colors = null;
 let Level = null;
@@ -48,15 +49,6 @@ startTimer(initialTime);
 
     setTimeout(() => closeCakeModal(), 10000);
   }
-
-  function shuffleArray(array) {
-    res_array = [...array];
-    for (let i = res_array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [res_array[i], res_array[j]] = [res_array[j], res_array[i]];
-    }
-    return res_array;
-  }
   
   function closeCakeModal() {
     resumeTimer();
@@ -65,7 +57,7 @@ startTimer(initialTime);
   
 function initializeGame() {
     const layersContainer = document.getElementById('layers-container');
-
+    const rightContainer = document.querySelector('.pole-container');
     const widths = [200, 180, 160, 140, 120];
 
     switch (Level) {
@@ -79,11 +71,13 @@ function initializeGame() {
         colors = colors_hard;
         break;
     }
+    const heightOfLayer = Math.floor(rightContainer.offsetHeight/numberOfLayers);
 
     const layers = widths.map((width, index) => {
         const layer = document.createElement('div');
         layer.classList.add('layer');
         layer.style.width = `${width}px`;
+        layer.style.height= `${heightOfLayer}px`;
         layer.style.backgroundColor = '#bdbdbd';
         layer.setAttribute('draggable', 'true');
         layer.setAttribute('data-weight', 1000 - width);
@@ -173,7 +167,7 @@ function dropLeft(event) {
         } 
         toggleModal('result-modal', 'open');
         const backgroundMusic = document.getElementById('background-music');
-    backgroundMusic.pause();
+        backgroundMusic.pause();
 
         const resultModal = document.getElementById('result-modal');
         const resultTitle = document.getElementById('result-title');
@@ -186,13 +180,12 @@ function dropLeft(event) {
           const maxPoints = 500;
           let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0) - finePoints;
           resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
-          completedLevels.push(1);
           const users = JSON.parse(localStorage.getItem('users')) || [];
           const username = users[users.length - 1];
           users[users.length-1]['level_2'] = true;
-          localStorage.setItem('users', JSON.stringify(users));
         if (username) 
          username.score=username.score+ points;
+        localStorage.setItem('users', JSON.stringify(users));
         } else {
           resultModal.classList.add('fail');
           resultTitle.textContent = 'ПРОВАЛ!!!';

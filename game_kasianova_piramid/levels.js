@@ -1,17 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   loadUserData();
-  //handleLevelButtons();
 });
-
-
-// function handleLevelButtons() {  
-//     if (completedLevels.includes(1)) {
-//       document.getElementById('level-2').style.backgroundColor = "#d81b60";
-//     }
-//     if (completedLevels.includes(2)) {
-//       document.getElementById('level-3').disabled = false;
-//     }
-//   }
 
 function loadUserData() {
     const users = JSON.parse(localStorage.getItem('users')) || [];
