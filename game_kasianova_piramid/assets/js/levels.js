@@ -13,16 +13,12 @@ function loadUserData() {
 
     function startLevel(level) {
       if(level===1)
-        window.location.href = 'level-1.html';
+        window.location.href = '/game_kasianova_piramid/level-1/level-1.html';
       else if(level===2){
-        const level_button = document.getElementById('level-2');
-        level_button.classList.remove("disabled");
-        window.location.href = 'level-2.html';
+        window.location.href = '/game_kasianova_piramid/level-2/level-2.html';
       }
       else if(level==3){
-        const level_button = document.getElementById('level-3');
-        level_button.classList.remove("disabled");
-        window.location.href = 'level-3.html';
+        window.location.href = '/game_kasianova_piramid/level-3/level-3.html';
       }
     }
 
@@ -43,5 +39,5 @@ function closeModalLevels() {
 }
 
 function confirmReset(){
-  window.location.href = 'index.html';
+  window.location.href = '/game_kasianova_piramid/index.html';
 }

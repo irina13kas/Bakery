@@ -135,13 +135,13 @@ function startTimer(duration) {
     location.reload();
   });
   document.querySelector('.levels-btn').addEventListener('click', () => {
-    window.location.href = 'levels.html';
+    window.location.href = '/game_kasianova_piramid/levels_menu/levels.html';
   });
   document.querySelector('.retry-btn-res').addEventListener('click', () => {
     location.reload();
   });
   document.querySelector('.levels-btn-res').addEventListener('click', () => {
-    window.location.href = 'levels.html';
+    window.location.href = '/game_kasianova_piramid/levels_menu/levels.html';
   });
 
   document.addEventListener('keydown', (event) => {

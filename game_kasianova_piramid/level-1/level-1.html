@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/general/images/icon.ico" type="image/x-icon">
     <title>Кондитерская</title>
-    <link rel="stylesheet" href="/game_kasianova_piramid/game.css">
-    <link rel="stylesheet" href="/game_kasianova_piramid/level-3.css">
-    <link rel="stylesheet" href="/game_kasianova_piramid/levels-styles.css">
+    <link rel="stylesheet" href="/game_kasianova_piramid/assets/css/game.css">
+    <link rel="stylesheet" href="/game_kasianova_piramid/assets/css/levels-styles.css">
 </head>
 <body>
     <audio id="background-music" loop>
@@ -16,8 +15,8 @@
       </audio> 
     <div class="game-container">
         <!-- Таймер -->
-        <div id="timer" class="game-header">2:00</div>
-        <h1>Уровень 3</h1>
+        <div id="timer" class="game-header">3:00</div>
+        <h1>Уровень 1</h1>
         <div class="top-buttons">
             <button class="settings-button" title="Настройки">
               <span class="icon">&#9881;</span>
@@ -25,8 +24,7 @@
             <button class="help-button" title="Справка">
               <span class="icon">&#10067;</span>
             </button>
-        </div>
-        <div class="target-weight">Целевая сумма: <span id="target-sum"></span></div>
+          </div>
           <button class="check-btn" id="check-button">Проверить</button>
 
           <div class="modal" id="settings-modal">
@@ -48,7 +46,7 @@
             <div class="content" style="max-width: 600px; width: 100%;">
               <span class="close-btn">&times;</span>
               <h2>Правила раунда</h2>
-              <p>Добро пожаловать на третий уровень! Тебе предстоит собрать идеальную башню из слоев! В этом испытании тебе дается несколько слоев с весами (числами) и целевая сумма. Ваше задание — перенести нужные слои в правую область так, чтобы их общий вес ровно совпал с указанной целью.</p>
+              <p>Добро пожаловать на первый уровень! Твоя задача — собрать торт, выкладывая коржи в строгом порядке: каждый следующий этаж должен быть уже предыдущего.</p>
             </div>
           </div>
 
@@ -89,11 +87,22 @@
           </div>
         </div>
       </div>
+
+      <div class="modal" id="level-modal">
+        <div class="content" style="max-width: 600px; width: 100%; text-align: center;">
+          <h2>Выбери уровень сложности</h2>
+          <div class="modal-buttons">
+            <button class="level" id="easy" onclick="chooseLevel(1)">Легкий</button>
+            <button class="level" id="middle" onclick="chooseLevel(2)">Средний</button>
+            <button class="level" id="hard" onclick="chooseLevel(3)">Сложный</button>
+          </div>
+        </div>
+      </div>
       
     </div>
 
-    <script src="game.js" defer></script>
-    <script src="levels-logic.js" defer></script>
-    <script src="level-3.js" defer></script>
+    <script src="/game_kasianova_piramid/assets/js/game.js" defer></script>
+    <script src="/game_kasianova_piramid/assets/js/levels-logic.js" defer></script>
+    <script src="/game_kasianova_piramid/assets/js/level-1.js" defer></script>
 </body>
 </html>

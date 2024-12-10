@@ -19,5 +19,5 @@ document.getElementById('auth-form').addEventListener('submit', function (event)
     const username = document.getElementById('username').value;
     saveUser(username);
     Score = 0;
-    window.location.href = 'levels.html';
+    window.location.href = './levels_menu/levels.html';
   });
