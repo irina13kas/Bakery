@@ -157,13 +157,12 @@ function dropLeft(event) {
       resultModal.classList.add('success');
       resultTitle.textContent = 'ПОБЕДА!!!';
       const timeUsed = initialTime - timeRemaining;
-  let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
+      let points = Math.max(Math.floor(maxPoints * (timeRemaining / initialTime)), 0);
       resultInfo.textContent = `Очки: ${points}, Время: ${formatTime(timeUsed)}`;
-      completedLevels.push(1);
       const users = JSON.parse(localStorage.getItem('users')) || [];
-    const username = users[users.length - 1];
+      const username = users[users.length - 1];
     if (username) 
-     username.score=username.score+ points;
+      username.score=username.score+ points;
     localStorage.setItem('users', JSON.stringify(users));
     } else {
       resultModal.classList.add('fail');

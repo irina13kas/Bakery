@@ -149,5 +149,3 @@ function dropLeft(event) {
   }
 
   document.querySelector('.check-btn').addEventListener('click', checkResult);
-
-  //localStorage.clear();

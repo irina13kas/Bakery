@@ -32,9 +32,7 @@ function toggleMusic() {
   const backgroundMusic = document.getElementById('background-music');
   const soundIcon = document.getElementById('sound-icon');
   if (musicPlaying) {
-    backgroundMusic.pause().catch(error => {
-      console.error("Музыка не может быть запущена:", error);
-  });
+    backgroundMusic.pause();
       soundIcon.textContent = '🔇';
   } else {
     backgroundMusic.play().catch(error => {

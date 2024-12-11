@@ -155,6 +155,7 @@ function dropLeft(event) {
         const layers = Array.from(poleContainer.querySelectorAll('.layer'));
       
         let isCorrect = true;
+        let finishColors = [];
       
         for (let i = 0; i < layers.length - 1; i++) {
           const currentWeight = parseInt(layers[i].getAttribute('data-weight'), 10);
@@ -164,7 +165,14 @@ function dropLeft(event) {
             isCorrect = false;
             break;
           }
-        } 
+        }
+        
+       layers.forEach(layer => {
+          finishColors.push(layer.style.backgroundColor);
+        });
+
+        isCorrect = arraysEqual(finishColors, resultCakeColors);
+
         toggleModal('result-modal', 'open');
         const backgroundMusic = document.getElementById('background-music');
         backgroundMusic.pause();
