@@ -3,6 +3,7 @@ const targetSumElement = document.getElementById('target-sum');
 let targetSum;
 let numberOfLayers;
 let targetNumOfLayers;
+let isGameInitialized = false;
 
 startTimer(initialTime);
 
@@ -12,10 +13,12 @@ function closeActiveModal() {
     modal.classList.remove('active');
   });
     resumeTimer();
-    initializeGame();
+    if(!isGameInitialized)
+      initializeGame();
 }
 
 function initializeGame() {
+    isGameInitialized = true;
     const layersContainer = document.getElementById('layers-container');
     const rightContainer = document.querySelector('.pole-container');
     const colors = ['rgb(255, 248, 220)', 'rgb(123, 63, 0)', 'rgb(255, 102, 102)', 'rgb(70, 50, 120)', 'rgb(147, 197, 114)','rgb(234, 176, 69)','rgb(210, 105, 30)','rgb(138, 43, 226)']; 
@@ -88,26 +91,6 @@ function addExtraNumbers(extraNum, total){
         extraNum--;
     }
     return numbers;
-}
-
-function dropRight(event) {
-    event.preventDefault();
-    if (draggedLayer) {
-        const rightArea = document.querySelector('.right');
-        const base = rightArea.querySelector('.base');
-
-        const baseBottom = base.getBoundingClientRect().bottom;
-        const rightAreaBottom = rightArea.getBoundingClientRect().bottom;
-        const baseOffset = rightAreaBottom - baseBottom;
-      
-        draggedLayer.style.position = 'absolute';
-        const layersAbove = rightArea.querySelectorAll('.layer');
-        const stackHeight =baseOffset + layersAbove.length * draggedLayer.offsetHeight;
-        draggedLayer.style.bottom = `${stackHeight}px`;
-        draggedLayer.style.left = '50%';
-        draggedLayer.style.transform = 'translateX(-50%)';
-        rightArea.appendChild(draggedLayer);
-    }
 }
 
 function dropLeft(event) {
