@@ -10,15 +10,18 @@ const colors_hard = ['rgb(210, 140, 87)', 'rgb(119, 73, 53)', 'rgb(144, 106, 58)
 
 startTimer(initialTime);
 
-  function closeActiveModal() {
-    const activeModal = document.querySelectorAll('.modal.active');
-    activeModal.forEach(modal => {
-      modal.classList.remove('active');
-    });
-    if (Level===null) {
-      toggleModal('level-modal', 'open');
-    }
+function closeActiveModal() {
+  const activeModal = document.querySelectorAll('.modal.active');
+  activeModal.forEach(modal => {
+    modal.classList.remove('active');
+  });
+  if (Level===null) {
+    toggleModal('level-modal', 'open');
   }
+  else{
+      resumeTimer();
+  }
+}
   
   function chooseLevel(level){
     Level = level;
